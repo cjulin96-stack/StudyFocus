@@ -234,7 +234,24 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 .quiz-feedback{padding:15px;border-radius:13px;line-height:1.6}.quiz-feedback p{margin:7px 0 0}
 #quizLevel{display:inline-flex;align-items:center;padding:5px 10px;border:1px solid #9b8cff55;border-radius:999px;background:#9b8cff18;font-size:12px;font-weight:700;margin-bottom:10px}
 @media(max-width:600px){#quizQuestion{padding:14px;border-radius:13px}.quiz-option{min-height:54px;padding:14px;font-size:14px}}
-.nav-group-label{padding:10px 13px 2px;color:#8791b5;font-size:10px;font-weight:800;letter-spacing:1.2px}.nav{gap:4px}.nav button{min-height:42px}.tool-card{min-width:0}.tool-calculator{display:grid;gap:10px}.tool-calculator input,.tool-calculator select,#studyNotes,.field input,.field select{width:100%;min-width:0;background:#11172e;color:var(--text);border:1px solid var(--line);border-radius:11px;padding:12px}.tool-result{padding:13px;border-radius:12px;background:#202747;color:var(--cyan);font-weight:800;min-height:48px}.study-method-list{padding-left:22px;color:var(--muted)}.study-method-list li{padding:5px 0}.tools-grid{align-items:start}</style>
+.nav-group-label{padding:10px 13px 2px;color:#8791b5;font-size:10px;font-weight:800;letter-spacing:1.2px}.nav{gap:4px}.nav button{min-height:42px}.tool-card{min-width:0}.tool-calculator{display:grid;gap:10px}.tool-calculator input,.tool-calculator select,#studyNotes,.field input,.field select{width:100%;min-width:0;background:#11172e;color:var(--text);border:1px solid var(--line);border-radius:11px;padding:12px}.tool-result{padding:13px;border-radius:12px;background:#202747;color:var(--cyan);font-weight:800;min-height:48px}.study-method-list{padding-left:22px;color:var(--muted)}.study-method-list li{padding:5px 0}.tools-grid{align-items:start}
+/* Navegação mobile organizada em duas linhas, sem rótulos de grupo */
+@media(max-width:900px){
+  .side{height:auto;min-height:0;padding:8px 10px calc(9px + env(safe-area-inset-bottom))}
+  .nav{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-flow:row;gap:5px;width:100%;align-items:stretch}
+  .nav-group-label{display:none}
+  .nav button{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:2px;min-width:0;min-height:48px;padding:5px 2px;font-size:10px;line-height:1.15;text-align:center;white-space:normal;overflow-wrap:anywhere}
+  .nav .ico{width:auto;font-size:17px;line-height:1}
+  .main{padding-bottom:calc(145px + env(safe-area-inset-bottom))}
+}
+@media(max-width:430px){
+  .side{padding-left:7px;padding-right:7px}
+  .nav{gap:3px}
+  .nav button{min-height:46px;font-size:9px;border-radius:9px}
+  .nav .ico{font-size:16px}
+}
+
+</style>
 <script>
 <script>
 window.MathJax = {
