@@ -1,0 +1,16 @@
+{
+  "$schema": "https://schema.cloudflare.com/wrangler/config-schema.json",
+  "name": "studyfocus-professor-ia",
+  "main": "cloudflare-worker.js",
+  "compatibility_date": "2026-11-06",
+  "ratelimits": [
+    {
+      "name": "STUDYFOCUS_LIMITER",
+      "namespace_id": "731106",
+      "simple": {
+        "limit": 5,
+        "period": 60
+      }
+    }
+  ]
+}
