@@ -263,6 +263,67 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
   .main{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
 }
 @media(max-width:380px){.nav{gap:4px}.nav button{font-size:9px;min-height:51px}.nav .ico{font-size:17px}}
+
+/* StudyFocus Academy — hierarquia visual e respiro da sala Aprender */
+#page-aprender{--learn-border:#405174;--learn-panel:#17233d}
+#page-aprender .learn-hero{position:relative;isolation:isolate;overflow:hidden;min-height:220px;padding:clamp(24px,4vw,38px);margin:0 0 30px;border:1px solid #7f79d866;border-radius:24px;background:radial-gradient(circle at 88% 18%,#67dfd02b,transparent 28%),linear-gradient(118deg,#302b61 0%,#253b61 58%,#15535a 100%);box-shadow:0 18px 45px #05081755}
+#page-aprender .learn-hero:after{content:"✦";position:absolute;z-index:-1;right:5%;bottom:-45px;font-size:190px;line-height:1;color:#ffffff0b}
+#page-aprender .learn-hero-top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+#page-aprender .learn-kicker{font-size:11px;font-weight:900;letter-spacing:1.7px;color:#9af0e4}
+#page-aprender .learn-hero-pill{font-size:10px;font-weight:800;letter-spacing:.8px;padding:7px 11px;border:1px solid #bdb4ff55;border-radius:30px;background:#a99aff20;color:#e7e2ff}
+#page-aprender .learn-hero h2{max-width:650px;font-size:clamp(27px,4vw,39px);line-height:1.12;letter-spacing:-.7px;margin:0 0 12px}
+#page-aprender .learn-hero p{max-width:620px;font-size:15px;line-height:1.75;color:#e0e7f7;margin:0}
+#page-aprender .learn-hero-foot{display:flex;gap:9px 18px;flex-wrap:wrap;margin-top:22px;color:#d4f5f0;font-size:11px;font-weight:650}
+#page-aprender .learn-section-heading{display:flex;align-items:center;gap:13px;margin:30px 0 13px}
+#page-aprender .learn-section-heading>span{width:38px;height:38px;flex:0 0 38px;display:grid;place-items:center;border-radius:12px;background:linear-gradient(145deg,#9b8cff35,#66dfd01c);border:1px solid #9b8cff66;color:#d8d1ff;font-size:12px;font-weight:900}
+#page-aprender .learn-section-heading b{display:block;font-size:16px;letter-spacing:.1px;color:#f5f6ff}
+#page-aprender .learn-section-heading small{display:block;margin-top:3px;color:#b9c5df;font-size:12px;line-height:1.5}
+#page-aprender .learn-filter-panel,#page-aprender .learn-library-panel,#page-aprender .learn-progress-panel{padding:clamp(17px,2.5vw,25px);border:1px solid #3b4c70;border-radius:19px;background:linear-gradient(145deg,#1b2947,#141d34);box-shadow:0 12px 28px #05081726;margin:0 0 12px}
+#page-aprender .learn-controls{gap:16px;margin:0 0 15px}
+#page-aprender .learn-controls .field{gap:8px;color:#dfe6f6;font-size:12px;font-weight:750}
+#page-aprender .learn-controls select{min-height:49px;border-radius:12px;padding:12px 14px;background:#0e1830;border-color:#52658a;color:#fff}
+#page-aprender #curriculumNotice,#page-aprender #topicStatus{margin:12px 0 0;padding:12px 14px;border-radius:12px;line-height:1.6;background:#122c3a;border:1px solid #4a9e9b55;color:#d5f5ef}
+#page-aprender .course-library{gap:12px;margin:17px 0 2px}
+#page-aprender .course-card{position:relative;min-height:104px;padding:17px;border-radius:15px;border:1px solid #405174;background:linear-gradient(145deg,#202d4b,#19243d);transition:transform .18s,border-color .18s,background .18s;overflow:hidden}
+#page-aprender .course-card:after{content:"↗";position:absolute;right:13px;bottom:10px;color:#91a1c4;font-size:14px}
+#page-aprender .course-card b{font-size:14px;line-height:1.4;margin:0 18px 8px 0;color:#f5f6ff}
+#page-aprender .course-card small{display:block;font-size:11px;line-height:1.5;color:#c0cbe2}
+#page-aprender .course-card.active{border-color:#a99aff;background:linear-gradient(145deg,#39346b,#233d58);box-shadow:inset 0 0 0 1px #a99aff44,0 8px 22px #090d2355}
+#page-aprender .course-card:hover{transform:translateY(-2px);border-color:#8fdddc}
+#page-aprender .learn-progress-panel{margin-top:0}
+#page-aprender .learn-progress-panel .panel-head{align-items:flex-start;gap:12px}
+#page-aprender .learn-progress-panel h3{font-size:17px;line-height:1.4}
+#page-aprender #courseSub{margin-top:4px;line-height:1.55;color:#c1cce2}
+#page-aprender .lesson-progress{height:10px;margin-top:17px;background:#0d162c;border:1px solid #405174}
+#page-aprender .lesson-layout.learn-workspace{grid-template-columns:minmax(220px,.72fr) minmax(0,2fr);gap:18px;align-items:start;margin-top:0}
+#page-aprender .lesson-menu{position:sticky;top:18px;max-height:calc(100vh - 36px);overflow:auto;display:grid;gap:9px;padding:14px;border:1px solid #3d4d70;border-radius:18px;background:linear-gradient(160deg,#1b2947,#141d34)}
+#page-aprender .lesson-menu button{min-height:72px;padding:13px;border-radius:12px;border:1px solid #3c4d70;background:#202d4a;color:#eef1fc;line-height:1.4}
+#page-aprender .lesson-menu button b{font-size:12px}
+#page-aprender .lesson-menu button small{margin-top:5px;color:#c0cbe2;font-size:10px}
+#page-aprender .lesson-menu button.active{border-color:#b3a7ff;background:linear-gradient(120deg,#403a75,#263e59);box-shadow:inset 3px 0 #c4baff}
+#page-aprender .lesson-content{padding:clamp(19px,3vw,30px);border-radius:19px;background:linear-gradient(150deg,#192640,#141d33);border-color:#405174;box-shadow:0 12px 28px #05081726}
+#page-aprender #graphPanel,#page-aprender #quizPanel,#page-aprender #unitAssessment,#page-aprender #mistakeReview{padding:clamp(17px,2.5vw,24px);border-radius:18px;border:1px solid #3d4d70;background:linear-gradient(145deg,#1b2947,#141d34);margin:16px 0 0}
+#page-aprender .professor-chat{margin-top:25px}
+@media(max-width:900px){#page-aprender .lesson-layout.learn-workspace{grid-template-columns:minmax(0,1fr);gap:13px}#page-aprender .lesson-menu{position:static;max-height:none;grid-template-columns:repeat(2,minmax(0,1fr));padding:12px}}
+@media(max-width:560px){
+ #page-aprender .learn-hero{min-height:0;padding:21px 18px;border-radius:19px;margin-bottom:24px}
+ #page-aprender .learn-hero-top{margin-bottom:14px}
+ #page-aprender .learn-hero-foot{display:grid;gap:7px;margin-top:17px}
+ #page-aprender .learn-section-heading{margin:25px 0 11px;gap:10px}
+ #page-aprender .learn-section-heading>span{width:34px;height:34px;flex-basis:34px}
+ #page-aprender .learn-section-heading b{font-size:14px}
+ #page-aprender .learn-section-heading small{font-size:11px}
+ #page-aprender .learn-filter-panel,#page-aprender .learn-library-panel,#page-aprender .learn-progress-panel{padding:15px;border-radius:16px}
+ #page-aprender .learn-controls{grid-template-columns:minmax(0,1fr);gap:12px}
+ #page-aprender .course-library{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ #page-aprender .course-card{min-height:96px;padding:12px}
+ #page-aprender .course-card b{font-size:12px}
+ #page-aprender .course-card small{font-size:10px}
+ #page-aprender .lesson-menu{gap:8px;padding:10px}
+ #page-aprender .lesson-menu button{min-height:66px;padding:10px}
+ #page-aprender .lesson-content{padding:17px 14px}
+}
+@media(prefers-reduced-motion:reduce){#page-aprender .course-card{transition:none}}
 </style>
 <script>
 <script>
@@ -328,14 +389,15 @@ window.MathJax = {
 </section>
 <datalist id="subjectOptions"></datalist><section class="page" id="page-materias"><div class="panel"><h3>📚 Minhas matérias</h3><p class="muted">Cadastre disciplinas para organizar tarefas e cartões.</p><form id="subjectForm"><div class="field"><label for="subjectName">Nome da matéria</label><input id="subjectName" maxlength="40" placeholder="Ex.: Geografia" required></div><div class="form-actions"><button class="btn" type="submit">＋ Adicionar matéria</button></div></form></div><div class="panel"><div class="panel-head"><h3>Disciplinas cadastradas</h3><span class="tag" id="subjectCount">0 matérias</span></div><div id="subjectList" class="task-list"></div></div></section>
 <section class="page" id="page-aprender">
-<div class="learn-hero"><div class="eyebrow">SALA DE APRENDIZAGEM</div><h2>Aprenda de verdade, no seu ritmo. 🚀</h2><p>Aulas guiadas, exemplos resolvidos, laboratório interativo e exercícios com explicação.</p></div>
-<div class="panel"><div class="learn-controls"><label class="field">Etapa escolar<select id="learnStage" onchange="changeCurriculumStage()"><option value="fund2">Ensino Fundamental II</option><option value="medio">Ensino Médio</option></select></label><label class="field">Ano/Série<select id="learnGrade" onchange="changeCurriculumStage()"><option value="6">6º ano</option><option value="7">7º ano</option><option value="8">8º ano</option><option value="9">9º ano</option><option value="10">1ª série</option><option value="11">2ª série</option><option value="12">3ª série</option></select></label></div><div class="notice" id="curriculumNotice">Trilhas organizadas para o Fundamental II e Ensino Médio. O conteúdo será alinhado à etapa selecionada.</div></div><div class="panel"><div class="learn-controls">
+<div class="learn-hero"><div class="learn-hero-top"><span class="learn-kicker">✦ STUDYFOCUS ACADEMY</span><span class="learn-hero-pill">APRENDIZAGEM GUIADA</span></div><h2>Seu próximo nível começa aqui.</h2><p>Uma jornada de aprendizagem organizada: escolha sua etapa, explore uma trilha e avance aula por aula.</p><div class="learn-hero-foot"><span>🎓 Conteúdo por etapa escolar</span><span>🧠 Aulas + prática + revisão</span><span>📈 Evolução acompanhada</span></div></div>
+<div class="learn-section-heading"><span>01</span><div><b>Personalize seu percurso</b><small>Escolha em qual etapa você está estudando.</small></div></div>
+<div class="panel learn-filter-panel"><div class="learn-controls"><label class="field">Etapa escolar<select id="learnStage" onchange="changeCurriculumStage()"><option value="fund2">Ensino Fundamental II</option><option value="medio">Ensino Médio</option></select></label><label class="field">Ano/Série<select id="learnGrade" onchange="changeCurriculumStage()"><option value="6">6º ano</option><option value="7">7º ano</option><option value="8">8º ano</option><option value="9">9º ano</option><option value="10">1ª série</option><option value="11">2ª série</option><option value="12">3ª série</option></select></label></div><div class="notice" id="curriculumNotice">Trilhas organizadas para o Fundamental II e Ensino Médio. O conteúdo será alinhado à etapa selecionada.</div></div><div class="learn-section-heading"><span>02</span><div><b>Explore a biblioteca</b><small>Selecione uma matéria e encontre a trilha que deseja estudar.</small></div></div><div class="panel learn-library-panel"><div class="learn-controls">
 <label class="field">Matéria<select id="learnSubject"><option>Matemática</option><option>Português</option><option>Ciências</option><option>História</option><option>Geografia</option><option>Física</option><option>Química</option><option>Biologia</option><option>Inglês</option></select></label>
 <label class="field">Assunto<select id="learnTopic"><option value="funcao-afim">Função Afim</option></select></label>
 </div><div id="topicStatus" class="notice">Cinco trilhas de Matemática disponíveis. Escolha um curso para começar.</div><div id="mathLibrary" class="course-library"><button class="course-card active" data-course="funcao-afim" onclick="selectLearningTopic('funcao-afim')"><b>📈 Função Afim</b><small>6 aulas · laboratório gráfico</small></button><button class="course-card" data-course="fracoes" onclick="selectLearningTopic('fracoes')"><b>🍕 Frações</b><small>3 aulas · 4 exercícios</small></button><button class="course-card" data-course="equacoes" onclick="selectLearningTopic('equacoes')"><b>🧮 Equações</b><small>3 aulas · 4 exercícios</small></button><button class="course-card" data-course="geometria" onclick="selectLearningTopic('geometria')"><b>📐 Geometria</b><small>3 aulas · 4 exercícios</small></button><button class="course-card" data-course="porcentagem" onclick="selectLearningTopic('porcentagem')"><b>💯 Porcentagem</b><small>3 aulas · 4 exercícios</small></button></div></div>
 <div id="functionCourse">
-<div class="panel"><div class="panel-head"><div><h3 id="courseHeading">Matemática · Função Afim</h3><div class="muted" id="courseSub" style="font-size:12px">Do conceito aos problemas do cotidiano</div></div><span class="tag" id="coursePercent">0% concluído</span></div><div class="lesson-progress"><span id="courseBar" style="width:0%"></span></div><div class="muted" id="courseCount" style="font-size:11px;margin-top:7px">0 de 6 aulas concluídas</div></div>
-<div class="lesson-layout"><aside class="panel lesson-menu" id="lessonMenu"></aside><div>
+<div class="learn-section-heading"><span>03</span><div><b>Sua trilha de aprendizagem</b><small>Acompanhe seu avanço e continue de onde parou.</small></div></div><div class="panel learn-progress-panel"><div class="panel-head"><div><h3 id="courseHeading">Matemática · Função Afim</h3><div class="muted" id="courseSub" style="font-size:12px">Do conceito aos problemas do cotidiano</div></div><span class="tag" id="coursePercent">0% concluído</span></div><div class="lesson-progress"><span id="courseBar" style="width:0%"></span></div><div class="muted" id="courseCount" style="font-size:11px;margin-top:7px">0 de 6 aulas concluídas</div></div>
+<div class="learn-section-heading"><span>04</span><div><b>Estude e pratique</b><small>Conteúdo explicado, laboratório e exercícios em um só lugar.</small></div></div><div class="lesson-layout learn-workspace"><aside class="panel lesson-menu" id="lessonMenu"></aside><div>
 <div class="panel lesson-content" id="lessonContent"></div>
 <div class="panel" id="graphPanel" style="display:none"><div class="panel-head"><h3>🧪 Laboratório interativo</h3><span class="tag">Explore e descubra</span></div><p class="muted" style="font-size:12px">Mude os valores de <b>a</b> e <b>b</b>. Depois escolha um x e acompanhe o cálculo e o ponto correspondente no gráfico.</p><div class="graph-controls"><label>Inclinação (a): <strong id="coefAValue">2</strong><input id="coefA" type="range" min="-5" max="5" step="1" value="2"></label><label>Valor inicial (b): <strong id="coefBValue">1</strong><input id="coefB" type="range" min="-5" max="5" step="1" value="1"></label></div><div class="graph-x-control"><label for="graphX">Valor de x:</label><input id="graphX" type="number" min="-8" max="8" step="1" value="2"><span class="muted" style="font-size:11px">Experimente valores de −8 a 8.</span></div><div class="graph-wrap" style="margin-top:12px"><svg id="functionGraph" viewBox="0 0 360 240" role="img" aria-label="Gráfico interativo da função afim"></svg></div><div class="notice" id="graphExplanation">A reta representa y = 2x + 1.</div><div class="graph-result" aria-live="polite"><span class="muted" style="font-size:11px">CÁLCULO DO VALOR ESCOLHIDO</span><strong id="graphResult">f(2) = 2 × 2 + 1 = 5</strong><span id="graphResultHint" class="muted" style="font-size:12px">O ponto destacado no gráfico é (2, 5).</span></div><p class="graph-caption">A reta é desenhada com animação. O ponto destacado acompanha o valor de x.</p></div>
 <div class="panel" id="quizPanel"><div class="panel-head"><h3>🎯 Hora de praticar</h3><span class="tag" id="quizLevel">Nível básico</span></div><label class="field" style="max-width:230px;margin-bottom:12px">Dificuldade<select id="learnDifficulty"><option value="adaptive">🤖 Adaptativo</option><option value="all">Todas</option><option value="facil">Fácil</option><option value="medio">Médio</option><option value="desafio">Desafio</option></select></label><div id="quizQuestion"></div><div id="quizFeedback" aria-live="polite"></div><div class="form-actions" style="justify-content:space-between"><button class="btn ghost" id="hintButton" onclick="showLearnHint()">💡 Ver dica</button><button class="btn secondary" id="nextQuestion" onclick="nextLearnQuestion()" style="display:none">Próxima questão →</button></div></div>
