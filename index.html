@@ -553,6 +553,21 @@ img,svg,canvas{max-width:100%}
 #page-foco .sf-focus-empty b{font-size:14px}
 #page-foco .sf-focus-empty small{font-size:12px;color:#aab2d0}
 @media(max-width:520px){#page-foco .sf-focus-metrics{grid-template-columns:1fr;gap:8px}#page-foco .sf-focus-metric{display:grid;grid-template-columns:1fr auto;align-items:center;gap:2px 10px;padding:12px 14px}#page-foco .sf-focus-metric span{grid-column:1}#page-foco .sf-focus-metric strong{grid-column:2;grid-row:1/3;margin:0;text-align:right;font-size:22px}#page-foco .sf-focus-metric small{grid-column:1}#page-foco .sf-focus-entry{padding:11px;gap:9px}#page-foco .sf-focus-entry .tag{white-space:nowrap}}
+
+/* Momentos de conquista — feedback audiovisual leve */
+.sf-celebration{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;padding:22px;background:#080b1bd9;backdrop-filter:blur(9px);opacity:0;pointer-events:none;transition:opacity .28s ease}
+.sf-celebration-show{opacity:1}
+.sf-celebration-card{position:relative;z-index:2;width:min(100%,390px);padding:30px 24px;text-align:center;border:1px solid #8e80ff70;border-radius:25px;background:radial-gradient(circle at 50% 0%,#9b8cff30,transparent 55%),linear-gradient(145deg,#252b4c,#151b33);box-shadow:0 24px 90px #0009;transform:translateY(14px) scale(.96);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.sf-celebration-show .sf-celebration-card{transform:translateY(0) scale(1)}
+.sf-celebration-emblem{display:grid;place-items:center;width:68px;height:68px;margin:0 auto 16px;border-radius:22px;background:linear-gradient(135deg,#9b8cff,#54d3c5);color:#11152b;font-size:36px;box-shadow:0 10px 35px #8e80ff55;animation:sf-emblem-pop .55s cubic-bezier(.2,.8,.2,1) both}
+.sf-celebration-card h2{margin:0 0 8px;font-size:25px;letter-spacing:-.5px}
+.sf-celebration-card p{margin:0 auto 18px;max-width:290px;color:#c1c9e2;font-size:14px}
+.sf-celebration-reward{display:inline-flex;padding:9px 18px;border-radius:999px;background:#8e80ff22;border:1px solid #9b8cff70;color:#d9d2ff;font-size:15px}
+.sf-confetti{position:absolute;z-index:1;left:calc(50% + (var(--i) - 12)*3px);top:45%;width:7px;height:13px;border-radius:2px;background:hsl(calc(var(--i)*31),85%,70%);opacity:0;transform:translate(0,0) rotate(0);pointer-events:none}
+.sf-celebration-show .sf-confetti{animation:sf-confetti-burst 1.35s ease-out both;animation-delay:calc(var(--i)*9ms)}
+@keyframes sf-emblem-pop{0%{transform:scale(.45) rotate(-20deg);opacity:0}75%{transform:scale(1.12) rotate(5deg)}100%{transform:scale(1);opacity:1}}
+@keyframes sf-confetti-burst{0%{opacity:0;transform:translate(0,0) rotate(0)}12%{opacity:1}100%{opacity:0;transform:translate(var(--drift),-230px) rotate(var(--spin))}}
+@media(prefers-reduced-motion:reduce){.sf-celebration,.sf-celebration-card,.sf-celebration-emblem,.sf-confetti{animation:none!important;transition:none!important}.sf-celebration-show .sf-celebration-card{transform:none}}
 </style>
 <script>
 <script>
@@ -702,6 +717,20 @@ function playStudySound(kind){if(!studySoundOn)return;try{const AC=window.AudioC
 
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function toast(s){const el=document.getElementById('toast');el.textContent=s;el.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>el.classList.remove('show'),2300)}
+function showCelebration(title,subtitle,reward){
+ const old=document.getElementById('sfCelebration');if(old)old.remove();
+ const layer=document.createElement('div');layer.id='sfCelebration';layer.className='sf-celebration';layer.setAttribute('role','status');layer.setAttribute('aria-live','polite');
+ const card=document.createElement('div');card.className='sf-celebration-card';
+ const emblem=document.createElement('div');emblem.className='sf-celebration-emblem';emblem.textContent='✦';
+ const heading=document.createElement('h2');heading.textContent=title;
+ const detail=document.createElement('p');detail.textContent=subtitle;
+ const prize=document.createElement('strong');prize.className='sf-celebration-reward';prize.textContent=reward||'Muito bem!';
+ card.append(emblem,heading,detail,prize);layer.appendChild(card);
+ for(let i=0;i<24;i++){const bit=document.createElement('i');bit.className='sf-confetti';bit.style.setProperty('--i',i);bit.style.setProperty('--drift',(Math.random()*220-110)+'px');bit.style.setProperty('--spin',(Math.random()*500+180)+'deg');layer.appendChild(bit)}
+ document.body.appendChild(layer);
+ requestAnimationFrame(()=>layer.classList.add('sf-celebration-show'));
+ clearTimeout(showCelebration.timer);showCelebration.timer=setTimeout(()=>{layer.classList.remove('sf-celebration-show');setTimeout(()=>layer.remove(),350)},2600);
+}
 function navigate(page){const target='page-'+page;document.querySelectorAll('main .page').forEach(x=>{const active=x.id===target;x.classList.toggle('active',active);x.style.display=active?'block':'none'});document.querySelectorAll('.nav button').forEach(x=>x.classList.toggle('active',x.dataset.page===page));const titles={inicio:'Bom estudo! 👋',tarefas:'Minhas tarefas',materias:'Minhas matérias',aprender:'Sala de aprendizagem',foco:'Hora de focar',revisao:'Central de revisão',ferramentas:'Ferramentas de estudo',progresso:'Minha evolução'};document.getElementById('pageTitle').textContent=titles[page]||'StudyFocus';if(page==='foco')renderTimer();window.scrollTo({top:0,behavior:'smooth'})}
 document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>navigate(b.dataset.page)));
 document.getElementById('today').textContent=new Intl.DateTimeFormat('pt-BR',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(new Date());
@@ -715,7 +744,7 @@ function deleteTask(id){data.tasks=data.tasks.filter(x=>x.id!==id);save();toast(
 let mode='focus',durations={focus:25*60,short:5*60,long:15*60},remaining=durations.focus,running=false,interval=null;
 function renderTimer(){const m=String(Math.floor(remaining/60)).padStart(2,'0')+':'+String(remaining%60).padStart(2,'0');['clock','homeClock'].forEach(id=>document.getElementById(id).textContent=m);const label=mode==='focus'?'HORA DE CONCENTRAR':mode==='short'?'PAUSA CURTA':'PAUSA LONGA';['timerMode','homeTimerMode'].forEach(id=>document.getElementById(id).textContent=label);const p=(1-remaining/durations[mode])*100;['timerProgress','homeProgress'].forEach(id=>document.getElementById(id).style.width=p+'%');document.getElementById('timerStart').textContent=running?'Ⅱ Pausar':'▶ Começar'}
 function stopTimer(){running=false;if(interval)clearInterval(interval);interval=null;renderTimer()}
-function toggleTimer(){if(running){stopTimer();return}running=true;renderTimer();interval=setInterval(()=>{remaining--;renderTimer();if(remaining<=0){stopTimer();if(mode==='focus'){data.sessions.push({date:localDayKey(),minutes:25});recordStudyActivity();data.totalXp+=15;addMissionProgress('focus');save();toast('Sessão concluída! +15 XP. Excelente trabalho.')}else toast('Pausa concluída. Você conseguiu!');if('Notification'in window&&Notification.permission==='granted')new Notification('StudyFocus',{body:mode==='focus'?'Sessão concluída!':'Pausa concluída.'});}},1000)}
+function toggleTimer(){if(running){stopTimer();return}running=true;renderTimer();interval=setInterval(()=>{remaining--;renderTimer();if(remaining<=0){stopTimer();if(mode==='focus'){data.sessions.push({date:localDayKey(),minutes:25});recordStudyActivity();data.totalXp+=15;addMissionProgress('focus');save();toast('Sessão concluída! +15 XP. Excelente trabalho.');showCelebration('Foco concluído!','Você reservou esse tempo para aprender e avançar.','+15 XP')}else toast('Pausa concluída. Você conseguiu!');if('Notification'in window&&Notification.permission==='granted')new Notification('StudyFocus',{body:mode==='focus'?'Sessão concluída!':'Pausa concluída.'});}},1000)}
 function startTimer(){if(!running)toggleTimer()}
 function resetTimer(){stopTimer();remaining=durations[mode];renderTimer()}
 function setTimerMode(m){stopTimer();mode=m;remaining=durations[m];renderTimer()}
@@ -1090,7 +1119,7 @@ function learnDone(){const k=topicKey(),v=data.learnProgress[k]||(k==='funcao-af
 function renderCourseProgress(){const ls=activeLessons(),done=learnDone().length,p=Math.round(done/ls.length*100);document.getElementById('coursePercent').textContent=p+'% concluído';document.getElementById('courseBar').style.width=p+'%';document.getElementById('courseCount').textContent=done+' de '+ls.length+' aulas concluídas'}
 function renderLessonMenu(){const ls=activeLessons();document.getElementById('lessonMenu').innerHTML=ls.map((l,i)=>'<button class="'+(i===learnLesson?'active':'')+'" onclick="openLearnLesson('+i+')"><b>'+(i+1)+'. '+l.title+'</b><small>'+l.time+(learnDone().includes(i)?' · ✓ Concluída':'')+'</small></button>').join('')}
 function openLearnLesson(i){learnLesson=i;professorChatHistory=[];stopNarration();renderLessonMenu();renderLesson();renderQuiz()}
-function completeLearnLesson(){const d=learnDone();if(!d.includes(learnLesson)){d.push(learnLesson);data.learnProgress[topicKey()]=d;if(topicKey()==='funcao-afim')data.learnProgress.funcaoAfim=d;recordStudyActivity();data.totalXp+=20;addMissionProgress('lesson');save();toast('Aula concluída! +20 XP 📚')}else toast('Esta aula já foi concluída.');renderCourseProgress();renderLessonMenu();}
+function completeLearnLesson(){const d=learnDone();if(!d.includes(learnLesson)){d.push(learnLesson);data.learnProgress[topicKey()]=d;if(topicKey()==='funcao-afim')data.learnProgress.funcaoAfim=d;recordStudyActivity();data.totalXp+=20;addMissionProgress('lesson');save();toast('Aula concluída! +20 XP 📚');showCelebration('Mais uma etapa vencida!','Você concluiu esta aula. Continue construindo seu conhecimento.','+20 XP')}else toast('Esta aula já foi concluída.');renderCourseProgress();renderLessonMenu();}
 
 function renderTopicVisualLab(){
  const k=topicKey();
