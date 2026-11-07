@@ -3,6 +3,7 @@
   "name": "studyfocus-professor-ia",
   "main": "cloudflare-worker.js",
   "compatibility_date": "2026-11-06",
+  // Rate limit: up to 5 voice requests per minute per client IP.
   "ratelimits": [
     {
       "name": "STUDYFOCUS_LIMITER",
