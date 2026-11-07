@@ -619,8 +619,115 @@ ingles:{title:'Língua Inglesa',lessons:[
 ]}
 });
 
-const learningSubjectCourses={'Matemática':['funcao-afim','fracoes','equacoes','geometria','porcentagem'],'Português':['portugues'],'Ciências':['ciencias'],'História':['historia'],'Geografia':['geografia'],'Física':['fisica'],'Química':['quimica'],'Biologia':['biologia','biologia-genetica','biologia-ecologia'],'Inglês':['ingles']};
-const learningCourseLabels={'funcao-afim':'📈 Função Afim',fracoes:'🍕 Frações',equacoes:'🧮 Equações do 1º grau',geometria:'📐 Geometria plana',porcentagem:'💯 Porcentagem',portugues:'📚 Língua Portuguesa',historia:'🏛️ História',geografia:'🌎 Geografia',ciencias:'🔬 Ciências',fisica:'⚛️ Física',quimica:'🧪 Química',biologia:'🧬 Biologia', 'biologia-genetica':'🧬 Genética e hereditariedade','biologia-ecologia':'🌱 Ecologia e sustentabilidade',ingles:'🇬🇧 Inglês'};
+
+function registerStudyCourse(key,title,lessons,questions){extraCourses[key]={title,lessons,questions};}
+const expandedStudyCourses=[
+['mat-proporcao','Razão e proporção',[
+['Razão no cotidiano','<p>Razão compara duas quantidades por meio de uma divisão. Se há 2 cadernos para 3 livros, a razão entre cadernos e livros é 2:3.</p>'],
+['Proporcionalidade direta','<p>Duas grandezas são diretamente proporcionais quando aumentam ou diminuem na mesma razão. O preço de produtos iguais, por exemplo, cresce conforme a quantidade.</p>']],
+[['Uma turma tem 12 meninas e 8 meninos. A razão meninas:meninos é:',['3:2','2:3','12:20','8:12'],0,'Simplificando 12:8 por 4, obtemos 3:2.'],
+['Se 2 cadernos custam R$ 10, quanto custam 4 pelo mesmo preço unitário?',['R$ 15','R$ 20','R$ 25','R$ 40'],1,'Ao dobrar a quantidade, o preço também dobra.'],
+['Em uma escala 1:100, 1 cm no desenho representa:',['1 mm','10 cm','1 m','100 m'],2,'100 cm correspondem a 1 metro.']]],
+['mat-estatistica','Estatística e gráficos',[
+['Média, moda e mediana','<p>A média é a soma dos valores dividida pela quantidade. A moda é o valor mais frequente. A mediana é o valor central após ordenar os dados.</p>'],
+['Como ler gráficos','<p>Observe título, legenda, unidades e escalas antes de comparar barras ou pontos. Uma escala truncada pode destacar diferenças visualmente.</p>']],
+[['A média de 4, 6 e 8 é:',['5','6','7','8'],1,'(4 + 6 + 8) ÷ 3 = 6.'],
+['No conjunto 2, 3, 3, 5, a moda é:',['2','3','4','5'],1,'O 3 aparece mais vezes que os demais valores.'],
+['Antes de comparar duas barras, é importante verificar:',['A cor apenas','A escala e as unidades','O tamanho da tela','A fonte do título'],1,'Escala e unidades são essenciais para interpretar corretamente.']]],
+['por-interpretacao','Interpretação de textos',[
+['Tema e ideia principal','<p>O tema é o assunto geral. A ideia principal é aquilo que o texto afirma sobre esse assunto. Títulos e repetições ajudam, mas a leitura do conjunto é decisiva.</p>'],
+['Inferência e evidências','<p>Inferir é concluir algo que não está dito literalmente, usando pistas do texto. Uma boa inferência precisa estar apoiada em evidências.</p>']],
+[['A ideia principal de um texto é:',['Um detalhe isolado','A mensagem central','Sempre a primeira frase','A opinião do leitor'],1,'A ideia principal resume a mensagem central desenvolvida pelo texto.'],
+['Uma inferência válida deve se apoiar:',['Em pistas do texto','Somente em suposições','No título apenas','Em informações sem relação'],0,'Inferências devem ser justificadas por pistas e contexto.'],
+['O tema de um texto corresponde:',['Ao assunto geral','À conclusão apenas','Ao nome do autor','A uma palavra difícil'],0,'Tema é o assunto amplo tratado no texto.']]],
+['por-gramatica','Gramática em contexto',[
+['Sujeito e predicado','<p>O sujeito é sobre quem ou o que se declara algo. O predicado apresenta a informação atribuída ao sujeito. Exemplo: “As crianças estudaram”: sujeito “As crianças”.</p>'],
+['Concordância verbal','<p>O verbo normalmente concorda em número e pessoa com o sujeito: “A turma chegou” e “As turmas chegaram”.</p>']],
+[['Em “Os atletas treinaram”, o sujeito é:',['treinaram','Os atletas','atletas treinaram','O'],1,'“Os atletas” é o termo sobre o qual se declara a ação.'],
+['Complete: “As meninas ___ cedo.”',['chegou','chegaram','chega','chegarei'],1,'O sujeito está no plural; o verbo também fica no plural.'],
+['Qual frase apresenta concordância adequada?',['A equipe venceram.','Os aluno chegou.','Os alunos chegaram.','As pessoa fala.'],2,'“Os alunos” está no plural e concorda com “chegaram”.']]],
+['his-antiga','Civilizações antigas',[
+['Egito e Mesopotâmia','<p>Sociedades antigas desenvolveram-se próximas a grandes rios. Agricultura, irrigação, comércio, escrita e organização política sustentaram cidades e Estados.</p>'],
+['Grécia e Roma','<p>Na Grécia antiga, diferentes pólis tinham organizações próprias. Roma passou por Monarquia, República e Império, deixando influências jurídicas e culturais.</p>']],
+[['A agricultura no Egito antigo dependia especialmente das cheias do:',['Nilo','Amazonas','Tigre','Danúbio'],0,'As cheias do Nilo fertilizavam as terras agrícolas.'],
+['Atenas ficou conhecida por desenvolver uma forma antiga de:',['Democracia','Feudalismo','Absolutismo','Socialismo'],0,'A democracia ateniense foi uma experiência política da Antiguidade, embora restrita a parte da população.'],
+['Roma teve, em sua história política, as fases de:',['República, Império e Monarquia apenas nessa ordem','Monarquia, República e Império','Feudalismo e capitalismo','Colônia e metrópole'],1,'A sequência tradicional da história política romana começa na Monarquia, passa pela República e chega ao Império.']]],
+['his-brasil','Brasil: colônia e independência',[
+['Colonização portuguesa','<p>A colonização envolveu exploração econômica, ocupação territorial, escravização de povos africanos e violência contra povos indígenas, além de resistências e negociações.</p>'],
+['Caminhos da Independência','<p>A Independência de 1822 resultou de disputas políticas e interesses diversos. Não encerrou desigualdades sociais nem significou participação política ampla.</p>']],
+[['A economia colonial portuguesa explorou, entre outros produtos:',['Açúcar e ouro','Petróleo e automóveis','Computadores','Trigo industrial apenas'],0,'Açúcar e, depois, ouro tiveram grande importância na economia colonial.'],
+['A Independência do Brasil foi proclamada em:',['1500','1789','1822','1889'],2,'O processo de Independência foi declarado em 1822.'],
+['A escravidão no Brasil colonial atingiu principalmente:',['Somente nobres','Povos africanos escravizados e seus descendentes','Apenas comerciantes europeus','Somente militares'],1,'Milhões de africanos foram trazidos à força e submetidos à escravização.']]],
+['geo-cartografia','Cartografia e orientação',[
+['Coordenadas geográficas','<p>Latitude mede a distância angular ao norte ou sul do Equador. Longitude mede a distância angular a leste ou oeste do meridiano de Greenwich.</p>'],
+['Escala e representação','<p>A escala relaciona uma distância no mapa à distância real. Legenda, orientação e título ajudam a interpretar a representação.</p>']],
+[['A linha de 0° de latitude é:',['Equador','Greenwich','Trópico de Câncer','Círculo Polar'],0,'O Equador divide a Terra em hemisférios Norte e Sul.'],
+['A longitude é medida a partir do meridiano de:',['Greenwich','Equador','Câncer','Capricórnio'],0,'Greenwich é a referência convencional de 0° de longitude.'],
+['Em um mapa, a escala informa:',['A relação entre distância no mapa e real','A população do país','A temperatura','A idade do mapa'],0,'A escala permite converter medidas do mapa em distâncias reais.']]],
+['geo-clima','Clima, relevo e vegetação',[
+['Tempo atmosférico e clima','<p>Tempo descreve condições atmosféricas de curto prazo. Clima representa padrões observados por longos períodos, considerando temperatura, chuva e outros elementos.</p>'],
+['Paisagens e biomas','<p>Clima, relevo, solo e disponibilidade de água influenciam a vegetação. Biomas reúnem ecossistemas com características ambientais e comunidades semelhantes.</p>']],
+[['Clima se diferencia de tempo porque clima considera:',['Padrões de longo prazo','Apenas a chuva de hoje','Uma hora do dia','Uma única tempestade'],0,'Clima descreve padrões atmosféricos observados durante longos períodos.'],
+['Qual fator influencia a distribuição da vegetação?',['Clima','Cor das cidades','Idioma','Fuso horário apenas'],0,'Temperatura e disponibilidade de água influenciam os tipos de vegetação.'],
+['A Caatinga é um bioma característico de áreas:',['Semiáridas','Polares','Equatoriais úmidas','De tundra'],0,'A Caatinga está adaptada a condições semiáridas do Nordeste brasileiro.']]],
+['cie-corpo','Corpo humano e saúde',[
+['Sistemas do corpo','<p>Os sistemas digestório, respiratório, circulatório e outros atuam de forma integrada. Nutrientes e oxigênio são distribuídos às células, enquanto resíduos são removidos.</p>'],
+['Prevenção e saúde coletiva','<p>Vacinação, saneamento, alimentação variada, atividade física adequada e acompanhamento de profissionais contribuem para a saúde individual e coletiva.</p>']],
+[['Qual sistema realiza trocas gasosas?',['Respiratório','Digestório','Esquelético','Nervoso'],0,'O sistema respiratório realiza a entrada de oxigênio e a eliminação de gás carbônico.'],
+['Qual é a função principal dos glóbulos vermelhos?',['Transportar oxigênio','Produzir bile','Filtrar alimentos','Formar ossos'],0,'A hemoglobina nas hemácias transporta grande parte do oxigênio no sangue.'],
+['Vacinas ajudam o organismo a:',['Desenvolver proteção imunológica','Substituir todos os hábitos saudáveis','Eliminar a necessidade de saneamento','Impedir qualquer doença para sempre'],0,'Vacinas treinam o sistema imunológico para reconhecer agentes infecciosos.']]],
+['cie-sistema-solar','Terra e sistema solar',[
+['Movimentos da Terra','<p>A rotação da Terra está relacionada à alternância entre dia e noite. A translação, junto à inclinação do eixo terrestre, participa da formação das estações.</p>'],
+['Lua e fases','<p>As fases da Lua dependem da porção iluminada que vemos da Terra durante sua órbita. A Lua não produz luz própria: reflete a luz solar.</p>']],
+[['O movimento de rotação da Terra está relacionado:',['Ao dia e à noite','À formação dos oceanos','Às marés apenas','À distância até o Sol'],0,'A rotação é o giro da Terra em torno do próprio eixo.'],
+['As estações do ano estão ligadas principalmente:',['À inclinação do eixo e à translação','À rotação da Lua','À distância diária da Terra ao Sol','Às nuvens'],0,'A inclinação do eixo terrestre e a translação alteram a incidência solar ao longo do ano.'],
+['A Lua é visível porque:',['Reflete a luz do Sol','Produz luz como uma estrela','É feita de fogo','Recebe luz da Terra apenas'],0,'A Lua reflete a luz solar que chega à sua superfície.']]],
+['fis-ondas','Ondas e som',[
+['Características das ondas','<p>Ondas transportam energia sem transportar matéria de forma permanente. Frequência indica oscilações por segundo e é medida em hertz.</p>'],
+['Som e audição','<p>O som é uma onda mecânica que precisa de um meio material para se propagar. Sua velocidade depende das propriedades do meio.</p>']],
+[['A unidade de frequência é:',['Hertz','Newton','Joule','Watt'],0,'Frequência é medida em hertz (Hz).'],
+['O som não se propaga no vácuo porque:',['Precisa de meio material','É uma onda luminosa','Não possui frequência','É sempre muito lento'],0,'O som é uma onda mecânica e precisa de partículas para transmitir vibrações.'],
+['Uma onda transporta principalmente:',['Energia','Matéria de um lado ao outro','Novos átomos','Massa em repouso'],0,'Ondas transportam energia; as partículas do meio apenas oscilam em torno de posições.']]],
+['fis-eletricidade','Eletricidade e circuitos',[
+['Corrente e tensão','<p>Corrente elétrica é o fluxo ordenado de cargas. Tensão elétrica representa diferença de potencial que pode impulsionar esse fluxo em um circuito.</p>'],
+['Circuitos e segurança','<p>Em um circuito simples, fonte, fios e componentes formam um caminho para a corrente. Instalações elétricas exigem proteção e nunca devem ser manipuladas sem orientação qualificada.</p>']],
+[['A unidade de corrente elétrica é:',['Ampere','Volt','Ohm','Joule'],0,'A corrente elétrica é medida em ampere (A).'],
+['A tensão elétrica é medida em:',['Volt','Watt','Metro','Newton'],0,'A unidade de tensão é o volt (V).'],
+['Em um circuito simples, o interruptor serve para:',['Abrir ou fechar o circuito','Criar energia','Mudar a massa dos fios','Eliminar a resistência'],0,'O interruptor controla a continuidade do caminho elétrico.']]],
+['qui-misturas','Substâncias e misturas',[
+['Substâncias puras e misturas','<p>Substância pura tem composição química definida. Mistura reúne duas ou mais substâncias e pode ser homogênea, com uma fase, ou heterogênea, com mais de uma fase.</p>'],
+['Separação de misturas','<p>Filtração, decantação, destilação e evaporação são técnicas escolhidas conforme propriedades dos componentes, como tamanho de partículas e ponto de ebulição.</p>']],
+[['Água com sal totalmente dissolvido é uma mistura:',['Homogênea','Heterogênea','Sempre pura','Metálica'],0,'A solução apresenta uma única fase visível.'],
+['Qual técnica separa areia da água?',['Filtração','Destilação fracionada','Imantação','Fusão nuclear'],0,'O filtro retém o sólido e permite a passagem do líquido.'],
+['A destilação simples pode separar componentes com diferentes:',['Pontos de ebulição','Cores apenas','Massas iguais','Formatos'],0,'A destilação usa diferenças de volatilidade e pontos de ebulição.']]],
+['qui-reacoes','Reações químicas',[
+['Transformações químicas','<p>Em uma reação química, reagentes se transformam em produtos. Os átomos são reorganizados; em sistema fechado, a massa total se conserva.</p>'],
+['Equações e conservação','<p>Balancear uma equação significa ajustar os coeficientes para que haja a mesma quantidade de átomos de cada elemento nos dois lados.</p>']],
+[['Em uma reação química, os reagentes:',['Transformam-se em produtos','Desaparecem sem explicação','Viraram energia somente','Não sofrem alteração'],0,'Reagentes são as substâncias iniciais que participam da reação.'],
+['Balancear uma equação garante a conservação do número de:',['Átomos de cada elemento','Moléculas sempre iguais','Cores','Estados físicos'],0,'Os coeficientes são ajustados para igualar os átomos de cada elemento.'],
+['Ferrugem é exemplo de transformação:',['Química','Apenas física','De estado sem reação','Nuclear'],0,'A formação da ferrugem envolve reação do ferro com oxigênio e água.']]],
+['bio-evolucao','Evolução e biodiversidade',[
+['Seleção natural','<p>Variações hereditárias podem influenciar sobrevivência e reprodução em determinado ambiente. Ao longo de gerações, características vantajosas naquele contexto podem se tornar mais frequentes.</p>'],
+['Biodiversidade e conservação','<p>Biodiversidade inclui variedade de genes, espécies e ecossistemas. A conservação protege habitats e processos ecológicos importantes.</p>']],
+[['A seleção natural atua sobre:',['Variações hereditárias em um ambiente','Necessidades conscientes dos indivíduos','Características adquiridas sempre herdadas','Todos os indivíduos de forma idêntica'],0,'A seleção natural altera frequências de características hereditárias ao longo das gerações.'],
+['Biodiversidade inclui diversidade de:',['Genes, espécies e ecossistemas','Somente animais grandes','Apenas florestas','Somente microrganismos'],0,'A biodiversidade abrange diferentes níveis de organização biológica.'],
+['Uma ação que favorece a conservação é:',['Proteger habitats','Poluir rios','Fragmentar florestas','Introduzir espécies invasoras'],0,'A proteção dos habitats ajuda a manter populações e relações ecológicas.']]],
+['ing-vocabulary','Vocabulário e situações do dia a dia',[
+['Apresentações e informações pessoais','<p>Expressões como “My name is…”, “I am from…” e “I like…” ajudam a apresentar nome, origem e preferências.</p>'],
+['Rotina e lugares','<p>Vocabulário de rotina inclui wake up, study, work e sleep. Para lugares, podemos usar school, library, park e home.</p>']],
+[['“Library” significa:',['Biblioteca','Livraria','Laboratório','Cozinha'],0,'Library é biblioteca; bookstore é livraria.'],
+['Complete: “I ___ from Brazil.”',['am','is','are','be'],0,'Com I, usamos am no verbo to be.'],
+['“Every day” significa:',['Todos os dias','Ontem','Nunca','Amanhã'],0,'Every day indica uma ação ou frequência diária.']]],
+['ing-past','Passado simples em inglês',[
+['Simple Past','<p>O Simple Past descreve ações concluídas no passado. Verbos regulares geralmente recebem -ed; verbos irregulares têm formas próprias, como go → went.</p>'],
+['Perguntas e negativas','<p>Com verbos comuns, usamos did em perguntas e did not em negativas, mantendo o verbo principal na forma base.</p>']],
+[['O passado de “play” é:',['played','plays','playing','plaied'],0,'Play é regular: acrescentamos -ed.'],
+['O passado de “go” é:',['went','goed','gone','going'],0,'Go é irregular e seu Simple Past é went.'],
+['Complete: “Did you ___ yesterday?”',['study','studied','studies','studying'],0,'Depois de did, usamos o verbo principal na forma base.']]]
+];
+expandedStudyCourses.forEach(([key,title,lessonRows,questionRows])=>registerStudyCourse(key,title,lessonRows.map(([title,body],i)=>({title,time:(7+i*2)+' min',body:'<h3>'+title+'</h3>'+body+'<p><b>Para lembrar:</b> explique este conceito com suas próprias palavras e conecte-o a um exemplo do cotidiano.</p>'})),questionRows.map(([q,o,a,e],i)=>({q,o,a,e,level:['facil','medio','desafio'][i]}))));
+const learningSubjectCourses={'Matemática':['funcao-afim','fracoes','equacoes','geometria','porcentagem','mat-proporcao','mat-estatistica'],'Português':['portugues','por-interpretacao','por-gramatica'],'Ciências':['ciencias','cie-corpo','cie-sistema-solar'],'História':['historia','his-antiga','his-brasil'],'Geografia':['geografia','geo-cartografia','geo-clima'],'Física':['fisica','fis-ondas','fis-eletricidade'],'Química':['quimica','qui-misturas','qui-reacoes'],'Biologia':['biologia','biologia-genetica','biologia-ecologia','bio-evolucao'],'Inglês':['ingles','ing-vocabulary','ing-past']};
+const learningCourseLabels={'funcao-afim':'📈 Função Afim',fracoes:'🍕 Frações',equacoes:'🧮 Equações do 1º grau',geometria:'📐 Geometria plana',porcentagem:'💯 Porcentagem',portugues:'📚 Língua Portuguesa',historia:'🏛️ História',geografia:'🌎 Geografia',ciencias:'🔬 Ciências',fisica:'⚛️ Física',quimica:'🧪 Química',biologia:'🧬 Biologia', 'biologia-genetica':'🧬 Genética e hereditariedade','biologia-ecologia':'🌱 Ecologia e sustentabilidade',ingles:'🇬🇧 Inglês','mat-proporcao':'📏 Razão e proporção','mat-estatistica':'📊 Estatística e gráficos','por-interpretacao':'🔎 Interpretação de textos','por-gramatica':'✍️ Gramática em contexto','his-antiga':'🏺 Civilizações antigas','his-brasil':'🇧🇷 Brasil: colônia e independência','geo-cartografia':'🧭 Cartografia e orientação','geo-clima':'🌦️ Clima, relevo e vegetação','cie-corpo':'🫀 Corpo humano e saúde','cie-sistema-solar':'🪐 Terra e sistema solar','fis-ondas':'〰️ Ondas e som','fis-eletricidade':'🔌 Eletricidade e circuitos','qui-misturas':'⚗️ Substâncias e misturas','qui-reacoes':'🧫 Reações químicas','bio-evolucao':'🦋 Evolução e biodiversidade','ing-vocabulary':'💬 Vocabulário do cotidiano','ing-past':'🕰️ Passado simples'};
 extraCourses['biologia-genetica']={title:'Genética e hereditariedade',lessons:[{title:'Genes, alelos e características',time:'9 min',body:'<h3>Como as características são herdadas?</h3><p>O DNA contém genes, trechos que participam da produção de moléculas e influenciam características. Para muitos genes, recebemos uma cópia de cada progenitor.</p><div class="lesson-callout"><b>Gene:</b> trecho funcional do DNA. <b>Alelo:</b> versão de um gene.</div><p>O ambiente também influencia muitas características; herança não significa destino imutável.</p>'},{title:'Herança e probabilidade',time:'10 min',body:'<p>Quadros de Punnett ajudam a organizar combinações possíveis de alelos. Eles estimam probabilidades em cruzamentos simples, não garantem o resultado de cada indivíduo.</p><h3>Exemplo</h3><p>Em um cruzamento Aa × Aa, as combinações possíveis são AA, Aa, Aa e aa. Cada uma tem probabilidade de 25% no modelo.</p>'},{title:'DNA e variação',time:'8 min',body:'<p>Variações no DNA surgem por mudanças chamadas mutações e pela recombinação genética. A diversidade genética é importante para populações e evolução.</p>'}],questions:[{q:'O que é um alelo?',o:['Uma versão de um gene','Uma célula inteira','Um órgão','Uma proteína sempre igual'],a:0,e:'Alelo é uma das versões possíveis de um gene.',level:'facil'},{q:'No cruzamento Aa × Aa, qual a chance de aa?',o:['0%','25%','50%','100%'],a:1,e:'Uma das quatro combinações possíveis é aa.',level:'medio'},{q:'A diversidade genética pode surgir por:',o:['Recombinação e mutações','Apenas alimentação','Somente exercício','Ausência de DNA'],a:0,e:'Mutações e recombinação contribuem para a variação genética.',level:'desafio'}]};extraCourses['biologia-ecologia']={title:'Ecologia e sustentabilidade',lessons:[{title:'Ecossistemas e relações',time:'8 min',body:'<p>Ecossistemas reúnem seres vivos e fatores não vivos, como água, luz e solo. Organismos interagem por competição, predação, mutualismo e outras relações.</p>'},{title:'Cadeias e teias alimentares',time:'9 min',body:'<p>Produtores transformam energia luminosa ou química em energia armazenada. Consumidores obtêm energia ao se alimentar; decompositores reciclam nutrientes.</p><div class="lesson-callout">A energia flui pelo ecossistema; a matéria circula.</div>'},{title:'Impactos e conservação',time:'8 min',body:'<p>Desmatamento, poluição e mudanças climáticas alteram habitats. Conservação combina proteção de áreas, uso responsável de recursos e participação social.</p>'}],questions:[{q:'Qual é um fator abiótico?',o:['Luz solar','Fungo','Árvore','Bactéria'],a:0,e:'Fatores abióticos não são seres vivos; luz é um deles.',level:'facil'},{q:'Qual grupo atua na decomposição?',o:['Decompositores','Apenas produtores','Predadores de topo','Polinizadores apenas'],a:0,e:'Fungos e muitas bactérias decompõem matéria orgânica.',level:'medio'},{q:'Em uma cadeia alimentar, a energia:',o:['Flui e parte se dissipa como calor','É reciclada integralmente','Aumenta em cada nível','Não tem origem'],a:0,e:'A energia flui entre níveis tróficos e parte se dissipa como calor.',level:'desafio'}]};
 let quizOrderKey='',quizOrder=[];
 function courseSubject(key){return Object.keys(learningSubjectCourses).find(subject=>learningSubjectCourses[subject].includes(key))||'Matemática'}
