@@ -608,7 +608,7 @@ ingles:{title:'Língua Inglesa',lessons:[
 ]}
 });
 
-const learningSubjectCourses={'Matemática':['funcao-afim','fracoes','equacoes','geometria','porcentagem'],'Português':['portugues'],'Ciências':['ciencias','biologia','fisica','quimica'],'História':['historia'],'Geografia':['geografia'],'Física':['fisica'],'Química':['quimica'],'Biologia':['biologia'],'Inglês':['ingles']};
+const learningSubjectCourses={'Matemática':['funcao-afim','fracoes','equacoes','geometria','porcentagem'],'Português':['portugues'],'Ciências':['ciencias'],'História':['historia'],'Geografia':['geografia'],'Física':['fisica'],'Química':['quimica'],'Biologia':['biologia'],'Inglês':['ingles']};
 const learningCourseLabels={'funcao-afim':'📈 Função Afim',fracoes:'🍕 Frações',equacoes:'🧮 Equações do 1º grau',geometria:'📐 Geometria plana',porcentagem:'💯 Porcentagem',portugues:'📚 Língua Portuguesa',historia:'🏛️ História',geografia:'🌎 Geografia',ciencias:'🔬 Ciências',fisica:'⚛️ Física',quimica:'🧪 Química',biologia:'🧬 Biologia',ingles:'🇬🇧 Inglês'};
 function courseSubject(key){return Object.keys(learningSubjectCourses).find(subject=>learningSubjectCourses[subject].includes(key))||'Matemática'}
 function activeLessons(){return topicKey()==='funcao-afim'?learnLessons:extraCourses[topicKey()]?.lessons||[]}
