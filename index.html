@@ -324,6 +324,90 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
  #page-aprender .lesson-content{padding:17px 14px}
 }
 @media(prefers-reduced-motion:reduce){#page-aprender .course-card{transition:none}}
+
+/* Academy layout refinement — biblioteca, trilha e sala de aula */
+#page-aprender{max-width:1180px;margin-inline:auto}
+#page-aprender .learn-hero{
+ display:grid;grid-template-columns:minmax(0,1.35fr) minmax(190px,.65fr);
+ grid-template-areas:"top top" "title art" "desc art" "foot foot";
+ align-items:center;column-gap:26px;row-gap:0;min-height:260px;padding:clamp(25px,4vw,42px);
+}
+#page-aprender .learn-hero-top{grid-area:top}
+#page-aprender .learn-hero h2{grid-area:title;align-self:end;margin-top:5px}
+#page-aprender .learn-hero p{grid-area:desc;align-self:start}
+#page-aprender .learn-hero-foot{grid-area:foot;padding-top:17px;border-top:1px solid #ffffff24}
+#page-aprender .learn-hero:after{
+ content:"✦";right:8%;top:50%;bottom:auto;transform:translateY(-50%);
+ width:190px;height:190px;border-radius:48px;display:grid;place-items:center;
+ font-size:105px;color:#d9fff0;line-height:1;
+ background:radial-gradient(circle at 35% 30%,#9af0e455,transparent 28%),linear-gradient(145deg,#ffffff1c,#ffffff05);
+ border:1px solid #ffffff24;box-shadow:inset 0 0 45px #a8fff01a,0 22px 45px #07132655;
+}
+#page-aprender .learn-section-heading{margin:34px 0 15px}
+#page-aprender .learn-section-heading>span{width:42px;height:42px;flex-basis:42px;border-radius:14px}
+#page-aprender .learn-section-heading b{font-size:17px}
+#page-aprender .learn-filter-panel,#page-aprender .learn-library-panel,#page-aprender .learn-progress-panel,
+#page-aprender #graphPanel,#page-aprender #quizPanel,#page-aprender #unitAssessment,#page-aprender #mistakeReview{
+ box-shadow:0 14px 34px #05081730, inset 0 1px #ffffff08;
+}
+#page-aprender .learn-filter-panel{display:grid;grid-template-columns:minmax(0,1fr) minmax(240px,.8fr);align-items:center;gap:20px}
+#page-aprender .learn-filter-panel .learn-controls{margin:0;grid-template-columns:repeat(2,minmax(0,1fr))}
+#page-aprender #curriculumNotice{margin:0;min-height:100%;display:flex;align-items:center}
+#page-aprender .learn-library-panel{padding:clamp(19px,3vw,29px)}
+#page-aprender .learn-library-panel>.learn-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+#page-aprender #mathLibrary{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:20px}
+#page-aprender #mathLibrary .course-card{
+ min-height:122px;padding:19px 17px;display:flex;flex-direction:column;justify-content:center;
+ border-radius:17px;background:linear-gradient(145deg,#202e4d,#18243c);
+}
+#page-aprender #mathLibrary .course-card b{font-size:15px;margin-bottom:9px}
+#page-aprender #mathLibrary .course-card small{font-size:11px}
+#page-aprender #mathLibrary .course-card:before{
+ content:"";display:block;width:32px;height:4px;border-radius:5px;margin-bottom:13px;
+ background:linear-gradient(90deg,#9b8cff,#67dfd0);opacity:.9
+}
+#page-aprender #mathLibrary .course-card.active{transform:translateY(-2px);box-shadow:0 13px 28px #090d2355,inset 0 0 0 1px #c0b5ff66}
+#page-aprender .learn-progress-panel{padding:22px 25px}
+#page-aprender .lesson-layout.learn-workspace{grid-template-columns:minmax(230px,.68fr) minmax(0,2fr);gap:20px}
+#page-aprender .lesson-menu{padding:13px;border-radius:19px}
+#page-aprender .lesson-menu:before{content:"CONTEÚDO DA TRILHA";display:block;padding:5px 8px 8px;color:#aebbd7;font-size:10px;font-weight:900;letter-spacing:1.3px}
+#page-aprender .lesson-menu button{position:relative;text-align:left;min-height:76px;padding:13px 13px 13px 16px}
+#page-aprender .lesson-menu button.active{border-color:#b9adff;background:linear-gradient(120deg,#423b78,#263e59);box-shadow:inset 4px 0 #c7beff,0 7px 18px #090d2330}
+#page-aprender .lesson-content{min-height:270px;padding:clamp(22px,3vw,34px)}
+#page-aprender .lesson-content h2{font-size:clamp(23px,3vw,30px);line-height:1.25;letter-spacing:-.4px}
+#page-aprender .lesson-content h3{margin-top:22px}
+#page-aprender #quizPanel{padding:clamp(19px,3vw,27px)}
+#page-aprender #unitAssessment,#page-aprender #mistakeReview{padding:clamp(19px,3vw,27px)}
+@media(max-width:900px){
+ #page-aprender .learn-hero{grid-template-columns:minmax(0,1fr) 145px;min-height:230px}
+ #page-aprender .learn-filter-panel{grid-template-columns:1fr}
+ #page-aprender #curriculumNotice{min-height:0}
+ #page-aprender .lesson-layout.learn-workspace{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+ #page-aprender .learn-hero{display:block;min-height:0;padding:21px 18px}
+ #page-aprender .learn-hero:after{right:-22px;top:auto;bottom:58px;transform:none;width:105px;height:105px;border-radius:30px;font-size:61px;opacity:.7}
+ #page-aprender .learn-hero h2{max-width:88%;font-size:26px;margin:0 0 10px}
+ #page-aprender .learn-hero p{max-width:92%;font-size:13px}
+ #page-aprender .learn-hero-foot{position:relative;z-index:1;max-width:85%;font-size:10px}
+ #page-aprender .learn-filter-panel{display:block}
+ #page-aprender .learn-filter-panel .learn-controls,
+ #page-aprender .learn-library-panel>.learn-controls{grid-template-columns:1fr}
+ #page-aprender #mathLibrary{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ #page-aprender #mathLibrary .course-card{min-height:112px;padding:13px 11px}
+ #page-aprender #mathLibrary .course-card b{font-size:12px}
+ #page-aprender #mathLibrary .course-card small{font-size:10px}
+ #page-aprender .learn-progress-panel{padding:17px}
+ #page-aprender .lesson-layout.learn-workspace{gap:12px}
+ #page-aprender .lesson-menu:before{grid-column:1/-1}
+ #page-aprender .lesson-menu button{min-height:68px}
+ #page-aprender .lesson-content{min-height:0;padding:19px 15px}
+}
+@media(max-width:360px){
+ #page-aprender #mathLibrary{grid-template-columns:1fr}
+ #page-aprender .learn-hero h2{max-width:100%}
+}
+
 </style>
 <script>
 <script>
