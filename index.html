@@ -223,6 +223,17 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 #page-aprender .lesson-content .lesson-steps{display:grid;gap:9px;margin:14px 0}
 #page-aprender .lesson-content .learn-step{line-height:1.7}
 @media(max-width:480px){#mathLibrary{grid-template-columns:repeat(2,minmax(0,1fr))}#mathLibrary .course-card{padding:12px;min-width:0}}
+
+/* Questões: leitura clara, hierarquia e toque confortável no celular */
+#quizQuestion{padding:clamp(15px,3vw,22px);border:1px solid #8f82ff55;border-radius:16px;background:linear-gradient(145deg,#24294a,#171d37);font-size:16px;line-height:1.65;box-shadow:0 12px 30px #05081735}
+#quizQuestion>b{display:block;font-size:clamp(17px,2.4vw,21px);line-height:1.4;margin:0 0 15px;color:#fff}
+.quiz-option{min-height:50px;padding:13px 15px;margin:9px 0;border-radius:13px;background:linear-gradient(110deg,#ffffff0d,#ffffff06);font-weight:600;line-height:1.45;transition:border-color .16s,background .16s,transform .16s}
+.quiz-option:not(:disabled):hover{border-color:var(--purple);background:#9b8cff20;transform:translateY(-1px)}
+.quiz-option:focus-visible{outline:3px solid var(--cyan);outline-offset:2px}
+.quiz-option.correct{background:#2a80503b;border-width:2px}.quiz-option.wrong{background:#a43e6338;border-width:2px}
+.quiz-feedback{padding:15px;border-radius:13px;line-height:1.6}.quiz-feedback p{margin:7px 0 0}
+#quizLevel{display:inline-flex;align-items:center;padding:5px 10px;border:1px solid #9b8cff55;border-radius:999px;background:#9b8cff18;font-size:12px;font-weight:700;margin-bottom:10px}
+@media(max-width:600px){#quizQuestion{padding:14px;border-radius:13px}.quiz-option{min-height:54px;padding:14px;font-size:14px}}
 </style>
 <script>
 <script>
