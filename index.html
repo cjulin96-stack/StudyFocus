@@ -1349,7 +1349,7 @@ function addDashboard(){
  wrap.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>{if(typeof navigate==='function')navigate(b.dataset.go)}));
 }
 function refreshDashboard(){
- const d=window.data;if(!d)return;
+ const d=typeof data!=='undefined'?data:null;if(!d)return;
  const done=(d.tasks||[]).filter(x=>x.done).length,mins=(d.sessions||[]).reduce((n,x)=>n+(Number(x.minutes)||0),0);
  const lessons=Object.values(d.learnProgress||{}).reduce((n,v)=>n+(Array.isArray(v)?v.length:0),0);
  if($('sfEvoTasks'))$('sfEvoTasks').textContent=done;
