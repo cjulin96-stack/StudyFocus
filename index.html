@@ -509,6 +509,34 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 }
 @media(prefers-reduced-motion:reduce){.sf-page-hero,.sf-hero-art,.page .btn{transition:none!important}}
 
+
+/* StudyFocus Academy — acabamento visual global */
+:root{--sf-ease:cubic-bezier(.2,.75,.25,1)}
+html{scroll-behavior:smooth;scroll-padding-top:22px}
+::selection{background:#8e80ff55;color:#fff}
+button,.btn,a,[role="button"],input,select,textarea{transition:background .2s var(--sf-ease),border-color .2s var(--sf-ease),box-shadow .2s var(--sf-ease),transform .2s var(--sf-ease),color .2s var(--sf-ease)}
+button:focus-visible,.btn:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid #70ddd2;outline-offset:3px}
+.panel{box-shadow:0 10px 30px #05081720}
+.panel:hover{border-color:#8e80ff45;box-shadow:0 15px 38px #05081738}
+.stat{position:relative;overflow:hidden}
+.stat:after{content:"";position:absolute;inset:auto -24px -42px auto;width:110px;height:110px;border-radius:50%;background:radial-gradient(circle,#8e80ff20,transparent 70%);pointer-events:none}
+.btn{letter-spacing:.01em}
+.btn:active,button:active{transform:translateY(1px) scale(.985)}
+input,select,textarea{max-width:100%}
+textarea{line-height:1.65}
+.panel-head{flex-wrap:wrap}
+.task{gap:13px}
+.task:hover{border-color:#8e80ff55;background:#ffffff0a}
+.nav button{position:relative;transition:background .2s,color .2s,transform .2s}
+.nav button:hover{transform:translateX(2px)}
+.nav button.active:before{content:"";position:absolute;left:0;top:22%;bottom:22%;width:3px;border-radius:5px;background:linear-gradient(#9c8cff,#5bcecf)}
+.top{align-items:flex-start}
+.top-actions{flex-shrink:0}
+img,svg,canvas{max-width:100%}
+@media(min-width:1100px){.content-grid{align-items:start}.stats{gap:15px}.panel{padding:20px}}
+@media(max-width:760px){.main{padding:22px 15px calc(100px + env(safe-area-inset-bottom))}.top{gap:12px;margin-bottom:20px}.top h1{font-size:25px}.top-actions{gap:7px}.stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.stat,.panel{padding:15px;border-radius:16px}.content-grid{grid-template-columns:minmax(0,1fr);gap:12px}.panel-head{align-items:flex-start}.btn{min-height:42px}}
+@media(max-width:380px){.main{padding-left:12px;padding-right:12px}.stat strong{font-size:23px}.top h1{font-size:22px}.panel{padding:13px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}}
 </style>
 <script>
 <script>
