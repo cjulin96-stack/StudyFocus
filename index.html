@@ -234,7 +234,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 .quiz-feedback{padding:15px;border-radius:13px;line-height:1.6}.quiz-feedback p{margin:7px 0 0}
 #quizLevel{display:inline-flex;align-items:center;padding:5px 10px;border:1px solid #9b8cff55;border-radius:999px;background:#9b8cff18;font-size:12px;font-weight:700;margin-bottom:10px}
 @media(max-width:600px){#quizQuestion{padding:14px;border-radius:13px}.quiz-option{min-height:54px;padding:14px;font-size:14px}}
-</style>
+.nav-group-label{padding:10px 13px 2px;color:#8791b5;font-size:10px;font-weight:800;letter-spacing:1.2px}.nav{gap:4px}.nav button{min-height:42px}.tool-card{min-width:0}.tool-calculator{display:grid;gap:10px}.tool-calculator input,.tool-calculator select,#studyNotes,.field input,.field select{width:100%;min-width:0;background:#11172e;color:var(--text);border:1px solid var(--line);border-radius:11px;padding:12px}.tool-result{padding:13px;border-radius:12px;background:#202747;color:var(--cyan);font-weight:800;min-height:48px}.study-method-list{padding-left:22px;color:var(--muted)}.study-method-list li{padding:5px 0}.tools-grid{align-items:start}</style>
 <script>
 <script>
 window.MathJax = {
@@ -254,10 +254,17 @@ window.MathJax = {
 <aside class="side">
 <div class="brand"><div class="logo">✦</div><div><strong>StudyFocus</strong><small>Seu tempo. Seu foco.</small></div></div>
 <nav class="nav" aria-label="Navegação principal">
+<div class="nav-group-label">VISÃO GERAL</div>
 <button class="active" data-page="inicio"><span class="ico">⌂</span>Início</button>
-<button data-page="tarefas"><span class="ico">▤</span>Tarefas</button><button data-page="materias"><span class="ico">▦</span>Matérias</button><button data-page="aprender"><span class="ico">✎</span>Aprender</button>
-<button data-page="foco"><span class="ico">◷</span>Foco</button>
+<div class="nav-group-label">ORGANIZAR</div>
+<button data-page="tarefas"><span class="ico">▤</span>Tarefas</button>
+<button data-page="materias"><span class="ico">▦</span>Matérias</button>
+<div class="nav-group-label">APRENDER</div>
+<button data-page="aprender"><span class="ico">✎</span>Aprender</button>
 <button data-page="revisao"><span class="ico">✧</span>Revisão</button>
+<button data-page="ferramentas"><span class="ico">🧰</span>Ferramentas</button>
+<div class="nav-group-label">ACOMPANHAR</div>
+<button data-page="foco"><span class="ico">◷</span>Foco</button>
 <button data-page="progresso"><span class="ico">↗</span>Progresso</button>
 </nav>
 <div class="side-note"><b>✦ Uma sessão de cada vez</b>Pequenos passos todos os dias constroem grandes resultados.</div>
@@ -322,6 +329,15 @@ window.MathJax = {
 <div class="notice">Seus dados ficam salvos somente neste navegador, neste aparelho. O StudyFocus não envia suas tarefas ou informações para um servidor. Limpar os dados do navegador pode apagar seu progresso.</div>
 <div class="form-actions"><button class="btn danger" onclick="clearData()">Apagar todos os dados locais</button></div>
 </section>
+<section class="page" id="page-ferramentas">
+<div class="welcome"><div><div class="eyebrow">CAIXA DE FERRAMENTAS</div><h2>Ferramentas para estudar melhor 🧰</h2><p>Recursos rápidos para resolver, organizar e registrar suas ideias.</p></div><div class="spark">✦</div></div>
+<div class="content-grid tools-grid">
+<div class="panel tool-card"><div class="panel-head"><div><h3>🧮 Calculadora de estudos</h3><small class="muted">Faça cálculos sem sair da plataforma.</small></div></div><div class="tool-calculator"><input id="toolCalcA" type="number" step="any" placeholder="Primeiro número" aria-label="Primeiro número"><select id="toolCalcOp" aria-label="Operação"><option value="+">Somar (+)</option><option value="-">Subtrair (−)</option><option value="*">Multiplicar (×)</option><option value="/">Dividir (÷)</option></select><input id="toolCalcB" type="number" step="any" placeholder="Segundo número" aria-label="Segundo número"><button class="btn" onclick="calculateStudyTool()">Calcular</button><div class="tool-result" id="toolCalcResult" aria-live="polite">O resultado aparecerá aqui.</div></div></div>
+<div class="panel tool-card"><div class="panel-head"><div><h3>📝 Bloco de anotações</h3><small class="muted">Guarde resumos, dúvidas e ideias neste aparelho.</small></div><span class="tag" id="notesStatus">Não salvo</span></div><textarea id="studyNotes" rows="9" placeholder="Escreva suas anotações, fórmulas ou dúvidas..."></textarea><div class="form-actions"><button class="btn" onclick="saveStudyNotes()">Salvar anotações</button><button class="btn secondary" onclick="clearStudyNotes()">Limpar</button></div><small class="muted">As anotações ficam salvas somente neste navegador e aparelho.</small></div>
+<div class="panel tool-card"><div class="panel-head"><div><h3>🎯 Planejador de sessão</h3><small class="muted">Defina um objetivo pequeno para a próxima sessão.</small></div></div><label class="field">O que você quer concluir?<input id="studyGoalInput" placeholder="Ex.: entender equações do 1º grau"></label><label class="field">Tempo disponível<select id="studyGoalTime"><option value="15">15 minutos</option><option value="25" selected>25 minutos</option><option value="40">40 minutos</option><option value="50">50 minutos</option></select></label><button class="btn" onclick="startPlannedStudy()">Começar sessão de foco</button><div id="studyGoalFeedback" class="muted" aria-live="polite"></div></div>
+<div class="panel tool-card"><div class="panel-head"><div><h3>💡 Método de estudo ativo</h3></div></div><p>Em vez de apenas reler, tente recuperar a informação da memória.</p><ol class="study-method-list"><li>Leia um trecho curto e feche o material.</li><li>Explique o conceito com suas palavras.</li><li>Resolva uma questão sem consultar a resposta.</li><li>Confira o que faltou e revise depois.</li></ol><button class="btn secondary" onclick="navigate('revisao')">Ir para revisão →</button></div>
+</div>
+</section>
 </main></div><div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script>
 const KEY='studyfocus-v1';
@@ -349,7 +365,7 @@ function playStudySound(kind){if(!studySoundOn)return;try{const AC=window.AudioC
 
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function toast(s){const el=document.getElementById('toast');el.textContent=s;el.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>el.classList.remove('show'),2300)}
-function navigate(page){const target='page-'+page;document.querySelectorAll('main .page').forEach(x=>{const active=x.id===target;x.classList.toggle('active',active);x.style.display=active?'block':'none'});document.querySelectorAll('.nav button').forEach(x=>x.classList.toggle('active',x.dataset.page===page));const titles={inicio:'Bom estudo! 👋',tarefas:'Minhas tarefas',materias:'Minhas matérias',aprender:'Sala de aprendizagem',foco:'Hora de focar',revisao:'Central de revisão',progresso:'Minha evolução'};document.getElementById('pageTitle').textContent=titles[page]||'StudyFocus';if(page==='foco')renderTimer();window.scrollTo({top:0,behavior:'smooth'})}
+function navigate(page){const target='page-'+page;document.querySelectorAll('main .page').forEach(x=>{const active=x.id===target;x.classList.toggle('active',active);x.style.display=active?'block':'none'});document.querySelectorAll('.nav button').forEach(x=>x.classList.toggle('active',x.dataset.page===page));const titles={inicio:'Bom estudo! 👋',tarefas:'Minhas tarefas',materias:'Minhas matérias',aprender:'Sala de aprendizagem',foco:'Hora de focar',revisao:'Central de revisão',ferramentas:'Ferramentas de estudo',progresso:'Minha evolução'};document.getElementById('pageTitle').textContent=titles[page]||'StudyFocus';if(page==='foco')renderTimer();window.scrollTo({top:0,behavior:'smooth'})}
 document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>navigate(b.dataset.page)));
 document.getElementById('today').textContent=new Intl.DateTimeFormat('pt-BR',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(new Date());
 document.getElementById('subjectForm').addEventListener('submit',e=>{e.preventDefault();const name=document.getElementById('subjectName').value.trim();if(!name)return;if(data.subjects.some(x=>x.toLowerCase()===name.toLowerCase())){toast('Essa matéria já existe.');return}data.subjects.push(name);data.subjects.sort((a,b)=>a.localeCompare(b,'pt-BR'));e.target.reset();save();toast('Matéria adicionada!')});function renderSubjects(){const list=document.getElementById('subjectList');if(!list)return;document.getElementById('subjectCount').textContent=data.subjects.length+' matérias';document.getElementById('subjectOptions').innerHTML=data.subjects.map(x=>'<option value="'+esc(x)+'"></option>').join('');list.innerHTML=data.subjects.map((x,i)=>'<div class="task"><div class="task-info"><div class="task-name">'+esc(x)+'</div></div><button class="btn ghost" onclick="removeSubject('+i+')">×</button></div>').join('')||'<div class="empty">Adicione sua primeira matéria.</div>'}function removeSubject(i){if(confirm('Remover esta matéria da lista?')){data.subjects.splice(i,1);save()}}
@@ -812,5 +828,13 @@ document.getElementById('coefA').addEventListener('input',drawFunctionGraph);doc
 
 function clearData(){if(confirm('Tem certeza? Isso apagará tarefas, cartões e histórico salvos neste navegador.')){data=blank();save();toast('Dados locais apagados.')}} 
 render();rebuildLearningTopics();changeLearningPath();renderTopicProgress();updateSoundButton();
+
+function calculateStudyTool(){const a=Number(document.getElementById('toolCalcA').value),b=Number(document.getElementById('toolCalcB').value),op=document.getElementById('toolCalcOp').value,out=document.getElementById('toolCalcResult');if(document.getElementById('toolCalcA').value===''||document.getElementById('toolCalcB').value===''){out.textContent='Preencha os dois números.';return}if(op==='/'&&b===0){out.textContent='Não é possível dividir por zero.';return}const v=op==='+'?a+b:op==='-'?a-b:op==='*'?a*b:a/b;out.textContent='Resultado: '+Number(v.toFixed(8)).toLocaleString('pt-BR');}
+function saveStudyNotes(){const el=document.getElementById('studyNotes');try{localStorage.setItem('studyfocus_study_notes',el.value);document.getElementById('notesStatus').textContent='Salvo neste aparelho';toast('Anotações salvas!')}catch(e){document.getElementById('notesStatus').textContent='Não foi possível salvar';toast('Não foi possível salvar neste navegador.')}}
+function clearStudyNotes(){if(!confirm('Deseja apagar suas anotações salvas neste aparelho?'))return;document.getElementById('studyNotes').value='';try{localStorage.removeItem('studyfocus_study_notes')}catch(e){}document.getElementById('notesStatus').textContent='Limpo';}
+function loadStudyNotes(){const el=document.getElementById('studyNotes');if(!el)return;try{el.value=localStorage.getItem('studyfocus_study_notes')||'';document.getElementById('notesStatus').textContent=el.value?'Salvo neste aparelho':'Não salvo'}catch(e){}}
+function startPlannedStudy(){const goal=document.getElementById('studyGoalInput').value.trim(),mins=Number(document.getElementById('studyGoalTime').value);if(!goal){document.getElementById('studyGoalFeedback').textContent='Escreva um objetivo antes de começar.';return}document.getElementById('studyGoalFeedback').textContent='Objetivo: '+goal+' · sessão de '+mins+' minutos iniciada.';navigate('foco');const mode=document.getElementById('timerMode');if(mode)mode.value=String(mins);renderTimer();startTimer();}
+
+document.addEventListener('DOMContentLoaded',loadStudyNotes);
 </script>
 </body></html>
