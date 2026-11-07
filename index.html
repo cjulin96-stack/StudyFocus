@@ -190,6 +190,33 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
  .professor-chat-compose{gap:9px}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+/* Correção de largura da sala Aprender em telas estreitas */
+.app{width:100%;min-width:0}
+.main{width:100%;min-width:0}
+.page{width:100%;min-width:0}
+#page-aprender{width:100%;max-width:100%;min-width:0}
+#page-aprender>*{min-width:0;max-width:100%}
+#page-aprender .panel{width:100%;min-width:0}
+#page-aprender .lesson-layout{display:grid;width:100%;min-width:0;grid-template-columns:minmax(0,1fr) minmax(0,2.2fr);align-items:start}
+#page-aprender .lesson-layout> *{min-width:0;max-width:100%}
+#page-aprender .lesson-content{width:100%;min-width:0;overflow-wrap:anywhere}
+#page-aprender .lesson-content img,#page-aprender .lesson-content svg,#page-aprender .graph-wrap{max-width:100%}
+@media(max-width:900px){
+ #page-aprender .lesson-layout{grid-template-columns:minmax(0,1fr)}
+ #page-aprender .lesson-menu{position:static;width:100%;max-height:none;grid-template-columns:repeat(2,minmax(0,1fr))}
+ #page-aprender .lesson-layout>div{width:100%;min-width:0}
+ #page-aprender .lesson-content{padding:18px 16px}
+}
+@media(max-width:480px){
+ #page-aprender .learn-hero,#page-aprender .panel{width:100%;margin-left:0;margin-right:0}
+ #page-aprender .learn-controls{grid-template-columns:minmax(0,1fr)}
+ #page-aprender .lesson-menu{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+ #page-aprender .lesson-content{padding:16px 13px}
+ #page-aprender .graph-wrap{width:100%;overflow:hidden}
+ #page-aprender #functionGraph{width:100%;height:auto}
+}
+
 </style>
 <script>
 <script>
