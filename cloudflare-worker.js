@@ -26,10 +26,10 @@ export default {
     if (origin !== ALLOWED_ORIGIN) return json({ error: "Origem não autorizada." }, 403, headers);
     if (request.method !== "POST") return json({ error: "Use uma solicitação POST." }, 405, headers);
     if (!env.GEMINI_API_KEY) return json({ error: "A chave do serviço ainda não foi configurada no servidor." }, 503, headers);
-    // Required binding: STUDYFOCUS_LIMITER (5 requests per 60 seconds).
-    if (!env.STUDYFOCUS_LIMITER) return json({ error: "Proteção de uso não configurada no servidor." }, 503, headers);
+    // Required binding: LIMITADOR_DE_FOCO_DE_ESTUDO (5 requests per 60 seconds).
+    if (!env.LIMITADOR_DE_FOCO_DE_ESTUDO) return json({ error: "Proteção de uso não configurada no servidor." }, 503, headers);
     const clientKey = request.headers.get("CF-Connecting-IP") || "anonymous";
-    const rate = await env.STUDYFOCUS_LIMITER.limit({ key: clientKey });
+    const rate = await env.LIMITADOR_DE_FOCO_DE_ESTUDO.limit({ key: clientKey });
     if (!rate.success) return json({ error: "Muitas aulas solicitadas em pouco tempo. Aguarde um minuto e tente novamente." }, 429, headers);
 
     let body;
