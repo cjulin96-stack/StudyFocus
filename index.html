@@ -251,6 +251,18 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
   .nav .ico{font-size:16px}
 }
 
+
+/* Navegação mobile: duas linhas fixas, sem títulos de grupo entre os botões */
+@media(max-width:900px){
+  .side{position:fixed;left:0;right:0;top:auto;bottom:0;width:100%;height:auto;min-height:0;padding:8px 8px calc(8px + env(safe-area-inset-bottom));z-index:20;border-top:1px solid var(--line);background:#10142af7}
+  .nav{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-flow:row;align-items:stretch;justify-content:stretch;gap:6px}
+  .nav-group-label{display:none!important}
+  .nav button{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:3px;width:100%;min-width:0;min-height:54px;height:auto;padding:6px 2px;border-radius:10px;text-align:center;white-space:normal;line-height:1.15;font-size:10px}
+  .nav .ico{display:block;width:auto;font-size:18px;line-height:1}
+  .nav button.active{box-shadow:inset 0 3px #b6aaff}
+  .main{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
+}
+@media(max-width:380px){.nav{gap:4px}.nav button{font-size:9px;min-height:51px}.nav .ico{font-size:17px}}
 </style>
 <script>
 <script>
