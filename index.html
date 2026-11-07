@@ -596,6 +596,38 @@ window.MathJax = {
 };
 </script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+/* StudyFocus Evolution 2.1 — painel, laboratório, tutor e conquistas */
+.sf-evo-dashboard{display:grid;grid-template-columns:1.25fr .75fr;gap:14px;margin:0 0 20px}
+.sf-evo-card{position:relative;overflow:hidden;border:1px solid #53658a;border-radius:18px;padding:18px;background:linear-gradient(135deg,#202c50,#17213a);box-shadow:0 14px 35px #05081735}
+.sf-evo-card h3{margin:0 0 6px;font-size:16px}.sf-evo-card p{margin:0;color:#bfc9e5;font-size:12px;line-height:1.6}
+.sf-evo-kicker{font-size:10px;font-weight:850;letter-spacing:1.4px;color:#8fe8dd}
+.sf-evo-metrics{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.sf-evo-metrics span{border:1px solid #ffffff1c;background:#ffffff0b;border-radius:10px;padding:8px 10px;font-size:11px;color:#dce4ff}
+.sf-evo-metrics b{color:#fff;font-size:15px;display:block}
+.sf-evo-plan{display:grid;gap:9px;margin-top:12px}
+.sf-evo-plan button,.sf-ai-prompts button{border:1px solid #53658a;border-radius:10px;background:#ffffff09;color:#eaf0ff;padding:10px;text-align:left;font-size:12px}
+.sf-evo-plan button:hover,.sf-ai-prompts button:hover{border-color:#9b8cff;background:#9b8cff18}
+.sf-evo-plan button span{color:#8fe8dd;font-weight:800;margin-right:7px}
+.sf-lab-3d{display:grid;grid-template-columns:minmax(0,1fr) minmax(180px,.75fr);gap:14px;align-items:center;margin:14px 0;padding:16px;border:1px solid #5d6d9b;border-radius:17px;background:radial-gradient(circle at 30% 45%,#6055a333,transparent 42%),linear-gradient(135deg,#111a34,#202a4a)}
+.sf-lab-3d-stage{min-height:190px;display:grid;place-items:center;perspective:650px;overflow:hidden}
+.sf-lab-3d-object{position:relative;width:125px;height:125px;transform-style:preserve-3d;animation:sfOrbit 13s linear infinite}
+.sf-lab-3d-object.paused{animation-play-state:paused}
+.sf-lab-3d-core{position:absolute;inset:34px;border-radius:50%;background:radial-gradient(circle at 30% 25%,#fff,#8fe8dd 17%,#6b64d8 55%,#25234f 80%);box-shadow:0 0 35px #8b80ff99, inset -10px -12px 20px #090d2c99}
+.sf-lab-3d-ring{position:absolute;inset:15px;border:2px solid #8fe8ddaa;border-radius:50%;transform:rotateX(68deg) rotateZ(25deg);box-shadow:0 0 13px #8fe8dd55}
+.sf-lab-3d-ring.r2{transform:rotateY(68deg) rotateZ(-35deg);border-color:#ffb7d4aa}
+.sf-lab-3d-dot{position:absolute;width:13px;height:13px;border-radius:50%;background:#ffd477;box-shadow:0 0 14px #ffd477;top:5px;left:55px}
+@keyframes sfOrbit{to{transform:rotateY(360deg) rotateX(360deg)}}
+.sf-lab-3d-copy b{display:block;font-size:14px;margin-bottom:5px}.sf-lab-3d-copy p{font-size:12px;line-height:1.6;color:#c3cce5;margin:0 0 10px}
+.sf-ai-prompts{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0 12px}
+.sf-ai-prompts button{font-size:11px;padding:8px 10px}
+.sf-ai-status{font-size:11px;color:#9ce8d9;margin:8px 0 0}
+.sf-achievement-evo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:12px}
+.sf-achievement-evo .task{border:1px solid #53658a;border-radius:12px;background:#ffffff08;padding:12px}
+.sf-achievement-evo .task.unlocked{border-color:#b99b59;background:linear-gradient(120deg,#ffd47716,#ffffff05)}
+.sf-achievement-evo .task-meta{line-height:1.5}
+@media(max-width:650px){.sf-evo-dashboard{grid-template-columns:1fr}.sf-lab-3d{grid-template-columns:1fr}.sf-lab-3d-stage{min-height:150px}.sf-achievement-evo{grid-template-columns:1fr}}
+
 </head>
 <body>
 <div class="app">
@@ -1303,5 +1335,60 @@ function loadStudyNotes(){const el=document.getElementById('studyNotes');if(!el)
 function startPlannedStudy(){const goal=document.getElementById('studyGoalInput').value.trim(),mins=Number(document.getElementById('studyGoalTime').value);if(!goal){document.getElementById('studyGoalFeedback').textContent='Escreva um objetivo antes de começar.';return}document.getElementById('studyGoalFeedback').textContent='Objetivo: '+goal+' · sessão de '+mins+' minutos iniciada.';navigate('foco');const mode=document.getElementById('timerMode');if(mode)mode.value=String(mins);renderTimer();startTimer();}
 
 document.addEventListener('DOMContentLoaded',loadStudyNotes);
+</script>
+<script>
+
+(()=>{'use strict';
+const $=id=>document.getElementById(id);
+function addDashboard(){
+ const page=$('page-inicio');if(!page||$('sfEvolutionDashboard'))return;
+ const welcome=page.querySelector('.welcome');if(!welcome)return;
+ const wrap=document.createElement('section');wrap.id='sfEvolutionDashboard';wrap.className='sf-evo-dashboard';
+ wrap.innerHTML='<article class="sf-evo-card"><div class="sf-evo-kicker">STUDYFOCUS INTELLIGENCE</div><h3>Seu próximo passo de aprendizagem</h3><p id="sfEvoInsight">Organize uma pequena sessão hoje e acompanhe sua evolução.</p><div class="sf-evo-metrics"><span><b id="sfEvoTasks">0</b>tarefas concluídas</span><span><b id="sfEvoMinutes">0 min</b>tempo de foco</span><span><b id="sfEvoLessons">0</b>aulas concluídas</span></div></article><article class="sf-evo-card"><div class="sf-evo-kicker">PLANO RÁPIDO</div><h3>Uma sessão com propósito</h3><p>Escolha uma ação para continuar de onde parou.</p><div class="sf-evo-plan"><button data-go="aprender"><span>01</span> Continuar aprendendo</button><button data-go="foco"><span>02</span> Iniciar sessão de foco</button><button data-go="progresso"><span>03</span> Ver minha evolução</button></div></article>';
+ welcome.insertAdjacentElement('afterend',wrap);
+ wrap.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>{if(typeof navigate==='function')navigate(b.dataset.go)}));
+}
+function refreshDashboard(){
+ const d=window.data;if(!d)return;
+ const done=(d.tasks||[]).filter(x=>x.done).length,mins=(d.sessions||[]).reduce((n,x)=>n+(Number(x.minutes)||0),0);
+ const lessons=Object.values(d.learnProgress||{}).reduce((n,v)=>n+(Array.isArray(v)?v.length:0),0);
+ if($('sfEvoTasks'))$('sfEvoTasks').textContent=done;
+ if($('sfEvoMinutes'))$('sfEvoMinutes').textContent=mins+' min';
+ if($('sfEvoLessons'))$('sfEvoLessons').textContent=lessons;
+ const insight=$('sfEvoInsight');if(insight)insight.textContent=done===0&&mins===0&&lessons===0?'Seu espaço está pronto. Comece com uma tarefa curta ou uma aula para criar seu primeiro registro.':lessons<3?'Você já começou! Complete mais uma aula e depois revise o que aprendeu.':mins<60?'Bom progresso. Experimente uma sessão de foco para consolidar sua rotina.':'Ótima consistência! Confira seu desempenho e escolha um assunto para aprofundar.';
+}
+function addLab3D(){
+ const area=$('subjectLabArea');if(!area||$('sfLab3D'))return;
+ const lab=document.createElement('section');lab.id='sfLab3D';lab.className='sf-lab-3d';
+ lab.innerHTML='<div class="sf-lab-3d-stage"><div class="sf-lab-3d-object" id="sfLabObject" role="img" aria-label="Modelo tridimensional abstrato em rotação"><i class="sf-lab-3d-ring"></i><i class="sf-lab-3d-ring r2"></i><i class="sf-lab-3d-core"></i><i class="sf-lab-3d-dot"></i></div></div><div class="sf-lab-3d-copy"><div class="sf-evo-kicker">VISUALIZAÇÃO ESPACIAL</div><b>Explore em 3D</b><p>Um modelo tridimensional interativo para acompanhar a exploração do laboratório. Pause a rotação para observar os detalhes.</p><button type="button" class="btn secondary" id="sfLabToggle">Ⅱ Pausar rotação</button><p class="sf-ai-status" id="sfLabState" aria-live="polite">Modelo em movimento</p></div>';
+ const first=area.querySelector('.sf-motion-lab,.sf-ph-lab,.sf-bio-lab');if(first)first.insertAdjacentElement('beforebegin',lab);else area.prepend(lab);
+ let paused=false;$('sfLabToggle').addEventListener('click',()=>{paused=!paused;$('sfLabObject').classList.toggle('paused',paused);$('sfLabToggle').textContent=paused?'▶ Retomar rotação':'Ⅱ Pausar rotação';$('sfLabState').textContent=paused?'Rotação pausada':'Modelo em movimento'});
+}
+function addAiPrompts(){
+ const chat=document.querySelector('.professor-chat');if(!chat||$('sfAiPrompts'))return;
+ const compose=chat.querySelector('.professor-chat-compose');if(!compose)return;
+ const box=document.createElement('div');box.id='sfAiPrompts';box.className='sf-ai-prompts';
+ box.innerHTML='<button type="button" data-prompt="Explique este assunto passo a passo, começando pelo básico e usando um exemplo.">Explicar do zero</button><button type="button" data-prompt="Crie 3 questões sobre o assunto atual, começando fácil e aumentando a dificuldade. Não mostre as respostas antes de eu tentar.">Criar exercícios</button><button type="button" data-prompt="Identifique os conceitos mais importantes desta aula e faça um resumo organizado.">Fazer resumo</button><button type="button" data-prompt="Faça uma pergunta por vez para verificar se entendi a aula. Corrija minhas respostas com gentileza.">Testar compreensão</button>';
+ compose.insertAdjacentElement('beforebegin',box);
+ box.querySelectorAll('[data-prompt]').forEach(b=>b.addEventListener('click',()=>{const input=$('professorChatInput');if(!input)return;input.value=b.dataset.prompt;input.focus();if(typeof askProfessorAI==='function')askProfessorAI()}));
+ const note=document.createElement('p');note.className='sf-ai-status';note.textContent='Atalhos de estudo: escolha um objetivo e o Professor IA usará o contexto da aula atual.';box.insertAdjacentElement('afterend',note);
+}
+function addAchievementMilestones(){
+ const area=$('achievements');if(!area||$('sfAchievementEvolution'))return;
+ const done=(data?.tasks||[]).filter(x=>x.done).length,mins=(data?.sessions||[]).reduce((n,x)=>n+(Number(x.minutes)||0),0),correct=Object.values(data?.learnStats||{}).reduce((n,x)=>n+(x.correct||0),0),lessons=Object.values(data?.learnProgress||{}).reduce((n,v)=>n+(Array.isArray(v)?v.length:0),0);
+ const items=[['🧭','Explorador de trilhas','Conclua 5 aulas',lessons>=5],['🧠','Prática deliberada','Acerte 25 questões',correct>=25],['⌛','Foco em construção','Acumule 180 minutos de foco',mins>=180],['📌','Organização ativa','Conclua 10 tarefas',done>=10]];
+ const box=document.createElement('div');box.id='sfAchievementEvolution';box.className='sf-achievement-evo';
+ box.innerHTML=items.map(x=>'<div class="task '+(x[3]?'unlocked':'')+'"><div style="font-size:22px">'+x[0]+'</div><div class="task-info"><div class="task-name">'+x[1]+' '+(x[3]?'✓':'🔒')+'</div><div class="task-meta">'+x[2]+' · '+(x[3]?'Conquistado':'Em progresso')+'</div></div></div>').join('');
+ area.insertAdjacentElement('afterend',box);
+}
+function refresh(){
+ addDashboard();refreshDashboard();addLab3D();addAiPrompts();
+ const old=$('sfAchievementEvolution');if(old)old.remove();addAchievementMilestones();
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',refresh);else refresh();
+const oldRender=window.render;if(typeof oldRender==='function'){window.render=function(){const result=oldRender.apply(this,arguments);refresh();return result}}
+window.addEventListener('hashchange',refresh);
+})();
+
 </script>
 </body></html>
