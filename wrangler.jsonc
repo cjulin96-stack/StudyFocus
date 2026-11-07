@@ -6,7 +6,7 @@
   // Rate limit: up to 5 voice requests per minute per client IP.
   "ratelimits": [
     {
-      "name": "STUDYFOCUS_LIMITER",
+      "name": "LIMITADOR_DE_FOCO_DE_ESTUDO",
       "namespace_id": "731106",
       "simple": {
         "limit": 5,
