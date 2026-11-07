@@ -630,6 +630,37 @@ window.MathJax = {
 @media(max-width:650px){.sf-evo-dashboard{grid-template-columns:1fr}.sf-lab-3d{grid-template-columns:1fr}.sf-lab-3d-stage{min-height:150px}.sf-achievement-evo{grid-template-columns:1fr}}
 
 </style>
+
+<style id="sf-evolution-22-css">
+/* StudyFocus Evolution 2.2 — descoberta de trilhas */
+.sf22-discovery{padding:16px;margin:0 0 14px;border:1px solid #59658d;border-radius:17px;background:radial-gradient(circle at 92% 0%,#8e80ff22,transparent 38%),linear-gradient(135deg,#20294a,#151b34)}
+.sf22-discovery-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:13px}
+.sf22-eyebrow{font-size:10px;font-weight:850;letter-spacing:1.5px;color:#8fe8dd}
+.sf22-discovery h3{margin:3px 0;font-size:17px}.sf22-discovery p{margin:0;color:#bdc8e5;font-size:12px}
+.sf22-count{flex:0 0 auto;border:1px solid #8fe8dd55;background:#8fe8dd12;color:#aaf3e7;padding:7px 10px;border-radius:999px;font-size:10px;font-weight:800}
+.sf22-subjects{display:flex;gap:7px;overflow-x:auto;padding:2px 1px 9px;scrollbar-width:thin}
+.sf22-subject-chip{flex:0 0 auto;border:1px solid #ffffff20;border-radius:999px;padding:8px 12px;background:#ffffff08;color:#dce4ff;font-size:11px;font-weight:750}
+.sf22-subject-chip.active{background:linear-gradient(120deg,#8e80ff55,#66dfd033);border-color:#a99bff;color:#fff}
+.sf22-search-wrap{position:relative;margin-top:3px}
+.sf22-search-wrap input{width:100%;border:1px solid #ffffff24;border-radius:11px;padding:11px 13px;background:#0d1329;color:#fff;font-size:12px;outline:none}
+.sf22-search-wrap input:focus{border-color:#9b8cff;box-shadow:0 0 0 3px #9b8cff20}
+.sf22-library-meta{display:flex;justify-content:space-between;gap:8px;align-items:center;margin:11px 1px 5px;color:#aeb9d8;font-size:11px}
+.sf22-course-card{position:relative;isolation:isolate;min-height:104px!important;padding:15px!important;border-radius:15px!important;overflow:hidden;transition:transform .2s,border-color .2s,background .2s}
+.sf22-course-card:before{content:"";position:absolute;z-index:-1;width:90px;height:90px;border-radius:50%;right:-35px;top:-38px;background:var(--sf22-glow,#8e80ff);opacity:.13;filter:blur(2px)}
+.sf22-course-card:hover{transform:translateY(-2px);border-color:#8e80ff!important}
+.sf22-course-card.active{background:linear-gradient(130deg,#8e80ff30,#66dfd014)!important;border-color:#a99bff!important;box-shadow:0 8px 24px #070b1d55}
+.sf22-course-card b{font-size:13px;position:relative;z-index:1}
+.sf22-course-card small{display:block;line-height:1.5;margin-top:5px;position:relative;z-index:1}
+.sf22-course-card .sf22-course-tag{display:inline-block;margin-top:9px;padding:4px 7px;border-radius:7px;background:#ffffff0c;color:#bfc9e5;font-size:9px;font-weight:800;letter-spacing:.4px}
+.sf22-empty{grid-column:1/-1;padding:20px;border:1px dashed #65739c;border-radius:13px;text-align:center;color:#bdc8e5;font-size:12px}
+.learn-workspace .lesson-menu{position:sticky;top:16px;max-height:calc(100vh - 32px);overflow:auto}
+.learn-workspace .lesson-menu button{transition:background .18s,border-color .18s,transform .18s}
+.learn-workspace .lesson-menu button:hover{transform:translateX(2px);border-color:#7770c9;background:#ffffff0d}
+.learn-workspace .lesson-content{border-color:#4b587f;background:linear-gradient(145deg,#1d2544,#151a32);box-shadow:0 14px 34px #05081735}
+.learn-workspace #quizPanel{border-color:#4b587f}
+@media(max-width:700px){.sf22-discovery{padding:13px}.sf22-discovery-top{align-items:center}.sf22-course-card{min-height:92px!important}.learn-workspace .lesson-menu{position:static;max-height:none;grid-template-columns:1fr 1fr}}
+@media(prefers-reduced-motion:reduce){.sf22-course-card,.learn-workspace .lesson-menu button{transition:none}}
+</style>
 </head>
 <body>
 <div class="app">
@@ -1392,5 +1423,79 @@ const oldRender=window.render;if(typeof oldRender==='function'){window.render=fu
 window.addEventListener('hashchange',refresh);
 })();
 
+</script>
+
+<script id="sf-evolution-22-js">
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const subjectMeta={
+ 'Matemática':['📐','Raciocínio e resolução de problemas'],
+ 'Português':['📚','Leitura, interpretação e comunicação'],
+ 'Ciências':['🔬','Descobertas sobre o mundo natural'],
+ 'História':['🏛️','Sociedades, culturas e transformações'],
+ 'Geografia':['🌎','Território, ambiente e sociedade'],
+ 'Física':['⚛️','Movimento, energia e fenômenos'],
+ 'Química':['🧪','Matéria, substâncias e transformações'],
+ 'Biologia':['🧬','Vida, células e biodiversidade'],
+ 'Inglês':['🇬🇧','Vocabulário e comunicação']
+};
+function mount(){
+ const panel=document.querySelector('.learn-library-panel'),subject=$('learnSubject'),library=$('mathLibrary');
+ if(!panel||!subject||!library)return;
+ let discovery=$('sf22Discovery');
+ if(!discovery){
+  discovery=document.createElement('div');discovery.id='sf22Discovery';discovery.className='sf22-discovery';
+  discovery.innerHTML='<div class="sf22-discovery-top"><div><div class="sf22-eyebrow">STUDYFOCUS ACADEMY · EVOLUTION 2.2</div><h3>Encontre sua próxima descoberta</h3><p>Escolha uma disciplina e explore aulas organizadas por assunto.</p></div><span class="sf22-count" id="sf22Count">0 trilhas</span></div><div class="sf22-subjects" id="sf22Subjects" aria-label="Atalhos de disciplinas"></div><div class="sf22-search-wrap"><input id="sf22Search" type="search" placeholder="⌕  Buscar uma trilha ou assunto..." aria-label="Buscar trilha ou assunto"></div><div class="sf22-library-meta"><span id="sf22SubjectDescription">Escolha uma disciplina para começar.</span><span id="sf22VisibleCount">0 resultados</span></div>';
+  panel.insertBefore(discovery,panel.querySelector('.learn-controls'));
+  $('sf22Search').addEventListener('input',filterCourses);
+ }
+ const chips=$('sf22Subjects');
+ if(chips&&!chips.children.length){
+  [...subject.options].forEach(opt=>{
+   const name=opt.value||opt.textContent.trim(),meta=subjectMeta[name]||['✦','Conteúdos para explorar'];
+   const b=document.createElement('button');b.type='button';b.className='sf22-subject-chip';b.dataset.subject=name;b.textContent=meta[0]+' '+name;
+   b.addEventListener('click',()=>{subject.value=name;subject.dispatchEvent(new Event('change',{bubbles:true}));syncDiscovery()});
+   chips.appendChild(b);
+  });
+ }
+ syncDiscovery();decorateCourses();
+ if(!library.dataset.sf22Observed){
+  new MutationObserver(()=>{decorateCourses();filterCourses();syncDiscovery()}).observe(library,{childList:true,subtree:true});
+  library.dataset.sf22Observed='1';
+ }
+ if(!subject.dataset.sf22Bound){subject.addEventListener('change',()=>{setTimeout(()=>{syncDiscovery();decorateCourses();filterCourses()},0)});subject.dataset.sf22Bound='1'}
+}
+function decorateCourses(){
+ const lib=$('mathLibrary');if(!lib)return;
+ [...lib.querySelectorAll('.course-card')].forEach((card,i)=>{
+  card.classList.add('sf22-course-card');
+  if(!card.querySelector('.sf22-course-tag')){
+   const small=card.querySelector('small'),tag=document.createElement('span');tag.className='sf22-course-tag';tag.textContent='TRILHA '+String(i+1).padStart(2,'0');
+   if(small)small.insertAdjacentElement('afterend',tag);else card.appendChild(tag);
+  }
+ });
+}
+function filterCourses(){
+ const lib=$('mathLibrary'),q=($('sf22Search')?.value||'').trim().toLocaleLowerCase('pt-BR');if(!lib)return;
+ let shown=0;
+ [...lib.querySelectorAll('.course-card')].forEach(card=>{const match=card.textContent.toLocaleLowerCase('pt-BR').includes(q);card.hidden=!match;if(match)shown++});
+ let empty=$('sf22Empty');
+ if(!shown&&q){if(!empty){empty=document.createElement('div');empty.id='sf22Empty';empty.className='sf22-empty';lib.appendChild(empty)}empty.textContent='Nenhuma trilha encontrada para “'+q+'”. Tente outro termo.'}
+ else if(empty)empty.remove();
+ const count=$('sf22VisibleCount');if(count)count.textContent=shown+' '+(shown===1?'resultado':'resultados');
+}
+function syncDiscovery(){
+ const subject=$('learnSubject'),chips=$('sf22Subjects');if(!subject)return;
+ const name=subject.value,meta=subjectMeta[name]||['✦','Conteúdos para explorar'];
+ if(chips)[...chips.children].forEach(b=>b.classList.toggle('active',b.dataset.subject===name));
+ const desc=$('sf22SubjectDescription');if(desc)desc.textContent=meta[0]+' '+meta[1];
+ const total=$('mathLibrary')?.querySelectorAll('.course-card').length||0,count=$('sf22Count');if(count)count.textContent=total+' '+(total===1?'trilha':'trilhas');
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mount);else mount();
+const original=window.changeLearningPath;
+if(typeof original==='function'){window.changeLearningPath=function(){const out=original.apply(this,arguments);setTimeout(()=>{mount();decorateCourses();filterCourses();syncDiscovery()},0);return out}}
+window.addEventListener('pageshow',mount);
+})();
 </script>
 </body></html>
