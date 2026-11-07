@@ -116,6 +116,80 @@
   .top-actions{gap:7px}
   .sound-toggle{padding:8px 9px}
 }
+
+/* StudyFocus UI refresh — legibilidade, hierarquia e navegação */
+:root{--bg:#0b1020;--panel:#151d35;--panel2:#202c4b;--line:#3a496b;--muted:#c0c9e2;--text:#f7f8ff;--purple:#a99aff;--cyan:#72e7dc}
+body{line-height:1.62;letter-spacing:.005em}
+.main{max-width:1600px;padding-left:clamp(16px,3.5vw,56px);padding-right:clamp(16px,3.5vw,56px)}
+.top{padding-bottom:16px;border-bottom:1px solid #ffffff18}
+.eyebrow{font-size:11px;letter-spacing:1.35px}
+.top h1{font-size:clamp(26px,3vw,36px);line-height:1.2}
+.date,.muted,.stat small,.task-meta,.lesson-menu small,.course-card small{color:#c0c9e2}
+.welcome{min-height:150px;padding:clamp(20px,3vw,32px);background:linear-gradient(115deg,#39336f,#253b60 62%,#176064)}
+.welcome h2{font-size:clamp(22px,2.5vw,29px);line-height:1.25}
+.stats{gap:16px}.stat,.panel{background:linear-gradient(145deg,#1b2745,#141d35);border-color:#3a496b}
+.stat{min-height:116px;padding:18px}.stat strong{font-size:30px}
+.panel{padding:clamp(17px,2vw,24px);margin-bottom:18px}
+.panel-head{margin-bottom:18px}.panel h3{font-size:18px;line-height:1.35}
+.btn{min-height:43px;padding:10px 17px}.btn.secondary{background:#344365}.btn.ghost{border-color:#566486}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #b6aaff;outline-offset:3px}
+.nav button{font-weight:650;transition:background .18s,color .18s}
+.nav button.active{background:#a99aff25;color:#fff;box-shadow:inset 3px 0 #b6aaff}
+.field label,.field{font-weight:600}.field input,.field select,.field textarea,.learn-controls select{min-height:46px;background:#0d152b;border-color:#465578;color:#fff}
+.lesson-layout{grid-template-columns:minmax(210px,260px) minmax(0,1fr);gap:20px}
+.lesson-menu{position:sticky;top:16px;align-self:start;max-height:70vh;overflow:auto;padding-right:3px}
+.lesson-menu button{background:#1c2946;border-color:#405071;color:#e0e6f7;min-height:66px}
+.lesson-menu button.active{background:#383263;border:1px solid #b6aaff;box-shadow:0 0 0 2px #a99aff20}
+.lesson-menu small{font-size:11px;margin-top:4px}
+.lesson-content{background:#151e36;border:1px solid #344363;border-radius:16px;padding:clamp(17px,2.5vw,28px)}
+.lesson-content h2{font-size:clamp(22px,2.3vw,29px);line-height:1.3}
+.lesson-content h3{font-size:18px;color:#e4e0ff}
+.lesson-content p{font-size:15px;line-height:1.85;color:#e1e7f5}
+.lesson-callout{background:#1e3150;border-left:4px solid var(--cyan);color:#f4f7ff}
+.lesson-formula{color:#fff;background:#101a32;border-color:#52658a}
+.quiz-option{min-height:48px;padding:13px 15px;background:#202c49;border-color:#465779;line-height:1.5}
+.quiz-option:hover:not(:disabled){background:#303b61;border-color:#a99aff}
+.course-library{grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+.course-card{min-height:100px;padding:16px;background:#1b2947;border-color:#435477;transition:transform .18s,border-color .18s}
+.course-card:hover{transform:translateY(-2px);border-color:#a99aff}
+.course-card b{font-size:15px;line-height:1.4}
+.notice{font-size:13px;line-height:1.6;background:#12343b;border-color:#327b7c;color:#d5fffa}
+.tag{font-size:11px;padding:5px 9px}
+.empty{color:#d0d8ed;border-color:#536181}
+.visual-lab,.professor-chat{background:linear-gradient(145deg,#1b2947,#151e36);border-color:#465779}
+.visual-readout,.graph-result{background:#10283a;border-color:#347c82}
+@media(max-width:900px){
+ .main{padding:18px 16px calc(125px + env(safe-area-inset-bottom))}
+ .side{padding:7px 6px calc(8px + env(safe-area-inset-bottom));background:#0d1428f7;backdrop-filter:blur(14px)}
+ .nav{gap:4px}
+ .nav button{min-height:62px;font-size:11px;border-radius:11px;padding:7px 3px}
+ .nav button.active{box-shadow:inset 0 3px #b6aaff}
+ .nav .ico{font-size:20px}
+ .lesson-menu{position:static;max-height:none;grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:600px){
+ .main{padding:14px 12px calc(130px + env(safe-area-inset-bottom))}
+ .top{align-items:center;gap:8px;margin-bottom:18px}
+ .top h1{font-size:24px}.top-actions{gap:6px}.sound-toggle{font-size:11px;padding:8px}
+ .avatar{width:36px;height:36px}
+ .welcome{min-height:0;padding:19px;border-radius:17px}.welcome p{font-size:13px}.welcome .spark{font-size:30px}
+ .stats{gap:9px}.stat{min-height:100px;padding:13px;border-radius:14px}.stat-top{font-size:11px}.stat strong{font-size:25px}
+ .panel{padding:15px;border-radius:15px;margin-bottom:14px}
+ .panel-head{align-items:flex-start}.panel h3{font-size:16px}
+ .content-grid{gap:12px}
+ .learn-hero{padding:17px}.learn-hero h2{font-size:21px}
+ .learn-controls{gap:9px}.field{font-size:13px}
+ .lesson-layout{gap:12px}.lesson-menu{gap:7px}
+ .lesson-menu button{min-height:68px;padding:10px;font-size:12px}
+ .lesson-content{padding:15px 13px;border-radius:14px}
+ .lesson-content h2{font-size:21px}.lesson-content h3{font-size:17px}
+ .lesson-content p{font-size:14px;line-height:1.8}
+ .course-library{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ .course-card{min-height:92px;padding:12px}.course-card b{font-size:13px}
+ .btn{min-height:44px}.quiz-option{font-size:13px}
+ .professor-chat-compose{gap:9px}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
 <script>
 <script>
