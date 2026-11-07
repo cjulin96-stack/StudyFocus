@@ -408,6 +408,107 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
  #page-aprender .learn-hero h2{max-width:100%}
 }
 
+
+/* STUDYFOCUS DESIGN SYSTEM — identidade visual consistente nas demais áreas */
+:root{--sf-lilac:#b6aaff;--sf-mint:#8de8d9;--sf-line:#354666;--sf-surface:#18243d;--sf-surface-deep:#111b31}
+.page{max-width:1180px;margin-inline:auto}
+.page>.panel,.page>.content-grid>.panel,.page>.stats>.stat{box-shadow:0 12px 30px #05081724}
+.sf-page-hero{
+ position:relative;isolation:isolate;overflow:hidden;display:grid;
+ grid-template-columns:minmax(0,1fr) 190px;align-items:center;gap:22px;
+ min-height:228px;padding:clamp(23px,3.6vw,38px);margin:0 0 25px;
+ border:1px solid #8b8bdf55;border-radius:23px;
+ background:radial-gradient(circle at 83% 22%,#7de5d52c,transparent 26%),linear-gradient(115deg,#282b58 0%,#253d61 58%,#15515a 100%);
+ box-shadow:0 18px 42px #05081745;
+}
+.sf-page-hero:before{content:"";position:absolute;z-index:-1;inset:0;background:linear-gradient(110deg,#ffffff08,transparent 52%)}
+.sf-page-hero-copy{min-width:0}
+.sf-page-kicker{display:inline-block;color:#a5f1e4;font-size:10px;font-weight:900;letter-spacing:1.6px;margin:0 9px 13px 0}
+.sf-page-pill{display:inline-flex;padding:6px 10px;border:1px solid #c4baff55;border-radius:99px;background:#a99aff18;color:#e5e0ff;font-size:9px;font-weight:850;letter-spacing:.8px;vertical-align:middle}
+.sf-page-hero h2{max-width:680px;margin:0 0 10px;font-size:clamp(25px,3.6vw,35px);line-height:1.13;letter-spacing:-.7px;color:#fff}
+.sf-page-hero p{max-width:650px;margin:0;color:#dbe5f5;font-size:14px;line-height:1.7}
+.sf-hero-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.sf-hero-chips span{display:inline-flex;align-items:center;min-height:29px;padding:6px 10px;border:1px solid #ffffff24;border-radius:99px;background:#ffffff0c;color:#e4f6f2;font-size:10px;font-weight:700}
+.sf-hero-art{position:relative;display:grid;place-items:center;justify-self:center;width:164px;height:164px;border:1px solid #ffffff35;border-radius:42px;background:radial-gradient(circle at 34% 26%,#b8fff055,transparent 34%),linear-gradient(145deg,#ffffff20,#ffffff06);box-shadow:inset 0 0 45px #a8fff01a,0 20px 45px #0713264d;transform:rotate(3deg)}
+.sf-hero-art>span{position:absolute;top:13px;right:22px;color:#c7fff1;font-size:48px;text-shadow:0 0 24px #9fffe6aa}
+.sf-hero-art>i{position:absolute;left:19px;top:18px;color:#d8ceff;font-size:24px;font-style:normal}
+.sf-hero-art>b{position:absolute;bottom:21px;left:20px;color:#effffb;font-size:12px;line-height:1.25;letter-spacing:2px}
+.sf-block-label{display:flex;align-items:center;gap:12px;margin:27px 0 13px}
+.sf-block-label>span{display:grid;place-items:center;flex:0 0 38px;width:38px;height:38px;border:1px solid #9b8cff66;border-radius:13px;background:linear-gradient(145deg,#9b8cff30,#66dfd018);color:#d9d1ff;font-size:11px;font-weight:900}
+.sf-block-label b{display:block;color:#f3f5ff;font-size:15px;letter-spacing:.1px}
+.sf-block-label small{display:block;margin-top:3px;color:#aebbd6;font-size:11px;line-height:1.45}
+.page>.panel,.page>.content-grid>.panel{padding:clamp(17px,2.5vw,24px);border:1px solid #354666;border-radius:18px;background:linear-gradient(145deg,#1b2946,#141e34);margin-bottom:16px}
+.page .panel-head{gap:14px;margin-bottom:15px}
+.page .panel-head h3{font-size:16px;line-height:1.4;letter-spacing:.05px}
+.page .panel-head .muted,.page .panel-head small{line-height:1.55}
+.page .field{gap:8px;color:#dce5f6;font-size:12px;font-weight:700}
+.page .field input,.page .field select,.page .field textarea,.page textarea{
+ border:1px solid #435778;border-radius:12px;background:#0e1830;color:#f5f7ff;
+ padding:12px 14px;min-height:46px;outline:none;transition:border-color .16s,box-shadow .16s;
+}
+.page .field input:focus,.page .field select:focus,.page .field textarea:focus,.page textarea:focus{border-color:#a99aff;box-shadow:0 0 0 3px #a99aff25}
+.page .btn{min-height:43px;border-radius:11px;font-weight:750;letter-spacing:.05px;transition:transform .16s,filter .16s,box-shadow .16s}
+.page .btn:not(:disabled):hover{transform:translateY(-1px);filter:brightness(1.08);box-shadow:0 7px 18px #05081735}
+.page .tag{border:1px solid #9b8cff55;background:#9b8cff16;color:#e3ddff;border-radius:99px;padding:6px 10px;font-weight:750}
+#page-inicio .welcome{position:relative;overflow:hidden;border:1px solid #8b8bdf55;border-radius:22px;background:linear-gradient(115deg,#292b5b,#1c5660);box-shadow:0 18px 42px #05081740}
+#page-inicio .welcome h2{font-size:clamp(24px,3.4vw,34px);line-height:1.15}
+#page-inicio .stats{gap:13px;margin:16px 0}
+#page-inicio .stat{border:1px solid #394b6e;border-radius:17px;background:linear-gradient(145deg,#1d2b49,#151f36);padding:18px;min-width:0}
+#page-inicio .stat strong{font-size:clamp(24px,3vw,31px)}
+#page-inicio .daily-missions,#page-inicio .daily-challenge{border:1px solid #435778;border-radius:18px;background:linear-gradient(145deg,#1c2b49,#151f36);padding:20px}
+#page-inicio .content-grid{gap:16px}
+#page-tarefas #taskForm .form-grid{gap:14px}
+#page-tarefas #allTasks .task-item,#page-inicio #homeTasks .task-item{border:1px solid #354666;border-radius:13px;background:#ffffff06;padding:13px;margin:8px 0}
+#page-materias #subjectForm{max-width:600px}
+#page-materias #subjectList>*{border:1px solid #354666;border-radius:13px;background:#ffffff06;padding:13px;margin:8px 0}
+#page-foco .timer{padding:clamp(22px,4vw,36px);border:1px solid #485d83;border-radius:21px;background:radial-gradient(circle at 50% 0%,#9b8cff22,transparent 42%),linear-gradient(145deg,#202d4d,#131d34);box-shadow:inset 0 1px #ffffff10}
+#page-foco .clock{font-variant-numeric:tabular-nums;font-size:clamp(54px,10vw,82px);font-weight:850;letter-spacing:-2px;text-shadow:0 8px 28px #9b8cff30}
+#page-foco .timer-mode{letter-spacing:2px;font-weight:850;color:#b9b0ff}
+#page-foco .timer-actions{gap:10px;flex-wrap:wrap}
+#page-revisao #cardForm .form-grid{gap:14px}
+#page-revisao #reviewArea{min-height:130px;padding:14px;border:1px dashed #52658a;border-radius:15px;background:#0e183033}
+#page-progresso .stats{gap:13px;margin:0 0 17px}
+#page-progresso .stat{border:1px solid #394b6e;border-radius:17px;background:linear-gradient(145deg,#1d2b49,#151f36);padding:18px}
+#page-progresso .bar-chart{padding:16px;border:1px solid #354666;border-radius:15px;background:#0e183033}
+#page-progresso .topic-progress>*{padding:12px;border-bottom:1px solid #354666}
+#page-progresso #globalLeaguePanel{border-color:#776bb0;background:linear-gradient(145deg,#25284d,#17283e)}
+#page-progresso .notice{border-radius:13px;line-height:1.65}
+#page-ferramentas .tools-grid{gap:16px}
+#page-ferramentas .tool-card{min-width:0}
+#page-ferramentas .tool-calculator{padding:15px;border:1px solid #354666;border-radius:15px;background:#0e183033}
+#page-ferramentas #studyNotes{min-height:180px;line-height:1.65}
+#page-ferramentas .study-method-list li{line-height:1.6;padding:7px 0}
+@media(max-width:760px){
+ .sf-page-hero{grid-template-columns:minmax(0,1fr) 112px;gap:10px;min-height:190px;padding:21px 18px;border-radius:19px}
+ .sf-hero-art{width:105px;height:105px;border-radius:29px}
+ .sf-hero-art>span{font-size:34px;top:8px;right:14px}
+ .sf-hero-art>i{font-size:18px;left:12px;top:12px}
+ .sf-hero-art>b{font-size:9px;left:13px;bottom:13px}
+ .sf-page-hero h2{font-size:24px;max-width:100%}
+ .sf-page-hero p{font-size:12px;line-height:1.6}
+ .sf-page-kicker{font-size:9px;letter-spacing:1px;margin-bottom:9px}
+ .sf-page-pill{font-size:8px;padding:5px 8px}
+ .sf-hero-chips{gap:6px;margin-top:13px}
+ .sf-hero-chips span{font-size:9px;min-height:26px;padding:5px 8px}
+ .sf-block-label{margin:22px 0 11px}
+ .page>.panel,.page>.content-grid>.panel{padding:15px;border-radius:15px;margin-bottom:13px}
+ #page-inicio .stats,#page-progresso .stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ #page-inicio .stat,#page-progresso .stat{padding:13px;border-radius:14px}
+ #page-inicio .content-grid,#page-ferramentas .tools-grid{grid-template-columns:minmax(0,1fr);gap:10px}
+ #page-foco .timer{padding:20px 14px}
+}
+@media(max-width:390px){
+ .sf-page-hero{grid-template-columns:minmax(0,1fr) 78px;padding:17px 14px}
+ .sf-hero-art{width:75px;height:75px;border-radius:22px}
+ .sf-hero-art>span{font-size:26px;right:9px}
+ .sf-hero-art>i{font-size:14px;left:9px;top:8px}
+ .sf-hero-art>b{font-size:7px;left:9px;bottom:9px}
+ .sf-page-hero h2{font-size:21px}
+ .sf-page-hero p{font-size:11px}
+ .sf-page-pill{display:table;margin:0 0 9px}
+}
+@media(prefers-reduced-motion:reduce){.sf-page-hero,.sf-hero-art,.page .btn{transition:none!important}}
+
 </style>
 <script>
 <script>
@@ -446,6 +547,8 @@ window.MathJax = {
 <main class="main">
 <header class="top"><div><div class="eyebrow">PAINEL DE ESTUDOS</div><h1 id="pageTitle">Bom estudo! 👋</h1><div class="date" id="today"></div></div><div class="top-actions"><button class="sound-toggle" id="soundToggle" onclick="toggleStudySound()" aria-label="Ativar ou desativar efeitos sonoros">🔊 Sons ligados</button><div class="avatar" aria-label="Perfil local">SF</div></div></header>
 <section class="page active" id="page-inicio">
+<div class="sf-page-hero sf-home-hero"><div class="sf-page-hero-copy"><span class="sf-page-kicker">✦ STUDYFOCUS · CENTRAL DO ALUNO</span><span class="sf-page-pill">SEU PAINEL</span><h2>Seu progresso começa com um passo.</h2><p>Um espaço para organizar sua rotina, acompanhar suas conquistas e manter o ritmo dos estudos.</p><div class="sf-hero-chips"><span>◷ Rotina inteligente</span><span>✧ Metas pessoais</span><span>↗ Evolução contínua</span></div></div><div class="sf-hero-art" aria-hidden="true"><span>✦</span><i>✧</i><b>STUDY<br>FOCUS</b></div></div><div class="sf-block-label"><span>01</span><div><b>Visão geral</b><small>Seus indicadores e próximos passos.</small></div></div>
+
 <div class="welcome"><div><div class="eyebrow">SEU ESPAÇO DE APRENDIZADO</div><h2>Seu tempo. Seu foco. Sua evolução.</h2><p>Organize suas tarefas e avance no seu ritmo.</p></div><div class="spark">✦</div></div>
 <div class="stats">
 <div class="stat"><div class="stat-top">Tarefas concluídas <span class="stat-icon">✓</span></div><strong id="statDone">0</strong><small id="statTasks">de 0 tarefas</small></div>
@@ -462,6 +565,8 @@ window.MathJax = {
 </div></div>
 </section>
 <section class="page" id="page-tarefas">
+<div class="sf-page-hero sf-tasks-hero"><div class="sf-page-hero-copy"><span class="sf-page-kicker">✦ PLANEJAMENTO ACADÊMICO</span><span class="sf-page-pill">ORGANIZAÇÃO</span><h2>Transforme planos em conquistas.</h2><p>Registre o que precisa fazer, defina prioridades e acompanhe cada etapa concluída.</p><div class="sf-hero-chips"><span>＋ Novas atividades</span><span>⚑ Prioridades</span><span>✓ Acompanhamento</span></div></div><div class="sf-hero-art" aria-hidden="true"><span>✓</span><i>＋</i><b>PLAN<br>YOUR DAY</b></div></div><div class="sf-block-label"><span>01</span><div><b>Planeje suas atividades</b><small>Crie tarefas com matéria, prazo e prioridade.</small></div></div>
+
 <div class="panel"><div class="panel-head"><div><h3>Organize suas tarefas</h3><div class="muted" style="font-size:12px">Adicione atividades, defina prioridades e marque o que concluiu.</div></div></div>
 <form id="taskForm"><div class="form-grid">
 <div class="field"><label for="taskName">Nome da tarefa</label><input id="taskName" maxlength="90" placeholder="Ex.: Estudar equação do 2º grau" required></div>
@@ -471,7 +576,9 @@ window.MathJax = {
 </div><div class="form-actions"><button class="btn" type="submit">＋ Adicionar tarefa</button></div></form></div>
 <div class="panel"><div class="panel-head"><h3>Minha lista</h3><select id="taskFilter" aria-label="Filtrar tarefas" class="btn secondary"><option value="all">Todas</option><option value="pending">Pendentes</option><option value="done">Concluídas</option></select></div><div id="allTasks" class="task-list"></div></div>
 </section>
-<datalist id="subjectOptions"></datalist><section class="page" id="page-materias"><div class="panel"><h3>📚 Minhas matérias</h3><p class="muted">Cadastre disciplinas para organizar tarefas e cartões.</p><form id="subjectForm"><div class="field"><label for="subjectName">Nome da matéria</label><input id="subjectName" maxlength="40" placeholder="Ex.: Geografia" required></div><div class="form-actions"><button class="btn" type="submit">＋ Adicionar matéria</button></div></form></div><div class="panel"><div class="panel-head"><h3>Disciplinas cadastradas</h3><span class="tag" id="subjectCount">0 matérias</span></div><div id="subjectList" class="task-list"></div></div></section>
+<datalist id="subjectOptions"></datalist><section class="page" id="page-materias">
+<div class="sf-page-hero sf-subjects-hero"><div class="sf-page-hero-copy"><span class="sf-page-kicker">✦ SUA BIBLIOTECA PESSOAL</span><span class="sf-page-pill">DISCIPLINAS</span><h2>Conhecimento organizado por matéria.</h2><p>Monte seu espaço de estudos e mantenha tarefas e revisões conectadas às disciplinas.</p><div class="sf-hero-chips"><span>📚 Suas matérias</span><span>＋ Personalização</span><span>⌁ Organização</span></div></div><div class="sf-hero-art" aria-hidden="true"><span>▤</span><i>✧</i><b>LEARN<br>MORE</b></div></div><div class="sf-block-label"><span>01</span><div><b>Monte sua biblioteca</b><small>Adicione as disciplinas que fazem parte da sua rotina.</small></div></div>
+<div class="panel"><h3>📚 Minhas matérias</h3><p class="muted">Cadastre disciplinas para organizar tarefas e cartões.</p><form id="subjectForm"><div class="field"><label for="subjectName">Nome da matéria</label><input id="subjectName" maxlength="40" placeholder="Ex.: Geografia" required></div><div class="form-actions"><button class="btn" type="submit">＋ Adicionar matéria</button></div></form></div><div class="panel"><div class="panel-head"><h3>Disciplinas cadastradas</h3><span class="tag" id="subjectCount">0 matérias</span></div><div id="subjectList" class="task-list"></div></div></section>
 <section class="page" id="page-aprender">
 <div class="learn-hero"><div class="learn-hero-top"><span class="learn-kicker">✦ STUDYFOCUS ACADEMY</span><span class="learn-hero-pill">APRENDIZAGEM GUIADA</span></div><h2>Seu próximo nível começa aqui.</h2><p>Uma jornada de aprendizagem organizada: escolha sua etapa, explore uma trilha e avance aula por aula.</p><div class="learn-hero-foot"><span>🎓 Conteúdo por etapa escolar</span><span>🧠 Aulas + prática + revisão</span><span>📈 Evolução acompanhada</span></div></div>
 <div class="learn-section-heading"><span>01</span><div><b>Personalize seu percurso</b><small>Escolha em qual etapa você está estudando.</small></div></div>
@@ -489,15 +596,21 @@ window.MathJax = {
 <div class="panel" id="unitAssessment"><div class="panel-head"><div><h3>📝 Avaliação da trilha</h3><div class="muted" style="font-size:12px">Simulado com questões variadas deste assunto.</div></div><span class="tag" id="assessmentStatus">Pronto para começar</span></div><p class="muted">Faça uma avaliação de até 10 questões para conferir o que aprendeu.</p><button class="btn" id="startAssessment" onclick="startUnitAssessment()">▶ Iniciar simulado</button><div id="assessmentArea" style="margin-top:12px"></div></div><div class="panel" id="mistakeReview"><div class="panel-head"><h3>🔁 Revisar meus erros</h3><span class="tag" id="missedCount">0 questões</span></div><p class="muted">As questões respondidas incorretamente ficam guardadas neste aparelho para você tentar novamente.</p><button class="btn secondary" onclick="createCardsFromMistakes()">✧ Transformar erros em flashcards</button><div id="missedReviewArea"></div></div></section>
 
 <section class="page" id="page-foco">
+<div class="sf-page-hero sf-focus-hero"><div class="sf-page-hero-copy"><span class="sf-page-kicker">✦ DEEP WORK STUDIO</span><span class="sf-page-pill">MODO CONCENTRAÇÃO</span><h2>Menos distração. Mais presença.</h2><p>Escolha um ciclo de foco, trabalhe em uma tarefa por vez e respeite suas pausas.</p><div class="sf-hero-chips"><span>◷ Pomodoro</span><span>◎ Pausas planejadas</span><span>↗ Consistência</span></div></div><div class="sf-hero-art" aria-hidden="true"><span>◷</span><i>✦</i><b>FOCUS<br>MODE</b></div></div><div class="sf-block-label"><span>01</span><div><b>Sua sessão de foco</b><small>Configure o tempo e comece no seu ritmo.</small></div></div>
+
 <div class="panel" style="max-width:650px;margin:0 auto 17px"><div class="panel-head"><h3>⏱️ Temporizador de foco</h3><span class="tag">Técnica Pomodoro</span></div><div class="timer"><div class="timer-mode" id="timerMode">HORA DE CONCENTRAR</div><div class="clock" id="clock">25:00</div><div class="progress"><span id="timerProgress"></span></div><div class="timer-actions"><button class="btn" id="timerStart" onclick="toggleTimer()">▶ Começar</button><button class="btn secondary" onclick="resetTimer()">↺ Reiniciar</button></div><div style="display:flex;justify-content:center;gap:8px;margin-top:17px;flex-wrap:wrap"><button class="btn ghost" onclick="setTimerMode('focus')">Foco · 25 min</button><button class="btn ghost" onclick="setTimerMode('short')">Pausa · 5 min</button><button class="btn ghost" onclick="setTimerMode('long')">Pausa longa · 15 min</button></div><p class="muted" style="font-size:12px;margin-top:17px">Dica: escolha uma tarefa, afaste distrações e faça uma pausa quando o ciclo terminar.</p></div></div>
 <div class="panel" style="max-width:650px;margin:auto"><div class="panel-head"><h3>Histórico de foco</h3></div><div id="focusHistory" class="muted">Nenhuma sessão concluída ainda.</div></div>
 </section>
 <section class="page" id="page-revisao">
+<div class="sf-page-hero sf-review-hero"><div class="sf-page-hero-copy"><span class="sf-page-kicker">✦ MEMÓRIA ATIVA</span><span class="sf-page-pill">REVISÃO INTELIGENTE</span><h2>Aprender também é lembrar.</h2><p>Crie cartões, teste sua memória e retome os conceitos importantes com frequência.</p><div class="sf-hero-chips"><span>✧ Flashcards</span><span>↻ Repetição ativa</span><span>🧠 Fixação</span></div></div><div class="sf-hero-art" aria-hidden="true"><span>✧</span><i>↻</i><b>RECALL<br>BETTER</b></div></div><div class="sf-block-label"><span>01</span><div><b>Construa sua revisão</b><small>Transforme conteúdos importantes em perguntas e respostas.</small></div></div>
+
 <div class="panel"><div class="panel-head"><div><h3>✧ Revisão ativa</h3><div class="muted" style="font-size:12px">Crie cartões de pergunta e resposta para testar sua memória.</div></div></div>
 <form id="cardForm"><div class="form-grid"><div class="field"><label for="cardSubject">Matéria</label><input id="cardSubject" list="subjectOptions" maxlength="40" placeholder="Ex.: História" required></div><div class="field"><label for="cardQuestion">Pergunta</label><input id="cardQuestion" maxlength="180" placeholder="O que você quer lembrar?" required></div><div class="field full"><label for="cardAnswer">Resposta</label><textarea id="cardAnswer" rows="2" maxlength="400" placeholder="Escreva a resposta..." required></textarea></div></div><div class="form-actions"><button class="btn" type="submit">＋ Criar cartão</button></div></form></div>
 <div class="panel"><div class="panel-head"><h3>Seus cartões</h3><span class="tag" id="cardCount">0 cartões</span></div><div id="reviewArea"><div class="empty">Crie seu primeiro cartão para começar a revisar.</div></div><div class="form-actions"><button class="btn secondary" id="nextCard" onclick="nextReview()" style="display:none">Próximo cartão →</button></div></div>
 </section>
 <section class="page" id="page-progresso">
+<div class="sf-page-hero sf-progress-hero"><div class="sf-page-hero-copy"><span class="sf-page-kicker">✦ SEU DESEMPENHO</span><span class="sf-page-pill">ANALYTICS</span><h2>Veja o quanto você já avançou.</h2><p>Acompanhe seus hábitos, tempo de estudo, precisão e evolução ao longo da jornada.</p><div class="sf-hero-chips"><span>▥ Indicadores</span><span>↗ Evolução</span><span>🏅 Conquistas</span></div></div><div class="sf-hero-art" aria-hidden="true"><span>↗</span><i>▥</i><b>YOUR<br>GROWTH</b></div></div><div class="sf-block-label"><span>01</span><div><b>Painel de desempenho</b><small>Indicadores calculados a partir das suas atividades registradas.</small></div></div>
+
 <div class="stats"><div class="stat"><div class="stat-top">Tarefas concluídas</div><strong id="progressDone">0</strong><small>no total</small></div><div class="stat"><div class="stat-top">Minutos estudados</div><strong id="progressMinutes">0</strong><small>tempo registrado</small></div><div class="stat"><div class="stat-top">Cartões revisados</div><strong id="progressReviews">0</strong><small>revisões concluídas</small></div><div class="stat"><div class="stat-top">Taxa de conclusão</div><strong id="progressRate">0%</strong><small>tarefas finalizadas</small></div></div>
 <div class="panel"><div class="panel-head"><h3>📊 Seus últimos 7 dias</h3><span class="muted" style="font-size:11px">Minutos de foco</span></div><div class="bar-chart" id="weeklyChart"></div></div><div class="panel"><div class="panel-head"><h3>📚 Aprendizado por assunto</h3></div><div id="topicProgress" class="topic-progress"></div></div><div class="panel"><div class="panel-head"><h3>🎯 Precisão por trilha</h3><span class="muted" style="font-size:11px">Acertos nas questões respondidas</span></div><div id="subjectAccuracyChart" class="topic-progress"></div></div><div class="panel" id="globalLeaguePanel"><div class="panel-head"><h3>🏆 Ranking entre estudantes e ligas</h3><span class="tag">Próxima conexão</span></div><div class="level-summary"><div class="level-summary-top"><strong id="leagueStudentLevel">Sua liga pessoal</strong><span id="leagueStudentXp">0 XP</span></div><div class="progress"><span id="leagueStudentBar" style="width:0%"></span></div><small id="leagueStudentCaption">Seu nível individual é calculado pelo XP local.</small></div><div class="notice" style="margin-top:12px">O ranking global ainda não está ativo: esta versão guarda XP neste aparelho. Para comparar estudantes com segurança, precisamos conectar autenticação e uma tabela compartilhada com regras contra alteração indevida de pontuação. Não vamos exibir participantes ou posições inventadas.</div></div>
 <div class="panel"><div class="panel-head"><h3>🏅 Conquistas</h3></div><div id="achievements" class="quick"></div></div><div class="panel"><div class="panel-head"><h3>🎯 Meta semanal</h3></div><div class="field" style="max-width:300px"><label for="weeklyGoal">Defina sua meta em minutos por semana</label><input type="number" id="weeklyGoal" min="30" max="3000" step="30" value="300"></div><div class="progress"><span id="goalProgress"></span></div><div class="muted" id="goalText" style="font-size:12px">0 de 300 minutos</div></div>
@@ -505,6 +618,8 @@ window.MathJax = {
 <div class="form-actions"><button class="btn danger" onclick="clearData()">Apagar todos os dados locais</button></div>
 </section>
 <section class="page" id="page-ferramentas">
+<div class="sf-page-hero sf-tools-hero"><div class="sf-page-hero-copy"><span class="sf-page-kicker">✦ STUDY TOOLKIT</span><span class="sf-page-pill">RECURSOS DE ESTUDO</span><h2>Tudo à mão para estudar melhor.</h2><p>Use ferramentas rápidas para calcular, registrar ideias e preparar sua próxima sessão.</p><div class="sf-hero-chips"><span>🧮 Calculadora</span><span>📝 Anotações</span><span>🎯 Planejador</span></div></div><div class="sf-hero-art" aria-hidden="true"><span>⌘</span><i>✧</i><b>SMART<br>TOOLS</b></div></div><div class="sf-block-label"><span>01</span><div><b>Seu espaço de ferramentas</b><small>Recursos práticos para apoiar sua rotina.</small></div></div>
+
 <div class="welcome"><div><div class="eyebrow">CAIXA DE FERRAMENTAS</div><h2>Ferramentas para estudar melhor 🧰</h2><p>Recursos rápidos para resolver, organizar e registrar suas ideias.</p></div><div class="spark">✦</div></div>
 <div class="content-grid tools-grid">
 <div class="panel tool-card"><div class="panel-head"><div><h3>🧮 Calculadora de estudos</h3><small class="muted">Faça cálculos sem sair da plataforma.</small></div></div><div class="tool-calculator"><input id="toolCalcA" type="number" step="any" placeholder="Primeiro número" aria-label="Primeiro número"><select id="toolCalcOp" aria-label="Operação"><option value="+">Somar (+)</option><option value="-">Subtrair (−)</option><option value="*">Multiplicar (×)</option><option value="/">Dividir (÷)</option></select><input id="toolCalcB" type="number" step="any" placeholder="Segundo número" aria-label="Segundo número"><button class="btn" onclick="calculateStudyTool()">Calcular</button><div class="tool-result" id="toolCalcResult" aria-live="polite">O resultado aparecerá aqui.</div></div></div>
