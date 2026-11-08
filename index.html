@@ -1947,4 +1947,84 @@ const target=document.getElementById('lessonContent');if(target&&window.Mutation
 .sf27-cell-stage{min-height:230px!important}
 </style>
 
+<script id="sf-evolution-30-interactive-labs">
+(()=>{'use strict';
+const STORE='sf30_lab_completions_v1';
+const plans={
+ animal:{
+  title:'Experimento: por dentro da célula animal',
+  intro:'Investigue como as estruturas trabalham em conjunto para manter a célula funcionando.',
+  steps:[
+   ['01 · Localize o núcleo','Selecione Núcleo na lista de estruturas. Observe sua posição e leia a explicação.','nucleus'],
+   ['02 · Encontre a central de energia','Selecione Mitocôndria. Ela participa da respiração celular e da produção de ATP.','mitochondria'],
+   ['03 · Siga o caminho das proteínas','Selecione Retículo endoplasmático e depois Complexo de Golgi. Eles participam da produção e do processamento de proteínas.','reticulum']
+  ],
+  question:'Qual estrutura contém a maior parte do DNA da célula animal?',
+  answers:['Mitocôndria','Núcleo','Complexo de Golgi'],correct:1,
+  explain:'O núcleo abriga a maior parte do DNA e participa do controle das atividades celulares.'
+ },
+ bacteria:{
+  title:'Experimento: investigando uma bactéria',
+  intro:'Explore a organização procariótica e descubra como a bactéria se protege, armazena informação e se movimenta.',
+  steps:[
+   ['01 · Observe as camadas externas','Selecione Cápsula e depois Parede celular. Nem todas as espécies possuem cápsula.','capsule'],
+   ['02 · Encontre o material genético','Selecione Nucleoide (DNA). Bactérias não possuem núcleo delimitado por membrana.','nucleoid'],
+   ['03 · Investigue o movimento','Selecione Flagelo. Algumas bactérias usam essa estrutura para se locomover.','flagellum']
+  ],
+  question:'Onde fica o DNA principal de uma bactéria?',
+  answers:['No nucleoide','Dentro de um núcleo membranoso','No complexo de Golgi'],correct:0,
+  explain:'O DNA bacteriano fica concentrado na região chamada nucleoide, que não é envolvida por membrana.'
+ }
+};
+const $=(root,sel)=>root.querySelector(sel);
+function count(){try{return Number(localStorage.getItem(STORE)||0)}catch(e){return 0}}
+function save(){try{localStorage.setItem(STORE,String(count()+1))}catch(e){}}
+function mount(root){
+ if(root.dataset.sf30Ready)return;
+ const note=$(root,'#sf25BioNote');if(!note)return;
+ root.dataset.sf30Ready='1';
+ const panel=document.createElement('section');panel.className='sf30-panel';panel.id='sf30Interactive';
+ panel.innerHTML='<div class="sf30-top"><div><div class="sf30-kicker">STUDYFOCUS · BIO LAB</div><h4>🧪 Experimento guiado</h4><p class="sf30-intro"></p></div><div class="sf30-count"><b class="sf30-total">0</b><span>experimentos concluídos</span></div></div><div class="sf30-stepbar"><span></span></div><div class="sf30-step"><small class="sf30-stepno"></small><h5 class="sf30-steptitle"></h5><p class="sf30-steptext"></p><div class="sf30-actions"><button type="button" class="sf30-prev" disabled>← Anterior</button><button type="button" class="sf30-next">Próxima etapa →</button></div></div><div class="sf30-quiz"><div class="sf30-kicker">DESAFIO DE CONHECIMENTO</div><h5 class="sf30-question"></h5><div class="sf30-options"></div><p class="sf30-feedback" aria-live="polite"></p><button type="button" class="sf30-retry" hidden>Refazer desafio</button></div>';
+ note.insertAdjacentElement('afterend',panel);
+ const stepTitle=$(panel,'.sf30-steptitle'),stepText=$(panel,'.sf30-steptext'),stepNo=$(panel,'.sf30-stepno'),bar=$(panel,'.sf30-stepbar span'),prev=$(panel,'.sf30-prev'),next=$(panel,'.sf30-next'),quiz=$(panel,'.sf30-quiz'),options=$(panel,'.sf30-options'),feedback=$(panel,'.sf30-feedback'),retry=$(panel,'.sf30-retry');
+ let step=0,answered=false,kind='';
+ function activeKind(){return $(root,'[data-cell-kind].active')?.dataset.cellKind||'animal'}
+ function update(){
+  const p=plans[kind];$(panel,'.sf30-intro').textContent=p.intro;stepTitle.textContent=p.steps[step][0];stepText.textContent=p.steps[step][1];stepNo.textContent='ETAPA '+(step+1)+' DE '+p.steps.length;bar.style.width=((step+1)/p.steps.length*100)+'%';prev.disabled=step===0;next.textContent=step===p.steps.length-1?'Concluir exploração ✓':'Próxima etapa →';
+  const target=$(root,'[data-cell-structure="'+p.steps[step][2]+'"]');if(target)target.click();
+  $(panel,'.sf30-total').textContent=String(count());
+  $(panel,'.sf30-question').textContent=p.question;
+  options.replaceChildren();p.answers.forEach((answer,i)=>{const b=document.createElement('button');b.type='button';b.className='sf30-answer';b.textContent=answer;b.addEventListener('click',()=>choose(i));options.appendChild(b)});
+  feedback.textContent='';feedback.className='sf30-feedback';answered=false;retry.hidden=true;
+ }
+ function choose(index){
+  if(answered)return;answered=true;const p=plans[kind],buttons=[...options.children],ok=index===p.correct;
+  buttons.forEach((b,i)=>{b.disabled=true;if(i===p.correct)b.classList.add('correct');else if(i===index)b.classList.add('incorrect')});
+  feedback.textContent=(ok?'Resposta correta! ':'Vamos revisar. ')+p.explain;feedback.classList.add(ok?'good':'review');retry.hidden=ok;
+  if(ok){save();$(panel,'.sf30-total').textContent=String(count());}
+ }
+ function setKind(nextKind){kind=plans[nextKind]?nextKind:'animal';step=0;update();}
+ prev.addEventListener('click',()=>{if(step>0){step--;update()}});
+ next.addEventListener('click',()=>{if(step<plans[kind].steps.length-1){step++;update()}else{next.textContent='Exploração concluída ✓';next.disabled=true;feedback.textContent='Etapas concluídas! Agora responda ao desafio para consolidar o aprendizado.';feedback.className='sf30-feedback good';}});
+ retry.addEventListener('click',()=>update());
+ let last=activeKind();setKind(last);
+ const observer=new MutationObserver(()=>{const current=activeKind();if(current!==last){last=current;next.disabled=false;setKind(current)}});
+ observer.observe(root,{subtree:true,attributes:true,attributeFilter:['class','aria-selected']});
+}
+function scan(){document.querySelectorAll('#sf23Cell').forEach(mount)}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',scan,{once:true});else scan();
+const lesson=document.getElementById('lessonContent');if(lesson&&window.MutationObserver)new MutationObserver(scan).observe(lesson,{childList:true,subtree:true});
+})();
+</script>
+<style id="sf-evolution-30-interactive-css">
+.sf30-panel{margin:16px 12px 12px;padding:16px;border:1px solid #7086b84a;border-radius:17px;background:linear-gradient(145deg,#182844,#101b31);color:#edf4ff;box-shadow:0 12px 28px #03091435}
+.sf30-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.sf30-kicker{font-size:9px;font-weight:900;letter-spacing:1.5px;color:#8fe8dd}.sf30-top h4{margin:5px 0;font-size:17px}.sf30-intro{margin:0;color:#b9c7e2;font-size:11px;line-height:1.6}
+.sf30-count{min-width:88px;padding:9px;border:1px solid #8fe8dd35;border-radius:11px;background:#8fe8dd0b;text-align:center}.sf30-count b{display:block;color:#9ff1e3;font-size:20px}.sf30-count span{display:block;color:#b9c7e2;font-size:9px;line-height:1.3}
+.sf30-stepbar{height:6px;margin:15px 0 13px;border-radius:99px;background:#ffffff18;overflow:hidden}.sf30-stepbar span{display:block;width:33.333%;height:100%;border-radius:99px;background:linear-gradient(90deg,#51d6c2,#8ca9ff);transition:width .25s}
+.sf30-step{padding:13px;border:1px solid #ffffff18;border-radius:13px;background:#ffffff08}.sf30-stepno{font-size:9px;font-weight:850;letter-spacing:1px;color:#8fe8dd}.sf30-steptitle,.sf30-question{margin:6px 0;font-size:14px}.sf30-steptext{margin:0;color:#c7d3ea;font-size:11px;line-height:1.6}
+.sf30-actions{display:flex;gap:8px;justify-content:space-between;margin-top:12px}.sf30-actions button,.sf30-retry{border:1px solid #7c91bb;border-radius:9px;padding:9px 11px;background:#ffffff0b;color:#eef3ff;font-size:11px;font-weight:750}.sf30-actions button:disabled{opacity:.4}.sf30-actions .sf30-next{background:#276b78;border-color:#65d7c9}
+.sf30-quiz{margin-top:14px;padding:13px;border:1px solid #8ca9ff35;border-radius:13px;background:#111e36}.sf30-options{display:grid;gap:7px}.sf30-answer{padding:10px 12px;border:1px solid #7184aa66;border-radius:9px;background:#ffffff09;color:#edf4ff;text-align:left;font-size:11px}.sf30-answer:disabled{opacity:.8}.sf30-answer.correct{border-color:#53d5a0;background:#1d795533}.sf30-answer.incorrect{border-color:#e58a8a;background:#8b333333}
+.sf30-feedback{min-height:18px;margin:9px 0 0;color:#cbd7ee;font-size:11px;line-height:1.55}.sf30-feedback.good{color:#8fe8c1}.sf30-feedback.review{color:#ffd28a}.sf30-retry{margin-top:7px}
+@media(max-width:520px){.sf30-panel{margin:12px 7px;padding:12px}.sf30-top{gap:8px}.sf30-count{min-width:75px}.sf30-actions button{font-size:10px;padding:8px}}
+</style>
 </body></html>
