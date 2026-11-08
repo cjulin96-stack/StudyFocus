@@ -694,6 +694,46 @@ window.MathJax = {
 @media(max-width:620px){.sf23-lab{padding:13px}.sf23-head{display:block}.sf23-live{display:inline-block;margin-top:8px}.sf23-controls{grid-template-columns:1fr}.sf23-cell-layout{grid-template-columns:1fr}.sf23-stage{min-height:130px}}
 @media(prefers-reduced-motion:reduce){.sf23-lab *{animation:none!important;transition:none!important}}
 </style>
+
+<style id="sf-evolution-24-css">
+/* Evolution 2.4 — organização editorial e foco na aula */
+#page-aprender{--sf-space:clamp(12px,2.2vw,20px)}
+#page-aprender .learn-section-heading{margin:24px 0 12px;gap:12px}
+#page-aprender .learn-section-heading>span{width:32px;height:32px;flex:0 0 32px}
+#page-aprender .learn-section-heading small{line-height:1.4}
+#page-aprender .learn-hero{margin-bottom:22px}
+#page-aprender .learn-filter-panel,#page-aprender .learn-progress-panel{padding:clamp(14px,2.5vw,22px)}
+#page-aprender .lesson-layout.learn-workspace{display:grid;grid-template-columns:minmax(170px,220px) minmax(0,1fr);gap:14px;align-items:start}
+#page-aprender .learn-workspace>.panel.lesson-content{min-width:0}
+#page-aprender .learn-workspace .lesson-menu{position:sticky;top:14px;max-height:65vh;overflow:auto;padding:10px;display:grid;gap:7px;align-content:start}
+#page-aprender .learn-workspace .lesson-menu button{text-align:left;border:1px solid #ffffff12;border-radius:12px;padding:11px 12px;background:#ffffff05;min-height:58px}
+#page-aprender .learn-workspace .lesson-menu button.active{border-color:#9b8cff;background:linear-gradient(110deg,#9b8cff22,#66dfd012);box-shadow:inset 3px 0 #9b8cff}
+#page-aprender .learn-workspace .lesson-menu button b{display:block;font-size:12px;line-height:1.4}
+#page-aprender .learn-workspace .lesson-menu button small{display:block;margin-top:4px;color:#aab2d0;font-size:10px}
+#page-aprender .lesson-content{padding:clamp(14px,2.5vw,22px);line-height:1.65}
+#page-aprender .lesson-content>h3:first-child{margin-top:0}
+#page-aprender .lesson-content p{max-width:78ch}
+#page-aprender .sf23-lab{margin:16px 0;padding:clamp(13px,2vw,19px);border-radius:16px}
+#page-aprender .sf23-stage{min-height:125px}
+#page-aprender #quizPanel,#page-aprender #unitAssessment,#page-aprender #mistakeReview{padding:clamp(14px,2.2vw,20px);border-radius:17px}
+#page-aprender #quizPanel{margin-top:14px}
+#page-aprender #unitAssessment,#page-aprender #mistakeReview{margin-top:12px}
+#page-aprender #quizPanel .panel-head,#page-aprender #unitAssessment .panel-head,#page-aprender #mistakeReview .panel-head{margin-bottom:10px}
+#page-aprender #quizQuestion{margin-top:10px}
+#page-aprender #quizQuestion>div{padding:14px!important}
+#page-aprender #unitAssessment>p,#page-aprender #mistakeReview>p{font-size:13px;line-height:1.55}
+#page-aprender .sf23-lab+.sf23-lab{margin-top:12px}
+@media(max-width:760px){
+ #page-aprender .lesson-layout.learn-workspace{grid-template-columns:minmax(0,1fr);gap:10px}
+ #page-aprender .learn-workspace .lesson-menu{position:static;max-height:none;display:flex;overflow-x:auto;overflow-y:hidden;gap:8px;padding:4px 1px 10px;scroll-snap-type:x mandatory}
+ #page-aprender .learn-workspace .lesson-menu button{flex:0 0 min(68vw,230px);scroll-snap-align:start;min-height:62px}
+ #page-aprender .learn-workspace .lesson-menu button.active{box-shadow:inset 0 -3px #9b8cff}
+ #page-aprender .sf23-controls{grid-template-columns:1fr}
+ #page-aprender .sf23-cell-layout{grid-template-columns:1fr}
+ #page-aprender .lesson-content{font-size:14px}
+}
+@media(min-width:761px){#page-aprender .learn-workspace .lesson-menu{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
 <div class="app">
@@ -1385,7 +1425,7 @@ function drawFunctionGraph(){const a=Number(document.getElementById('coefA').val
 function selectLearningTopic(key){const topic=document.getElementById('learnTopic'),subject=document.getElementById('learnSubject');subject.value=courseSubject(key);rebuildLearningTopics();topic.value=key;changeLearningPath()}
 function rebuildLearningTopics(){const subject=document.getElementById('learnSubject'),topic=document.getElementById('learnTopic'),library=document.getElementById('mathLibrary'),keys=learningSubjectCourses[subject.value]||[];topic.innerHTML=keys.map(k=>'<option value="'+k+'">'+(learningCourseLabels[k]||k).split(' ').slice(1).join(' ')+'</option>').join('');library.innerHTML=keys.map((k,i)=>'<button class="course-card '+(i===0?'active':'')+'" data-course="'+k+'" onclick="selectLearningTopic(\''+k+'\')"><b>'+(learningCourseLabels[k]||k)+'</b><small>'+activeCourseLessonCount(k)+' aulas · '+(k==='funcao-afim'?'laboratório gráfico':'aulas visuais e exercícios')+'</small></button>').join('');if(keys.length)topic.value=keys.includes(topic.value)?topic.value:keys[0]}
 function activeCourseLessonCount(k){return k==='funcao-afim'?learnLessons.length:(extraCourses[k]?.lessons.length||0)}
-function changeLearningPath(){const subject=document.getElementById('learnSubject'),topic=document.getElementById('learnTopic'),course=document.getElementById('functionCourse'),status=document.getElementById('topicStatus'),library=document.getElementById('mathLibrary'),key=topic.value,available=!!activeLessons().length;const labArea=document.getElementById('subjectLabArea'),motionLab=document.querySelector('.sf-motion-lab'),phLab=document.querySelector('.sf-ph-lab'),labHeading=document.getElementById('subjectLabHeading'),labSub=document.getElementById('subjectLabSub');const bioLab=document.querySelector('.sf-bio-lab'),showMotion=subject.value==='Física',showChemistry=subject.value==='Química',showBiology=subject.value==='Biologia';if(labArea){labArea.style.display=(showMotion||showChemistry||showBiology)?'block':'none';if(motionLab)motionLab.style.display=showMotion?'block':'none';if(phLab)phLab.style.display=showChemistry?'block':'none';if(bioLab)bioLab.style.display=showBiology?'block':'none';if(labHeading)labHeading.textContent=showMotion?'Laboratório de Física':showChemistry?'Laboratório de Química':'Laboratório de Biologia';if(labSub)labSub.textContent=showMotion?'Explore movimento, velocidade, tempo e distância em uma simulação.':showChemistry?'Investigue a escala de pH e classifique soluções na simulação.':'Explore as estruturas de uma célula animal e descubra suas funções.';}course.style.display=available?'block':'none';library.style.display='grid';status.textContent=available?subject.value+' · '+(learningSubjectCourses[subject.value]||[]).length+' trilha(s) disponíveis. Escolha uma aula, explore os recursos visuais e pratique.':'Esta trilha ainda não possui conteúdo publicado.';document.querySelectorAll('[data-course]').forEach(b=>b.classList.toggle('active',b.dataset.course===key));const title=key==='funcao-afim'?'Função Afim':(extraCourses[key]?.title||key);document.getElementById('courseHeading').textContent=subject.value+' · '+title;document.getElementById('courseSub').textContent='Aulas guiadas, recursos visuais, exemplos e prática adaptativa';learnLesson=0;learnQuestion=0;quizOrderKey='';quizOrder=[];professorChatHistory=[];stopNarration();if(available){renderLessonMenu();renderLesson();renderQuiz()}renderMissedReview()}
+function changeLearningPath(){const subject=document.getElementById('learnSubject'),topic=document.getElementById('learnTopic'),course=document.getElementById('functionCourse'),status=document.getElementById('topicStatus'),library=document.getElementById('mathLibrary'),key=topic.value,available=!!activeLessons().length;const labArea=document.getElementById('subjectLabArea'),motionLab=document.querySelector('.sf-motion-lab'),phLab=document.querySelector('.sf-ph-lab'),labHeading=document.getElementById('subjectLabHeading'),labSub=document.getElementById('subjectLabSub');const bioLab=document.querySelector('.sf-bio-lab'),showMotion=subject.value==='Física',showChemistry=subject.value==='Química',showBiology=subject.value==='Biologia';if(labArea){labArea.style.display=(available?'none':((showMotion||showChemistry||showBiology)?'block':'none'));if(motionLab)motionLab.style.display=showMotion?'block':'none';if(phLab)phLab.style.display=showChemistry?'block':'none';if(bioLab)bioLab.style.display=showBiology?'block':'none';if(labHeading)labHeading.textContent=showMotion?'Laboratório de Física':showChemistry?'Laboratório de Química':'Laboratório de Biologia';if(labSub)labSub.textContent=showMotion?'Explore movimento, velocidade, tempo e distância em uma simulação.':showChemistry?'Investigue a escala de pH e classifique soluções na simulação.':'Explore as estruturas de uma célula animal e descubra suas funções.';}course.style.display=available?'block':'none';library.style.display='grid';status.textContent=available?subject.value+' · '+(learningSubjectCourses[subject.value]||[]).length+' trilha(s) disponíveis. Escolha uma aula, explore os recursos visuais e pratique.':'Esta trilha ainda não possui conteúdo publicado.';document.querySelectorAll('[data-course]').forEach(b=>b.classList.toggle('active',b.dataset.course===key));const title=key==='funcao-afim'?'Função Afim':(extraCourses[key]?.title||key);document.getElementById('courseHeading').textContent=subject.value+' · '+title;document.getElementById('courseSub').textContent='Aulas guiadas, recursos visuais, exemplos e prática adaptativa';learnLesson=0;learnQuestion=0;quizOrderKey='';quizOrder=[];professorChatHistory=[];stopNarration();if(available){renderLessonMenu();renderLesson();renderQuiz()}renderMissedReview()}
 document.getElementById('learnSubject').addEventListener('change',()=>{rebuildLearningTopics();changeLearningPath()});
 document.getElementById('learnTopic').addEventListener('change',changeLearningPath);
 document.getElementById('learnDifficulty').addEventListener('change',()=>{learnQuestion=0;quizOrderKey='';quizOrder=[];renderQuiz()});
