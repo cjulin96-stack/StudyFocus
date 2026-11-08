@@ -921,6 +921,64 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.stat,.panel,.btn{transition:none!important}}
 </style>
+
+<style id="sf-dashboard-41">
+.sf-dashboard-intro{position:relative;display:flex;align-items:center;justify-content:space-between;gap:18px;overflow:hidden;margin:0 0 20px;padding:22px 25px;border:1px solid #42dce744;border-radius:19px;background:radial-gradient(ellipse at 88% 20%,#39dce52a,transparent 35%),linear-gradient(115deg,#101e34,#11192e 62%,#12283a);box-shadow:0 14px 36px #0005}
+.sf-dashboard-intro:after{content:"";position:absolute;inset:auto 0 0;height:1px;background:linear-gradient(90deg,transparent,#45e5ef88,#a28bff66,transparent)}
+.sf-dashboard-kicker{font-size:9px;font-weight:900;letter-spacing:1.7px;color:#54e7ec}
+.sf-dashboard-intro h2{margin:6px 0;font-size:clamp(19px,2.5vw,25px);letter-spacing:-.5px;color:#f4fbff}
+.sf-dashboard-intro p{max-width:650px;margin:0;color:#a9bdd2;font-size:12px;line-height:1.65}
+.sf-dashboard-orb{position:relative;display:grid;place-items:center;flex:0 0 68px;width:68px;height:68px;border:1px solid #57e7ed66;border-radius:22px;background:linear-gradient(145deg,#37dce72c,#8e78ff2c);box-shadow:0 0 28px #35dce722,inset 0 0 20px #35dce71a}
+.sf-dashboard-orb span{font-size:31px;color:#bafcff;text-shadow:0 0 17px #46e6f2}
+.sf-dashboard-orb i{position:absolute;inset:-7px;border:1px solid #55e8ef33;border-radius:26px;transform:rotate(12deg)}
+#page-inicio .sf-block-label{margin:21px 0 12px}
+#page-inicio .stats{grid-template-columns:repeat(5,minmax(0,1fr));gap:11px;margin-bottom:17px}
+#page-inicio .stat{position:relative;min-width:0;overflow:hidden;padding:15px 14px}
+#page-inicio .stat:after{content:"";position:absolute;right:-24px;top:-25px;width:75px;height:75px;border-radius:50%;background:#38dce710;filter:blur(2px);pointer-events:none}
+#page-inicio .stat-top{font-size:10px;line-height:1.4;gap:6px}
+#page-inicio .stat-icon{color:#5be5eb}
+#page-inicio .stat strong{font-size:clamp(20px,2vw,27px);letter-spacing:-.6px}
+#page-inicio .stat small{display:block;line-height:1.45;font-size:10px}
+#page-inicio .content-grid{align-items:start;gap:15px}
+#page-inicio .content-grid>.panel,#page-inicio .content-grid>div>.panel{margin-bottom:15px}
+#page-inicio .daily-missions,#page-inicio .daily-challenge{position:relative;overflow:hidden}
+#page-inicio .daily-missions{border-color:#927bff44!important}
+#page-inicio .daily-challenge{border:1px solid #3edce644!important;border-radius:17px;box-shadow:0 10px 30px #0003}
+#page-inicio .daily-missions:before,#page-inicio .daily-challenge:before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(#43e4eb,#9c7cff)}
+#page-inicio .panel-head{margin-bottom:14px}
+#page-inicio .sf-quick-panel{padding-bottom:17px}
+.sf-live-dot{display:inline-flex;align-items:center;gap:6px;padding:5px 8px;border:1px solid #42dba944;border-radius:30px;color:#73e8b5;font-size:8px;font-weight:900;letter-spacing:.8px}
+.sf-live-dot:before{content:"";width:5px;height:5px;border-radius:50%;background:#5be7a9;box-shadow:0 0 9px #5be7a9}
+.sf-home-shortcuts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.sf-home-shortcuts button{display:grid;justify-items:start;gap:4px;min-width:0;padding:12px;border:1px solid #2d4b65;border-radius:12px;background:linear-gradient(145deg,#122239,#0d192b);color:#eafaff;text-align:left;transition:.2s}
+.sf-home-shortcuts button:hover{transform:translateY(-2px);border-color:#4bdde8;box-shadow:0 7px 18px #36dce51a}
+.sf-home-shortcuts button>span{display:grid;place-items:center;width:29px;height:29px;border-radius:9px;background:#37dce71b;color:#69e8ee;font-size:17px}
+.sf-home-shortcuts b{font-size:11px}
+.sf-home-shortcuts small{color:#8fa8bf;font-size:9px;line-height:1.4}
+.sf-home-activity{display:grid;gap:8px}
+.sf-activity-row{display:flex;align-items:center;gap:10px;padding:10px;border:1px solid #ffffff10;border-radius:11px;background:#0c192a}
+.sf-activity-icon{display:grid;place-items:center;flex:0 0 32px;width:32px;height:32px;border-radius:10px;background:#35dce71b;color:#68e8ee}
+.sf-activity-copy{flex:1;min-width:0}
+.sf-activity-copy b{display:block;color:#e9f7ff;font-size:11px}
+.sf-activity-copy small{display:block;color:#8fa7bd;font-size:9px;margin-top:2px}
+.sf-activity-time{color:#a9c2d7;font-size:10px;white-space:nowrap}
+.sf-activity-empty{display:grid;justify-items:center;gap:5px;padding:20px 10px;border:1px dashed #36536b;border-radius:12px;text-align:center;color:#9bb1c6}
+.sf-activity-empty span{font-size:23px;color:#59e3e9}
+.sf-activity-empty b{font-size:11px;color:#e7f6ff}
+.sf-activity-empty small{font-size:9px}
+@media(max-width:1100px){#page-inicio .stats{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:650px){
+ .sf-dashboard-intro{padding:17px;border-radius:16px}
+ .sf-dashboard-orb{flex-basis:52px;width:52px;height:52px;border-radius:17px}
+ .sf-dashboard-orb span{font-size:24px}
+ #page-inicio .stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ #page-inicio .stat{padding:13px 11px}
+ .sf-home-shortcuts{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .sf-home-shortcuts button{min-height:88px}
+ #page-inicio .content-grid{gap:10px}
+}
+@media(prefers-reduced-motion:reduce){.sf-home-shortcuts button{transition:none}}
+</style>
 </head>
 <body>
 <div class="app">
@@ -947,7 +1005,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 <section class="page active" id="page-inicio">
 <div class="sf-page-hero sf-home-hero"><div class="sf-page-hero-copy"><span class="sf-page-kicker">✦ STUDYFOCUS · CENTRAL DO ALUNO</span><span class="sf-page-pill">SEU PAINEL</span><h2>Seu progresso começa com um passo.</h2><p>Um espaço para organizar sua rotina, acompanhar suas conquistas e manter o ritmo dos estudos.</p><div class="sf-hero-chips"><span>◷ Rotina inteligente</span><span>✧ Metas pessoais</span><span>↗ Evolução contínua</span></div></div><div class="sf-hero-art" aria-hidden="true"><span>✦</span><i>✧</i><b>STUDY<br>FOCUS</b></div></div><div class="sf-block-label"><span>01</span><div><b>Visão geral</b><small>Seus indicadores e próximos passos.</small></div></div>
 
-<div class="welcome"><div><div class="eyebrow">SEU ESPAÇO DE APRENDIZADO</div><h2>Seu tempo. Seu foco. Sua evolução.</h2><p>Organize suas tarefas e avance no seu ritmo.</p></div><div class="spark">✦</div></div>
+<div class="sf-dashboard-intro"><div><span class="sf-dashboard-kicker">CENTRAL DE COMANDO</span><h2>Seu próximo avanço começa aqui.</h2><p>Veja sua rotina, escolha uma prioridade e transforme alguns minutos em progresso.</p></div><div class="sf-dashboard-orb" aria-hidden="true"><span>✦</span><i></i></div></div>
 <div class="stats">
 <div class="stat"><div class="stat-top">Tarefas concluídas <span class="stat-icon">✓</span></div><strong id="statDone">0</strong><small id="statTasks">de 0 tarefas</small></div>
 <div class="stat"><div class="stat-top">Tempo de foco <span class="stat-icon">◷</span></div><strong id="statTime">0 min</strong><small>sessões concluídas</small></div>
@@ -959,7 +1017,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 <div class="panel"><div class="panel-head"><h3>📚 Próximas tarefas</h3><button class="btn secondary" onclick="navigate('tarefas')">Ver todas</button></div><div id="homeTasks" class="task-list"></div></div>
 <div>
 <div class="panel"><div class="panel-head"><h3>⏱️ Foco rápido</h3><span class="tag">25 min</span></div><div class="timer"><div class="timer-mode" id="homeTimerMode">HORA DE CONCENTRAR</div><div class="clock" id="homeClock">25:00</div><div class="progress"><span id="homeProgress"></span></div><div class="timer-actions"><button class="btn" onclick="navigate('foco');startTimer()">Começar foco</button><button class="btn ghost" onclick="resetTimer()">Reiniciar</button></div></div></div>
-<div class="panel"><div class="panel-head"><h3>⚡ Atalhos</h3></div><div class="quick"><button onclick="navigate('tarefas')"><b>＋ Nova tarefa</b><small>Planeje seu dia</small></button><button onclick="navigate('revisao')"><b>✧ Revisar</b><small>Treine sua memória</small></button></div></div>
+<div class="panel sf-quick-panel"><div class="panel-head"><div><h3>⚡ Acesso rápido</h3><small class="muted">Suas ferramentas a um toque.</small></div><span class="sf-live-dot">PRONTO</span></div><div class="sf-home-shortcuts"><button onclick="navigate('tarefas')"><span>＋</span><b>Nova tarefa</b><small>Organize seu dia</small></button><button onclick="navigate('materias')"><span>▦</span><b>Matérias</b><small>Escolha uma disciplina</small></button><button onclick="navigate('aprender')"><span>✎</span><b>Aprender</b><small>Continue estudando</small></button><button onclick="navigate('revisao')"><span>✧</span><b>Revisão</b><small>Treine sua memória</small></button><button onclick="navigate('ferramentas')"><span>⌘</span><b>Ferramentas</b><small>Explore recursos</small></button><button onclick="navigate('progresso')"><span>↗</span><b>Meu progresso</b><small>Veja sua evolução</small></button></div></div><div class="panel sf-activity-panel"><div class="panel-head"><div><h3>◷ Histórico de foco</h3><small class="muted">Suas sessões registradas recentemente.</small></div><button class="btn ghost" onclick="navigate('foco')">Ver foco →</button></div><div id="homeActivity" class="sf-home-activity"></div></div>
 </div></div>
 </section>
 <section class="page" id="page-tarefas">
@@ -1177,7 +1235,8 @@ function minsThisWeek(){const start=new Date();start.setHours(0,0,0,0);start.set
 function renderAchievements(){const done=data.tasks.filter(t=>t.done).length,mins=data.sessions.reduce((a,s)=>a+s.minutes,0),rv=data.reviews,correct=Object.values(data.learnStats||{}).reduce((n,x)=>n+(x.correct||0),0),streak=studyStreak();const items=[['primeiro-passo','🌱','Primeiro passo','Conclua uma tarefa',done>=1,10],['organizacao','📚','Organização','Cadastre 3 matérias',data.subjects.length>=3,10],['foco-inicial','⏱️','Foco inicial','Complete uma sessão',data.sessions.length>=1,15],['foco-consistente','🔥','Foco consistente','Complete 5 sessões',data.sessions.length>=5,25],['memoria-ativa','🧠','Memória ativa','Faça 10 revisões',rv>=10,20],['estudante-dedicado','🏆','Estudante dedicado','Conclua 20 tarefas',done>=20,40],['uma-hora','⌛','Uma hora de foco','Acumule 60 minutos',mins>=60,20],['primeira-aula','📖','Primeira aula','Conclua uma aula',Object.values(data.learnProgress).some(v=>Array.isArray(v)&&v.length>0),15],['mente-afiada','🎯','Mente afiada','Acerte 10 questões',correct>=10,25],['constancia-3','🔥','Três dias de foco','Estude por 3 dias seguidos',streak>=3,30],['constancia-7','💎','Semana brilhante','Estude por 7 dias seguidos',streak>=7,60]];let newly=false;items.forEach(x=>{if(x[4]&&!data.unlockedAchievements.includes(x[0])){data.unlockedAchievements.push(x[0]);newly=true}if(x[4]&&!data.achievementXpClaimed.includes(x[0])){data.achievementXpClaimed.push(x[0]);data.totalXp+=x[5];newly=true}});if(newly){localStorage.setItem(KEY,JSON.stringify(data));playStudySound('achievement');toast('🏆 Conquista desbloqueada! XP bônus recebido.')}const area=document.getElementById('achievements');if(area)area.innerHTML=items.map(x=>'<div class="task" style="align-items:flex-start;opacity:'+(x[4]?'1':'.55')+'"><div style="font-size:22px">'+x[1]+'</div><div class="task-info"><div class="task-name">'+x[2]+' '+(x[4]?'✓':'🔒')+'</div><div class="task-meta">'+x[3]+' · '+(x[4]?'+'+x[5]+' XP recebido':'+'+x[5]+' XP')+'</div></div></div>').join('');renderLevelProgress()}
 function renderProgress(){renderTopicProgress();const done=data.tasks.filter(t=>t.done).length,mins=data.sessions.reduce((a,s)=>a+s.minutes,0),rate=data.tasks.length?Math.round(done/data.tasks.length*100):0;progressDone.textContent=done;progressMinutes.textContent=mins;progressReviews.textContent=data.reviews;progressRate.textContent=rate+'%';weeklyGoal.value=data.goal;const days=[];for(let i=6;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);const key=d.toISOString().slice(0,10);days.push({key,label:d.toLocaleDateString('pt-BR',{weekday:'short'}).replace('.',''),value:data.sessions.filter(s=>s.date===key).reduce((a,s)=>a+s.minutes,0)})}const max=Math.max(30,...days.map(x=>x.value));weeklyChart.innerHTML=days.map(x=>'<div class="bar-col"><div class="bar" style="height:'+Math.max(2,x.value/max*100)+'%" title="'+x.value+' minutos"></div><small>'+x.label+'</small></div>').join('');const w=minsThisWeek(),pct=Math.min(100,Math.round(w/data.goal*100));goalProgress.style.width=pct+'%';goalText.textContent=w+' de '+data.goal+' minutos nesta semana ('+pct+'%)'}
 weeklyGoal.addEventListener('change',()=>{data.goal=Math.max(30,Math.min(3000,Number(weeklyGoal.value)||300));save()});
-function render(){renderSubjects();renderAchievements();const done=data.tasks.filter(t=>t.done).length,mins=data.sessions.reduce((a,s)=>a+s.minutes,0),w=minsThisWeek(),pct=Math.min(100,Math.round(w/data.goal*100));statDone.textContent=done;statTasks.textContent='de '+data.tasks.length+' tarefas';statTime.textContent=mins>=60?Math.floor(mins/60)+'h '+mins%60+'min':mins+' min';statReviews.textContent=data.reviews;statGoal.textContent=pct+'%';goalCaption.textContent=w+' de '+data.goal+' minutos';const streak=studyStreak();document.getElementById('statStreak').textContent=streak+' '+(streak===1?'dia':'dias');document.getElementById('streakCaption').textContent=streak?'Continue estudando diariamente!':'Comece hoje!';renderDailyChallenge();renderTasks();renderReview();renderProgress();const focusMinutes=data.sessions.reduce((n,x)=>n+(Number(x.minutes)||0),0),focusBest=data.sessions.reduce((n,x)=>Math.max(n,Number(x.minutes)||0),0);document.getElementById('focusSessionCount').textContent=data.sessions.length;document.getElementById('focusTotalTime').textContent=focusMinutes>=60?Math.floor(focusMinutes/60)+'h '+focusMinutes%60+'min':focusMinutes+' min';document.getElementById('focusBestTime').textContent=focusBest+' min';focusHistory.innerHTML=data.sessions.length?data.sessions.slice().reverse().slice(0,10).map((x,i)=>'<div class="sf-focus-entry"><span class="sf-focus-entry-icon">'+(i===0?'✦':'◷')+'</span><div class="task-info"><div class="task-name">Ciclo de concentração</div><div class="task-meta">'+new Date(x.date+'T12:00:00').toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'})+'</div></div><span class="tag">'+x.minutes+' min</span></div>').join(''):'<div class="sf-focus-empty"><span>✧</span><b>Sua primeira sessão começa agora</b><small>Conclua um ciclo de foco para construir seu histórico.</small></div>';renderTimer()}
+function renderHomeActivity(){const area=document.getElementById('homeActivity');if(!area)return;const sessions=(data.sessions||[]).slice().filter(x=>x&&x.date).sort((a,b)=>String(b.date).localeCompare(String(a.date))).slice(0,4);const completed=(data.tasks||[]).filter(t=>t&&t.done).slice(-3).reverse();const rows=[...sessions.map(x=>({icon:'◷',title:'Sessão de concentração',detail:(Number(x.minutes)||0)+' minutos de foco',date:x.date,kind:0})),...completed.map(x=>({icon:'✓',title:String(x.name||'Tarefa concluída'),detail:'Tarefa marcada como concluída',date:'',kind:1}))].slice(0,5);if(!rows.length){area.innerHTML='<div class="sf-activity-empty"><span>✧</span><b>Seu histórico começa aqui</b><small>Conclua uma sessão de foco ou uma tarefa para registrar sua evolução.</small></div>';return}area.innerHTML=rows.map(x=>'<div class="sf-activity-row"><span class="sf-activity-icon">'+x.icon+'</span><div class="sf-activity-copy"><b>'+esc(x.title)+'</b><small>'+esc(x.detail)+'</small></div><span class="sf-activity-time">'+(x.date?new Date(x.date+'T12:00:00').toLocaleDateString('pt-BR',{day:'2-digit',month:'short'}):'Concluída')+'</span></div>').join('')}
+function render(){renderSubjects();renderAchievements();const done=data.tasks.filter(t=>t.done).length,mins=data.sessions.reduce((a,s)=>a+s.minutes,0),w=minsThisWeek(),pct=Math.min(100,Math.round(w/data.goal*100));statDone.textContent=done;statTasks.textContent='de '+data.tasks.length+' tarefas';statTime.textContent=mins>=60?Math.floor(mins/60)+'h '+mins%60+'min':mins+' min';statReviews.textContent=data.reviews;statGoal.textContent=pct+'%';goalCaption.textContent=w+' de '+data.goal+' minutos';const streak=studyStreak();document.getElementById('statStreak').textContent=streak+' '+(streak===1?'dia':'dias');document.getElementById('streakCaption').textContent=streak?'Continue estudando diariamente!':'Comece hoje!';renderDailyChallenge();renderTasks();renderHomeActivity();renderReview();renderProgress();const focusMinutes=data.sessions.reduce((n,x)=>n+(Number(x.minutes)||0),0),focusBest=data.sessions.reduce((n,x)=>Math.max(n,Number(x.minutes)||0),0);document.getElementById('focusSessionCount').textContent=data.sessions.length;document.getElementById('focusTotalTime').textContent=focusMinutes>=60?Math.floor(focusMinutes/60)+'h '+focusMinutes%60+'min':focusMinutes+' min';document.getElementById('focusBestTime').textContent=focusBest+' min';focusHistory.innerHTML=data.sessions.length?data.sessions.slice().reverse().slice(0,10).map((x,i)=>'<div class="sf-focus-entry"><span class="sf-focus-entry-icon">'+(i===0?'✦':'◷')+'</span><div class="task-info"><div class="task-name">Ciclo de concentração</div><div class="task-meta">'+new Date(x.date+'T12:00:00').toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'})+'</div></div><span class="tag">'+x.minutes+' min</span></div>').join(''):'<div class="sf-focus-empty"><span>✧</span><b>Sua primeira sessão começa agora</b><small>Conclua um ciclo de foco para construir seu histórico.</small></div>';renderTimer()}
 
 const learnLessons=[
 {title:'O que é função afim?',time:'5 min',body:`<p>Uma <b>função afim</b> é uma relação matemática em que cada valor de entrada x está associado a um único valor de saída y, seguindo uma regra do tipo:</p><div class="lesson-formula">f(x) = ax + b</div><p>Ela aparece em situações em que existe uma parte fixa e outra que varia. Uma corrida pode ter uma taxa inicial mais um valor por quilômetro.</p><div class="lesson-callout"><b>Guarde:</b> x é a entrada; f(x) ou y é o resultado; a e b são números reais.</div><h3>Exemplo simples</h3><p>Se f(x) = 2x + 3, para x = 4: f(4) = 2 · 4 + 3 = 11.</p>`},
