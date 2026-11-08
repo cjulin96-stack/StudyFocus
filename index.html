@@ -734,7 +734,39 @@ window.MathJax = {
 }
 @media(min-width:761px){#page-aprender .learn-workspace .lesson-menu{grid-template-columns:1fr}}
 </style>
-</head>
+
+<style id="sf-evolution-24-stage-css">
+#page-aprender .sf24-flow{margin:18px 0 14px;padding:15px;border:1px solid #ffffff18;border-radius:17px;background:linear-gradient(145deg,#1a2340,#121a31)}
+#page-aprender .sf24-flow-head{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:12px}
+#page-aprender .sf24-flow-head b{font-size:14px}
+#page-aprender .sf24-flow-head small{display:block;color:#aab2d0;font-size:11px;margin-top:2px}
+#page-aprender .sf24-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+#page-aprender .sf24-step{display:flex;align-items:center;gap:9px;min-width:0;text-align:left;padding:11px 10px;border:1px solid #ffffff1c;border-radius:12px;background:#ffffff06;color:#c7cfe5;transition:.18s}
+#page-aprender .sf24-step .sf24-num{display:grid;place-items:center;flex:0 0 27px;width:27px;height:27px;border-radius:9px;background:#ffffff12;font-size:12px;font-weight:850}
+#page-aprender .sf24-step b{display:block;font-size:12px}
+#page-aprender .sf24-step small{display:block;font-size:10px;color:#aab2d0;line-height:1.25;margin-top:2px}
+#page-aprender .sf24-step[aria-pressed="true"]{border-color:#9b8cff;background:linear-gradient(135deg,#9b8cff24,#66dfd015);color:#fff;box-shadow:inset 0 -2px #9b8cff}
+#page-aprender .sf24-step[aria-pressed="true"] .sf24-num{background:#9b8cff;color:#11152b}
+#page-aprender .sf24-stage{min-width:0;animation:sf24Enter .22s ease}
+#page-aprender .sf24-stage[hidden]{display:none!important}
+#page-aprender .sf24-stage-title{display:flex;align-items:center;gap:10px;margin:18px 0 10px}
+#page-aprender .sf24-stage-title h3{font-size:17px;margin:0}
+#page-aprender .sf24-stage-title p{font-size:11px;color:#aab2d0;margin:2px 0 0}
+#page-aprender .sf24-stage-title .sf24-stage-icon{display:grid;place-items:center;width:36px;height:36px;border-radius:11px;background:#9b8cff1b;border:1px solid #9b8cff55}
+#page-aprender #sf24PracticeStage #quizPanel,#page-aprender #sf24AssessmentStage #unitAssessment,#page-aprender #sf24AssessmentStage #mistakeReview{margin:0 0 12px}
+#page-aprender #sf24AssessmentStage #mistakeReview{margin-top:12px}
+#page-aprender .sf24-next{display:flex;justify-content:flex-end;margin:14px 0}
+#page-aprender .sf24-next button{border-radius:11px;padding:11px 16px;background:linear-gradient(120deg,#9b8cff,#7668df);font-weight:800}
+@keyframes sf24Enter{from{opacity:.45;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:520px){
+ #page-aprender .sf24-flow{padding:11px}
+ #page-aprender .sf24-steps{gap:6px}
+ #page-aprender .sf24-step{display:grid;justify-items:start;gap:5px;padding:9px 8px}
+ #page-aprender .sf24-step b{font-size:11px}
+ #page-aprender .sf24-step small{font-size:9px}
+}
+@media(prefers-reduced-motion:reduce){#page-aprender .sf24-stage{animation:none}}
+</style></head>
 <body>
 <div class="app">
 <aside class="side">
@@ -1599,4 +1631,47 @@ function start(){const original=window.renderLesson;if(typeof original==='functi
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
 })();
 </script>
-</body></html>
+
+<script id="sf-evolution-24-stage-js">
+(()=>{'use strict';
+function initLearningFlow(){
+ const page=document.getElementById('page-aprender');
+ if(!page||document.getElementById('sf24LearningFlow'))return;
+ const layout=page.querySelector('.lesson-layout.learn-workspace');
+ const assessment=document.getElementById('unitAssessment');
+ const mistakes=document.getElementById('mistakeReview');
+ const quiz=document.getElementById('quizPanel');
+ const progress=page.querySelector('.learn-progress-panel');
+ if(!layout||!assessment||!mistakes||!quiz||!progress)return;
+ const flow=document.createElement('section');flow.id='sf24LearningFlow';flow.className='sf24-flow';
+ flow.innerHTML='<div class="sf24-flow-head"><div><b>Seu percurso de aprendizagem</b><small>Avance por etapas, no seu ritmo.</small></div><span class="tag">3 etapas</span></div><div class="sf24-steps" role="group" aria-label="Etapas da aprendizagem"><button type="button" class="sf24-step" data-sf24-step="learn" aria-pressed="true"><span class="sf24-num">01</span><span><b>Aprender</b><small>Entenda o conteúdo</small></span></button><button type="button" class="sf24-step" data-sf24-step="practice" aria-pressed="false"><span class="sf24-num">02</span><span><b>Praticar</b><small>Treine com questões</small></span></button><button type="button" class="sf24-step" data-sf24-step="assess" aria-pressed="false"><span class="sf24-num">03</span><span><b>Avaliar</b><small>Confira sua evolução</small></span></button></div>';
+ const learn=document.createElement('div');learn.id='sf24LearnStage';learn.className='sf24-stage';
+ const practice=document.createElement('div');practice.id='sf24PracticeStage';practice.className='sf24-stage';practice.hidden=true;
+ const assess=document.createElement('div');assess.id='sf24AssessmentStage';assess.className='sf24-stage';assess.hidden=true;
+ learn.innerHTML='<div class="sf24-stage-title"><span class="sf24-stage-icon">📘</span><div><h3>Aprender</h3><p>Aula, explicação e recursos visuais do assunto selecionado.</p></div></div>';
+ practice.innerHTML='<div class="sf24-stage-title"><span class="sf24-stage-icon">🎯</span><div><h3>Praticar</h3><p>Resolva exercícios e use as dicas quando precisar.</p></div></div>';
+ assess.innerHTML='<div class="sf24-stage-title"><span class="sf24-stage-icon">📊</span><div><h3>Avaliar</h3><p>Faça o simulado e revise os pontos que merecem atenção.</p></div></div>';
+ progress.insertAdjacentElement('afterend',flow);
+ flow.insertAdjacentElement('afterend',learn);
+ learn.appendChild(layout);
+ practice.appendChild(quiz);
+ assess.appendChild(assessment);assess.appendChild(mistakes);
+ learn.insertAdjacentElement('afterend',practice);practice.insertAdjacentElement('afterend',assess);
+ const descriptions={learn:'Aula, explicação e recursos visuais do assunto selecionado.',practice:'Resolva exercícios e use as dicas quando precisar.',assess:'Faça o simulado e revise os pontos que merecem atenção.'};
+ function go(key,scroll){
+  const stages={learn,practice,assess};
+  Object.keys(stages).forEach(k=>{stages[k].hidden=k!==key;});
+  flow.querySelectorAll('[data-sf24-step]').forEach(btn=>btn.setAttribute('aria-pressed',String(btn.dataset.sf24Step===key)));
+  const heading=stages[key].querySelector('.sf24-stage-title p');if(heading)heading.textContent=descriptions[key];
+  if(scroll){flow.scrollIntoView({behavior:'smooth',block:'start'});}
+ }
+ flow.querySelectorAll('[data-sf24-step]').forEach(btn=>btn.addEventListener('click',()=>go(btn.dataset.sf24Step,false)));
+ const next=document.createElement('div');next.className='sf24-next';next.innerHTML='<button type="button">Ir para praticar →</button>';
+ learn.appendChild(next);next.querySelector('button').addEventListener('click',()=>go('practice',false));
+ const nextAssess=document.createElement('div');nextAssess.className='sf24-next';nextAssess.innerHTML='<button type="button">Ir para avaliação →</button>';
+ practice.appendChild(nextAssess);nextAssess.querySelector('button').addEventListener('click',()=>go('assess',false));
+ go('learn',false);
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initLearningFlow,{once:true});else initLearningFlow();
+})();
+</script></body></html>
