@@ -2079,4 +2079,102 @@ const lesson=document.getElementById('lessonContent');if(lesson&&window.Mutation
 @media(max-width:520px){.sf31-panel{padding:12px}.sf31-grid{grid-template-columns:1fr}.sf31-flask{height:120px}.sf31-head{gap:7px}.sf31-counter{min-width:70px}.sf31-tabs button{min-width:0;padding:9px 5px;font-size:10px}}
 @media(prefers-reduced-motion:reduce){.sf31-bubbles i,.sf31-orbs i.moving{animation:none}}
 </style>
+
+<script id="sf-evolution-32-anatomy">
+(()=>{'use strict';
+const SYSTEMS=[
+ {id:'all',label:'Corpo inteiro',items:['brain','heart','lungs','liver','stomach','kidneys','intestine','skeleton','muscles']},
+ {id:'nervous',label:'Nervoso',items:['brain','spinal']},
+ {id:'circulatory',label:'Circulatório',items:['heart','vessels']},
+ {id:'respiratory',label:'Respiratório',items:['lungs','trachea']},
+ {id:'digestive',label:'Digestório',items:['liver','stomach','intestine']},
+ {id:'urinary',label:'Urinário',items:['kidneys','bladder']},
+ {id:'skeletal',label:'Esquelético',items:['skeleton']},
+ {id:'muscular',label:'Muscular',items:['muscles']}
+];
+const DATA={
+ brain:['Cérebro','Centro de integração do sistema nervoso. Participa da percepção, memória, linguagem, pensamento e coordenação de muitas funções do corpo.','Sistema nervoso'],
+ spinal:['Medula espinhal','Feixe de tecido nervoso que conecta o encéfalo a nervos do corpo e participa dos reflexos.','Sistema nervoso'],
+ heart:['Coração','Órgão muscular que bombeia o sangue. Suas contrações mantêm a circulação pelo corpo.','Sistema circulatório'],
+ vessels:['Vasos sanguíneos','Artérias, veias e capilares conduzem o sangue e permitem trocas de substâncias com os tecidos.','Sistema circulatório'],
+ lungs:['Pulmões','Órgãos onde ocorre a troca de gases: o oxigênio passa para o sangue e o gás carbônico sai dele.','Sistema respiratório'],
+ trachea:['Traqueia','Tubo que conduz o ar da laringe até os brônquios.','Sistema respiratório'],
+ liver:['Fígado','Participa do metabolismo, processa nutrientes, produz bile e ajuda a transformar substâncias.','Sistema digestório'],
+ stomach:['Estômago','Armazena temporariamente o alimento e mistura seu conteúdo com o suco gástrico.','Sistema digestório'],
+ intestine:['Intestinos','O intestino delgado absorve a maior parte dos nutrientes; o grosso absorve água e forma as fezes.','Sistema digestório'],
+ kidneys:['Rins','Filtram o sangue, regulam água e sais e participam da formação da urina.','Sistema urinário'],
+ bladder:['Bexiga','Armazena a urina até sua eliminação.','Sistema urinário'],
+ skeleton:['Esqueleto','Dá sustentação ao corpo, protege órgãos e, junto aos músculos, permite movimentos. A medula óssea também participa da produção de células sanguíneas.','Sistema esquelético'],
+ muscles:['Músculos','Contraem e relaxam para produzir movimentos, manter a postura e gerar calor.','Sistema muscular']
+};
+const STORE='sf32_anatomy_progress_v1';
+let root,scene,camera,renderer,model,raycaster,pointer,active='all',selected='heart',raf=0,drag=false,px=0,py=0,ready=false;
+const objects={},groups={};
+const mat=(color,opacity=1,roughness=.62)=>new THREE.MeshStandardMaterial({color,roughness,transparent:opacity<1,opacity});
+function mesh(group,name,geo,color,pos,scale,opacity=1){const m=new THREE.Mesh(geo,mat(color,opacity));m.position.set(...pos);m.scale.set(...scale);m.name=name;m.castShadow=true;group.add(m);(objects[name]||(objects[name]=[])).push(m);return m}
+function capsule(group,name,color,a,b,r){const mid=new THREE.Vector3((a[0]+b[0])/2,(a[1]+b[1])/2,(a[2]+b[2])/2),dir=new THREE.Vector3(b[0]-a[0],b[1]-a[1],b[2]-a[2]);const m=mesh(group,name,new THREE.CapsuleGeometry(r,Math.max(.05,dir.length()-r*2),6,12),color,mid.toArray(),[1,1,1]);m.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),dir.normalize());return m}
+function groupFor(id){const g=new THREE.Group();g.name=id;model.add(g);groups[id]=g;return g}
+function build(){
+ model=new THREE.Group();scene.add(model);
+ const body=groupFor('body'),nerv=groupFor('nervous'),circ=groupFor('circulatory'),resp=groupFor('respiratory'),dig=groupFor('digestive'),urin=groupFor('urinary'),skel=groupFor('skeletal'),mus=groupFor('muscular');
+ const skin=mat(0x8eb7c9,.2),bone=0xe5dfc8;
+ mesh(body,'body',new THREE.CapsuleGeometry(.48,1.15,8,20),0x7896ad,[0,.95,0],[1,1,1],.22);
+ mesh(body,'head',new THREE.SphereGeometry(.34,24,18),0x9bbdca,[0,2.02,0],[.86,1.05,.8],.28);
+ capsule(body,'armL',0x7896ad,[-.48,1.48,0],[-.78,.5,0],.16);
+ capsule(body,'armR',0x7896ad,[.48,1.48,0],[.78,.5,0],.16);
+ capsule(body,'legL',0x7896ad,[-.22,.38,0],[-.28,-1.05,0],.19);
+ capsule(body,'legR',0x7896ad,[.22,.38,0],[.28,-1.05,0],.19);
+ mesh(nerv,'brain',new THREE.SphereGeometry(.23,24,18),0xe5a5c7,[0,2.08,.06],[1,.82,.9]);
+ capsule(nerv,'spinal',0xe5a5c7,[0,1.78,.08],[0,.48,.08],.045);
+ mesh(circ,'heart',new THREE.SphereGeometry(.19,24,18),0xe65d70,[-.12,1.12,.29],[.8,1.1,.7]);
+ capsule(circ,'vessels',0xd85c68,[0,1.42,.25],[0,.42,.22],.025);
+ mesh(resp,'lungs',new THREE.SphereGeometry(.28,24,18),0x78bde1,[-.22,1.28,.16],[.72,1.08,.62]);
+ mesh(resp,'lungs',new THREE.SphereGeometry(.28,24,18),0x78bde1,[.22,1.28,.16],[.72,1.08,.62]);
+ capsule(resp,'trachea',0x8ed5d0,[0,1.78,.17],[0,1.48,.17],.055);
+ mesh(dig,'liver',new THREE.SphereGeometry(.25,24,18),0x9b694e,[.19,.96,.24],[1.25,.65,.65]);
+ mesh(dig,'stomach',new THREE.SphereGeometry(.19,24,18),0xe9a16c,[-.17,.88,.28],[.78,1.1,.7]);
+ const gut=mesh(dig,'intestine',new THREE.TorusKnotGeometry(.13,.045,90,10,2,5),0xe7c28a,[0,.48,.22],[1.25,1.15,.7]);gut.rotation.x=.35;
+ mesh(urin,'kidneys',new THREE.SphereGeometry(.13,20,16),0x9b79c9,[-.3,.55,-.02],[.7,1,.7]);
+ mesh(urin,'kidneys',new THREE.SphereGeometry(.13,20,16),0x9b79c9,[.3,.55,-.02],[.7,1,.7]);
+ mesh(urin,'bladder',new THREE.SphereGeometry(.12,20,16),0x9b79c9,[0,.18,.2],[1,.8,.8]);
+ // Esqueleto didático em destaque quando selecionado.
+ capsule(skel,'skeleton',bone,[0,1.78,-.02],[0,.35,-.02],.075);
+ for(const x of [-.18,.18]){capsule(skel,'skeleton',bone,[x,1.62,0],[x*1.5,1.15,0],.035);capsule(skel,'skeleton',bone,[x*1.5,1.15,0],[x,.78,0],.035);capsule(skel,'skeleton',bone,[x,.35,0],[x*1.25,-.95,0],.055)}
+ for(let y=.65;y<1.7;y+=.16)mesh(skel,'skeleton',new THREE.SphereGeometry(.09,12,8),bone,[0,y,-.03],[1.2,.35,.7]);
+ capsule(skel,'skeleton',bone,[-.48,1.48,0],[-.78,.5,0],.045);capsule(skel,'skeleton',bone,[.48,1.48,0],[.78,.5,0],.045);
+ // Grupos musculares simplificados sobre os membros.
+ capsule(mus,'muscles',0xb85e72,[-.48,1.48,.04],[-.78,.5,.04],.105);capsule(mus,'muscles',0xb85e72,[.48,1.48,.04],[.78,.5,.04],.105);
+ capsule(mus,'muscles',0xb85e72,[-.22,.38,.04],[-.28,-1.05,.04],.13);capsule(mus,'muscles',0xb85e72,[.22,.38,.04],[.28,-1.05,.04],.13);
+}
+function info(id){const d=DATA[id]||DATA.heart;root.querySelector('#sf32-organ-name').textContent=d[0];root.querySelector('#sf32-organ-system').textContent=d[2];root.querySelector('#sf32-organ-desc').textContent=d[1];root.querySelectorAll('[data-sf32-organ]').forEach(b=>b.classList.toggle('active',b.dataset.sf32Organ===id));selected=id}
+function setSystem(id){active=id;const sys=SYSTEMS.find(x=>x.id===id)||SYSTEMS[0];root.querySelectorAll('[data-sf32-system]').forEach(b=>b.classList.toggle('active',b.dataset.sf32System===id));Object.entries(groups).forEach(([key,g])=>g.visible=(id==='all'||key==='body'||key===id));root.querySelectorAll('[data-sf32-organ]').forEach(b=>b.hidden=id!=='all'&&!sys.items.includes(b.dataset.sf32Organ));const first=sys.items[0];if(DATA[first])info(first);if(renderer)renderer.render(scene,camera)}
+function resize(){if(!renderer||!root)return;const box=root.querySelector('#sf32-view').getBoundingClientRect(),w=Math.max(260,box.width),h=Math.max(300,box.height);renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();renderer.render(scene,camera)}
+function start3d(){if(ready||!window.THREE)return;const canvas=root.querySelector('#sf32-canvas');if(!canvas)return;scene=new THREE.Scene();scene.background=new THREE.Color(0x0c1728);camera=new THREE.PerspectiveCamera(35,1,.1,100);camera.position.set(0,1.05,6.7);renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:false});renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.7));renderer.shadowMap.enabled=true;scene.add(new THREE.HemisphereLight(0xdceeff,0x253047,2));const light=new THREE.DirectionalLight(0xffffff,2.2);light.position.set(3,5,5);light.castShadow=true;scene.add(light);const fill=new THREE.PointLight(0x4c9dff,1.1);fill.position.set(-3,1,3);scene.add(fill);raycaster=new THREE.Raycaster();pointer=new THREE.Vector2();build();ready=true;resize();canvas.addEventListener('pointerdown',e=>{drag=true;px=e.clientX;py=e.clientY;canvas.setPointerCapture(e.pointerId)});canvas.addEventListener('pointermove',e=>{if(!drag)return;const dx=e.clientX-px,dy=e.clientY-py;px=e.clientX;py=e.clientY;model.rotation.y+=dx*.009;model.rotation.x=Math.max(-.35,Math.min(.35,model.rotation.x+dy*.004));renderer.render(scene,camera)});canvas.addEventListener('pointerup',e=>{drag=false;const rect=canvas.getBoundingClientRect();pointer.x=((e.clientX-rect.left)/rect.width)*2-1;pointer.y=-((e.clientY-rect.top)/rect.height)*2+1;raycaster.setFromCamera(pointer,camera);const hits=raycaster.intersectObjects(model.children.flatMap(g=>g.children),true);for(const hit of hits){let n=hit.object;while(n&&(!n.name||!DATA[n.name]))n=n.parent;if(n&&DATA[n.name]){info(n.name);break}}});canvas.addEventListener('pointercancel',()=>drag=false);if(window.ResizeObserver)new ResizeObserver(resize).observe(root.querySelector('#sf32-view'));const tick=()=>{if(!root.isConnected){if(raf)cancelAnimationFrame(raf);return}if(active==='all')model.rotation.y+=.0015;renderer.render(scene,camera);raf=requestAnimationFrame(tick)};tick();info('heart')}
+function mount(){
+ const cell=document.querySelector('#sf23Cell');if(!cell||document.querySelector('#sf32Anatomy'))return;
+ const panel=document.createElement('section');panel.id='sf32Anatomy';panel.className='sf32-panel';
+ panel.innerHTML='<div class="sf32-head"><div><div class="sf32-kicker">STUDYFOCUS · LABORATÓRIO DE ANATOMIA</div><h3>🧍 Corpo humano interativo</h3><p>Explore os sistemas do organismo, selecione estruturas e descubra como elas trabalham em conjunto.</p></div><span class="sf32-live">● 3D INTERATIVO</span></div><div class="sf32-tabs">'+SYSTEMS.map(x=>'<button type="button" data-sf32-system="'+x.id+'">'+x.label+'</button>').join('')+'</div><div class="sf32-layout"><div><div class="sf32-view" id="sf32-view"><canvas id="sf32-canvas" aria-label="Modelo tridimensional didático do corpo humano. Arraste para girar e toque nas estruturas para selecioná-las."></canvas><span class="sf32-hint">↔ Arraste para girar · toque em uma estrutura</span></div><div class="sf32-organ-list">'+Object.keys(DATA).map(k=>'<button type="button" data-sf32-organ="'+k+'">'+DATA[k][0]+'</button>').join('')+'</div></div><aside class="sf32-detail"><span class="sf32-detail-label">ESTRUTURA SELECIONADA</span><h4 id="sf32-organ-name">Coração</h4><span id="sf32-organ-system" class="sf32-system-name">Sistema circulatório</span><p id="sf32-organ-desc">Órgão muscular que bombeia o sangue e mantém a circulação.</p><div class="sf32-tip">💡 <b>Como explorar:</b> escolha um sistema, gire o modelo e toque nas estruturas ou use a lista abaixo do modelo.</div><div class="sf32-quiz"><b>Desafio rápido</b><p>Qual órgão bombeia o sangue para a circulação?</p><div class="sf32-answers"><button type="button" data-sf32-answer="lungs">Pulmões</button><button type="button" data-sf32-answer="heart">Coração</button><button type="button" data-sf32-answer="liver">Fígado</button></div><p id="sf32-feedback" aria-live="polite"></p></div><div class="sf32-progress"><b>Descobertas registradas</b><strong id="sf32-count">0</strong><span>estruturas estudadas neste dispositivo</span></div></aside></div><p class="sf32-note">Modelo anatômico 3D simplificado para fins educacionais. Formas, posições e proporções não representam um modelo clínico nem estão em escala.</p>';
+ cell.insertAdjacentElement('afterend',panel);root=panel;
+ let saved=[];try{saved=JSON.parse(localStorage.getItem(STORE)||'[]')}catch(e){}const count=panel.querySelector('#sf32-count');count.textContent=saved.length;
+ panel.addEventListener('click',e=>{const tab=e.target.closest('[data-sf32-system]');if(tab){setSystem(tab.dataset.sf32System);return}const organ=e.target.closest('[data-sf32-organ]');if(organ){info(organ.dataset.sf32Organ);if(!saved.includes(organ.dataset.sf32Organ)){saved.push(organ.dataset.sf32Organ);localStorage.setItem(STORE,JSON.stringify(saved));count.textContent=saved.length}return}const answer=e.target.closest('[data-sf32-answer]');if(answer){const good=answer.dataset.sf32Answer==='heart';panel.querySelectorAll('[data-sf32-answer]').forEach(b=>b.disabled=true);answer.classList.add(good?'correct':'wrong');panel.querySelector('#sf32-feedback').textContent=good?'Correto! O coração impulsiona o sangue.':'Quase! O coração é o órgão que bombeia o sangue.';panel.querySelector('#sf32-feedback').className=good?'good':'wrong'}});
+ start3d();setSystem('all');
+}
+function watch(){const lesson=document.querySelector('#lessonContent')||document.body;const mo=new MutationObserver(()=>{if(document.querySelector('#sf23Cell'))mount()});mo.observe(lesson,{childList:true,subtree:true});if(document.querySelector('#sf23Cell'))mount()}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',watch);else watch();
+const retry=setInterval(()=>{if(!root&&document.querySelector('#sf23Cell'))mount();if(root&&window.THREE&&!ready)start3d();if(root&&ready){clearInterval(retry)}},700);
+})();
+</script>
+<style id="sf-evolution-32-anatomy-css">
+.sf32-panel{margin:18px 0;padding:clamp(13px,2.5vw,22px);border:1px solid #65b6cf44;border-radius:20px;background:linear-gradient(145deg,#111f35,#101a2b 60%,#17263a);color:#edf5ff;box-shadow:0 16px 40px #02081744}
+.sf32-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.sf32-kicker{font-size:9px;letter-spacing:1.5px;color:#8fd6e9;font-weight:900}.sf32-head h3{font-size:clamp(17px,3vw,22px);margin:6px 0;color:#fff}.sf32-head p{font-size:11px;line-height:1.55;color:#b8c9df;margin:0;max-width:620px}.sf32-live{white-space:nowrap;padding:7px 9px;border-radius:99px;background:#2c8c7540;color:#9cf0cd;font-size:9px;font-weight:900}
+.sf32-tabs{display:flex;gap:7px;overflow-x:auto;padding:14px 0 10px}.sf32-tabs button,.sf32-organ-list button{flex:0 0 auto;border:1px solid #8ea8c344;border-radius:10px;padding:9px 11px;background:#ffffff09;color:#dce9fa;font-size:10px;font-weight:800}.sf32-tabs button.active,.sf32-organ-list button.active{border-color:#78d5e5;background:#28657a88;color:#fff}
+.sf32-layout{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(220px,.8fr);gap:13px}.sf32-view{height:440px;position:relative;overflow:hidden;border:1px solid #7fa7d233;border-radius:15px;background:#0c1728;touch-action:pan-y}.sf32-view canvas{width:100%;height:100%;display:block;touch-action:pan-y;cursor:grab}.sf32-view canvas:active{cursor:grabbing}.sf32-hint{position:absolute;bottom:9px;left:10px;padding:6px 8px;border-radius:8px;background:#081322bb;color:#c3d6e9;font-size:9px;pointer-events:none}
+.sf32-organ-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}.sf32-organ-list button{font-size:9px;padding:7px 9px}.sf32-organ-list button[hidden]{display:none}
+.sf32-detail{padding:15px;border:1px solid #8ca9ff30;border-radius:15px;background:#0d192c;align-self:stretch}.sf32-detail-label{font-size:9px;letter-spacing:1.2px;color:#8ed6e6;font-weight:900}.sf32-detail h4{font-size:21px;margin:8px 0 4px;color:#fff}.sf32-system-name{font-size:10px;color:#9ee2d1}.sf32-detail>p{font-size:12px;line-height:1.65;color:#d0dced;min-height:85px}.sf32-tip{padding:10px;border-radius:10px;background:#ffffff09;color:#bdcce0;font-size:10px;line-height:1.5}
+.sf32-quiz{margin-top:12px;padding-top:12px;border-top:1px solid #ffffff1a}.sf32-quiz>b{font-size:12px;color:#fff}.sf32-quiz>p{font-size:10px;color:#c9d6e9;line-height:1.5}.sf32-answers{display:grid;gap:6px}.sf32-answers button{border:1px solid #8195b255;border-radius:9px;padding:9px;background:#ffffff08;color:#e7efff;text-align:left;font-size:10px}.sf32-answers button:disabled{opacity:.85}.sf32-answers button.correct{border-color:#5bd6a4;background:#287b5933}.sf32-answers button.wrong{border-color:#e58a8a;background:#8b333333}#sf32-feedback.good{color:#8fe8c1}#sf32-feedback.wrong{color:#ffc1c1}
+.sf32-progress{display:grid;grid-template-columns:1fr auto;gap:4px;margin-top:12px;padding:10px;border-radius:10px;background:#ffffff09}.sf32-progress b{font-size:10px}.sf32-progress strong{font-size:16px;color:#9ee2d1}.sf32-progress span{grid-column:1/-1;color:#91a5c1;font-size:9px}.sf32-note{font-size:9px;line-height:1.5;color:#91a4bf;margin:12px 0 0}
+@media(max-width:650px){.sf32-layout{grid-template-columns:1fr}.sf32-view{height:370px}.sf32-detail>p{min-height:0}.sf32-head{flex-wrap:wrap}.sf32-live{font-size:8px}}
+@media(prefers-reduced-motion:reduce){.sf32-panel *{scroll-behavior:auto!important}}
+</style>
+
 </body></html>
