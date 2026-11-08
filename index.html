@@ -2083,12 +2083,13 @@ const lesson=document.getElementById('lessonContent');if(lesson&&window.Mutation
 <script id="sf-evolution-32-anatomy">
 (()=>{'use strict';
 const SYSTEMS=[
- {id:'all',label:'Corpo inteiro',items:['brain','spinal','heart','vessels','lungs','trachea','liver','stomach','intestine','kidneys','bladder','skeleton','muscles']},
+ {id:'all',label:'Corpo inteiro',items:['brain','spinal','heart','vessels','lungs','trachea','liver','stomach','intestine','kidneys','bladder','uterus','ovaries','testes','skeleton','muscles']},
  {id:'nervous',label:'Nervoso',items:['brain','spinal']},
  {id:'circulatory',label:'Circulatório',items:['heart','vessels']},
  {id:'respiratory',label:'Respiratório',items:['lungs','trachea']},
  {id:'digestive',label:'Digestório',items:['liver','stomach','intestine']},
  {id:'urinary',label:'Urinário',items:['kidneys','bladder']},
+ {id:'reproductive',label:'Reprodutor',items:['uterus','ovaries','testes']},
  {id:'skeletal',label:'Esquelético',items:['skeleton']},
  {id:'muscular',label:'Muscular',items:['muscles']}
 ];
@@ -2104,6 +2105,9 @@ const DATA={
  intestine:['Intestinos','O intestino delgado absorve a maior parte dos nutrientes; o grosso absorve água e forma as fezes.','Sistema digestório'],
  kidneys:['Rins','Filtram o sangue, regulam água e sais e participam da formação da urina.','Sistema urinário'],
  bladder:['Bexiga','Armazena a urina até sua eliminação.','Sistema urinário'],
+ uterus:['Útero','Órgão muscular do sistema reprodutor feminino. É onde pode ocorrer o desenvolvimento do embrião e do feto durante a gestação.','Sistema reprodutor'],
+ ovaries:['Ovários','Produzem os gametas femininos (óvulos) e hormônios como estrogênio e progesterona.','Sistema reprodutor'],
+ testes:['Testículos','Produzem os gametas masculinos (espermatozoides) e hormônios, como a testosterona.','Sistema reprodutor'],
  skeleton:['Esqueleto','Dá sustentação ao corpo, protege órgãos e, junto aos músculos, permite movimentos. A medula óssea também participa da produção de células sanguíneas.','Sistema esquelético'],
  muscles:['Músculos','Contraem e relaxam para produzir movimentos, manter a postura e gerar calor.','Sistema muscular']
 };
@@ -2116,7 +2120,7 @@ function capsule(group,name,color,a,b,r){const mid=new THREE.Vector3((a[0]+b[0])
 function groupFor(id){const g=new THREE.Group();g.name=id;model.add(g);groups[id]=g;return g}
 function build(){
  model=new THREE.Group();scene.add(model);
- const body=groupFor('body'),nerv=groupFor('nervous'),circ=groupFor('circulatory'),resp=groupFor('respiratory'),dig=groupFor('digestive'),urin=groupFor('urinary'),skel=groupFor('skeletal'),mus=groupFor('muscular');
+ const body=groupFor('body'),nerv=groupFor('nervous'),circ=groupFor('circulatory'),resp=groupFor('respiratory'),dig=groupFor('digestive'),urin=groupFor('urinary'),repro=groupFor('reproductive'),skel=groupFor('skeletal'),mus=groupFor('muscular');
  const skin=mat(0x8eb7c9,.2),bone=0xe5dfc8;
  mesh(body,'body',new THREE.CapsuleGeometry(.48,1.15,8,20),0x7896ad,[0,.95,0],[1,1,1],.22);
  mesh(body,'head',new THREE.SphereGeometry(.34,24,18),0x9bbdca,[0,2.02,0],[.86,1.05,.8],.28);
@@ -2137,6 +2141,9 @@ function build(){
  mesh(urin,'kidneys',new THREE.SphereGeometry(.13,20,16),0x9b79c9,[-.3,.55,-.02],[.7,1,.7]);
  mesh(urin,'kidneys',new THREE.SphereGeometry(.13,20,16),0x9b79c9,[.3,.55,-.02],[.7,1,.7]);
  mesh(urin,'bladder',new THREE.SphereGeometry(.12,20,16),0x9b79c9,[0,.18,.2],[1,.8,.8]);
+ mesh(repro,'uterus',new THREE.CapsuleGeometry(.11,.22,6,12),0xd987a8,[0,.48,.28],[1,.9,.8]);
+ mesh(repro,'ovaries',new THREE.SphereGeometry(.075,16,12),0xe9a5bd,[-.2,.55,.26],[1,1,1]);mesh(repro,'ovaries',new THREE.SphereGeometry(.075,16,12),0xe9a5bd,[.2,.55,.26],[1,1,1]);
+ mesh(repro,'testes',new THREE.SphereGeometry(.09,16,12),0x86b9d8,[-.12,.16,.28],[1,1,1]);mesh(repro,'testes',new THREE.SphereGeometry(.09,16,12),0x86b9d8,[.12,.16,.28],[1,1,1]);
  // Esqueleto didático em destaque quando selecionado.
  capsule(skel,'skeleton',bone,[0,1.78,-.02],[0,.35,-.02],.075);
  for(const x of [-.18,.18]){capsule(skel,'skeleton',bone,[x,1.62,0],[x*1.5,1.15,0],.035);capsule(skel,'skeleton',bone,[x*1.5,1.15,0],[x,.78,0],.035);capsule(skel,'skeleton',bone,[x,.35,0],[x*1.25,-.95,0],.055)}
