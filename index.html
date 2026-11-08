@@ -772,6 +772,25 @@ window.MathJax = {
 .sf25-ph-stage{min-height:205px;display:flex;flex-direction:column;justify-content:center;gap:0;padding:8px 12px!important}.sf25-ph-stage svg{max-height:175px}.sf25-ph-bubble{margin:-5px 0 8px;padding:7px 13px;border:1px solid #8fe8dd55;border-radius:99px;background:#0b1428;color:#dffcf4;font-size:11px;font-weight:850;letter-spacing:.5px}.sf25-ph-control{margin-top:12px}.sf25-ph-control input{accent-color:#9b8cff;cursor:pointer}.sf25-ph-scale{grid-template-columns:repeat(15,minmax(0,1fr))!important;gap:4px!important}.sf25-ph-scale span{height:20px;transition:transform .15s,opacity .15s}.sf25-ph-scale span.active{outline:2px solid #fff;outline-offset:2px;transform:translateY(-3px);opacity:1}.sf25-bio-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.sf25-bio-tabs button{flex:1;min-width:135px;border:1px solid #65739e;border-radius:12px;padding:11px 12px;background:#ffffff0a;color:#dce4ff;font-weight:800;font-size:12px}.sf25-bio-tabs button.active{border-color:#8fe8dd;background:linear-gradient(110deg,#8fe8dd22,#9b8cff20);color:#aaf3e7;box-shadow:inset 0 -2px #8fe8dd}.sf25-bio-intro{padding:11px 13px;border:1px solid #8f82ff38;border-radius:11px;background:#8f82ff0d;color:#cbd5ef;font-size:12px;line-height:1.6;margin-bottom:12px}.sf25-cell-stage{padding:12px;min-height:230px;background:radial-gradient(ellipse at center,#26375b,#0c142a 78%)}.sf25-cell-stage svg{max-width:560px;max-height:360px}.sf25-cell-stage svg[hidden]{display:none}.sf25-structure-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-top:12px}.sf25-structure-grid .sf23-organelle{min-height:40px;line-height:1.35}.sf25-bio-description{min-height:78px;margin-top:11px;font-size:12px;line-height:1.65}.sf25-bio-description b{color:#aaf3e7;font-size:14px}.sf25-bio-lab .sf23-note{margin-top:12px}
 @media(max-width:620px){.sf25-structure-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.sf25-cell-stage{padding:5px;min-height:185px}.sf25-cell-stage svg{max-height:280px}.sf25-ph-scale{gap:3px!important}.sf25-ph-scale span{height:15px}}
 </style>
+<style id="sf-evolution-26-fix-css">
+/* Evolution 2.6 — correção de interação e profundidade visual */
+#sf23Cell .sf25-cell-stage{perspective:1000px;overflow:hidden;background:radial-gradient(ellipse at 50% 45%,#314b70 0%,#111a31 72%);min-height:280px}
+#sf23Cell .sf25-cell-stage svg{transform:perspective(900px) rotateX(9deg) rotateY(-7deg) scale(.94);transform-style:preserve-3d;filter:drop-shadow(0 18px 12px #0008) drop-shadow(0 0 16px #7ee9df25);transition:transform .45s ease,filter .45s ease;animation:sf26CellFloat 5s ease-in-out infinite}
+#sf23Cell .sf25-cell-stage svg[hidden]{display:none!important}
+#sf23Cell .sf25-cell-stage svg:not([hidden]){display:block!important}
+#sf23Cell .sf25-cell-stage:after{content:"";position:absolute;inset:auto 15% 8% 15%;height:18px;border-radius:50%;background:#02081799;filter:blur(13px);pointer-events:none}
+#sf23Cell .sf25-bio-tabs button{cursor:pointer;touch-action:manipulation;min-height:50px}
+#sf23Cell .sf25-structure-grid button{cursor:pointer;touch-action:manipulation}
+#sf23Cell .sf25-bio-tabs button:focus-visible,#sf23Cell .sf25-structure-grid button:focus-visible{outline:3px solid #8fe8dd;outline-offset:3px}
+#sf23Cell .sf25-cell-stage svg#sf25BacteriaArt{filter:drop-shadow(0 16px 12px #0009) drop-shadow(0 0 18px #9be76c30)}
+#sf23Ph .sf25-ph-stage svg{transition:filter .25s}
+#sf23Ph .sf25-ph-bubble{transition:background .25s,color .25s,border-color .25s}
+#sf23Ph .sf25-ph-control input{cursor:pointer;touch-action:pan-y}
+#sf23Ph .sf25-ph-scale span{border-radius:5px}
+@keyframes sf26CellFloat{0%,100%{transform:perspective(900px) rotateX(9deg) rotateY(-7deg) translateY(0) scale(.94)}50%{transform:perspective(900px) rotateX(12deg) rotateY(-3deg) translateY(-5px) scale(.96)}}
+@media(max-width:620px){#sf23Cell .sf25-cell-stage{min-height:230px}#sf23Cell .sf25-cell-stage svg{transform:perspective(900px) rotateX(7deg) rotateY(-5deg) scale(.98)}}
+@media(prefers-reduced-motion:reduce){#sf23Cell .sf25-cell-stage svg{animation:none}}
+</style>
 </head>
 <body>
 <div class="app">
@@ -1686,4 +1705,73 @@ function initLearningFlow(){
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initLearningFlow,{once:true});else initLearningFlow();
 })();
-</script></body></html>
+</script><script id="sf-evolution-26-fix-js">
+(()=>{'use strict';
+const $=(root,sel)=>root&&root.querySelector(sel);
+const info={
+ animal:{
+ nucleus:['Núcleo','Abriga a maior parte do DNA e coordena diversas atividades celulares.'],
+ membrane:['Membrana plasmática','Envolve a célula e controla seletivamente a entrada e a saída de substâncias.'],
+ mitochondria:['Mitocôndria','Participa da respiração celular e da produção de ATP, utilizado em processos celulares.'],
+ golgi:['Complexo de Golgi','Modifica, organiza e direciona proteínas e lipídios.'],
+ reticulum:['Retículo endoplasmático','O retículo rugoso participa da produção de proteínas; o liso atua na produção de lipídios e em outras funções.'],
+ lysosome:['Lisossomo','Contém enzimas que participam da digestão e da reciclagem de materiais.'],
+ ribosome:['Ribossomo','Realiza a síntese de proteínas.']
+ },
+ bacteria:{
+ capsule:['Cápsula','Camada externa presente em algumas bactérias; pode proteger e favorecer a adesão.'],
+ wall:['Parede celular','Ajuda a manter a forma e protege a célula bacteriana. Em muitas espécies contém peptidoglicano.'],
+ membrane:['Membrana plasmática','Controla as trocas de substâncias entre o citoplasma e o ambiente.'],
+ cytoplasm:['Citoplasma','Meio interno onde ficam moléculas e acontecem diversas reações metabólicas.'],
+ nucleoid:['Nucleoide (DNA)','Região que contém o cromossomo bacteriano. Não é envolvida por uma membrana nuclear.'],
+ plasmid:['Plasmídeo','Pequena molécula de DNA que pode carregar genes adicionais. Nem todas as bactérias possuem plasmídeos.'],
+ ribosome:['Ribossomo','Estrutura responsável pela produção de proteínas.'],
+ pili:['Pili e fímbrias','Projeções que podem ajudar na adesão; alguns pili participam da transferência de DNA.'],
+ flagellum:['Flagelo','Estrutura que permite o movimento de muitas espécies bacterianas.']
+ }
+};
+const labels={nucleus:'Núcleo',membrane:'Membrana plasmática',mitochondria:'Mitocôndria',golgi:'Complexo de Golgi',reticulum:'Retículo endoplasmático',lysosome:'Lisossomo',ribosome:'Ribossomo',capsule:'Cápsula',wall:'Parede celular',cytoplasm:'Citoplasma',nucleoid:'Nucleoide (DNA)',plasmid:'Plasmídeo',pili:'Pili e fímbrias',flagellum:'Flagelo'};
+function chooseCell(root,kind){
+ const bac=kind==='bacteria',animal=$(root,'#sf25AnimalArt'),bacteria=$(root,'#sf25BacteriaArt'),grid=$(root,'#sf25StructureGrid'),intro=$(root,'#sf25BioIntro'),note=$(root,'#sf25BioNote'),desc=$(root,'#sf23CellDescription');
+ if(!animal||!bacteria||!grid)return;
+ animal.hidden=bac;bacteria.hidden=!bac;
+ animal.setAttribute('aria-hidden',String(bac));bacteria.setAttribute('aria-hidden',String(!bac));
+ root.querySelectorAll('[data-cell-kind]').forEach(btn=>{const on=btn.dataset.cellKind===kind;btn.classList.toggle('active',on);btn.setAttribute('aria-selected',String(on));});
+ intro.textContent=bac?'Célula procariótica: não possui núcleo delimitado por membrana nem organelas membranosas. O DNA fica no nucleoide.':'Célula eucariótica: possui núcleo delimitado por membrana e organelas especializadas.';
+ const keys=bac?Object.keys(info.bacteria):Object.keys(info.animal);
+ grid.innerHTML=keys.map((key,i)=>'<button type="button" class="sf23-organelle '+(i===0?'active':'')+'" data-cell-structure="'+key+'">'+labels[key]+'</button>').join('');
+ note.textContent=bac?'Modelo de bactéria: cápsula, plasmídeos, pili e flagelo podem variar conforme a espécie. Bactérias não possuem núcleo verdadeiro.':'Modelo didático de célula animal. As organelas foram ampliadas para facilitar a exploração; tamanhos e posições não estão em escala.';
+ showStructure(root,keys[0],kind);
+}
+function showStructure(root,key,kind){const item=info[kind]&&info[kind][key];if(!item)return;root.querySelectorAll('[data-cell-structure]').forEach(b=>b.classList.toggle('active',b.dataset.cellStructure===key));const desc=$(root,'#sf23CellDescription');if(desc)desc.innerHTML='<b>'+item[0]+'</b><br>'+item[1];}
+function updatePh(root,slider){
+ const n=Math.max(0,Math.min(14,Number(slider.value))),acid=n<7,basic=n>7;
+ const hue=n<=7?(n/7)*115:115+((n-7)/7)*145;
+ const color='hsl('+hue+',78%,52%)',dark='hsl('+hue+',72%,34%)';
+ const set=(sel,val)=>{const el=$(root,sel);if(el)el.textContent=val;return el};
+ set('#sf23PhValue',String(n));set('#sf23PhClass',acid?'Ácido':basic?'Básico':'Neutro');
+ set('#sf23PhExplain',n===7?'pH 7 é neutro a 25 °C.':acid?'pH abaixo de 7: solução ácida. Quanto menor o valor, mais ácida é a solução.':'pH acima de 7: solução básica. Quanto maior o valor, mais básica é a solução.');
+ set('#sf25PhBubble','pH '+n+' · '+(acid?'ÁCIDO':basic?'BÁSICO':'NEUTRO'));
+ const a=$(root,'#sf23LiquidStop'),b=$(root,'#sf23LiquidStop2'),shape=$(root,'#sf23LiquidShape');
+ if(a)a.setAttribute('stop-color',color);if(b)b.setAttribute('stop-color',dark);if(shape)shape.setAttribute('fill','url(#sf23Liquid)');
+ const bubble=$(root,'#sf25PhBubble');if(bubble){bubble.style.borderColor=color;bubble.style.background=color+'22';bubble.style.color='#f4f7ff';}
+ root.querySelectorAll('#sf23PhScale span').forEach((el,i)=>{const h=i<=7?(i/7)*115:115+((i-7)/7)*145;el.style.background='hsl('+h+',78%,52%)';el.classList.toggle('active',i===n);});
+ slider.style.setProperty('--sf25-ph-progress',(n/14*100)+'%');
+}
+function routeClick(e){
+ const tab=e.target.closest('#sf23Cell [data-cell-kind]');
+ if(tab){e.preventDefault();e.stopImmediatePropagation();chooseCell(tab.closest('#sf23Cell'),tab.dataset.cellKind);return;}
+ const structure=e.target.closest('#sf23Cell [data-cell-structure]');
+ if(structure){e.preventDefault();e.stopImmediatePropagation();const root=structure.closest('#sf23Cell'),kind=$ (root,'[data-cell-kind].active')?.dataset.cellKind||'animal';showStructure(root,structure.dataset.cellStructure,kind);}
+}
+function routeInput(e){const slider=e.target.closest('#sf23Ph #sf23PhSlider');if(slider){updatePh(slider.closest('#sf23Ph'),slider);}}
+document.addEventListener('click',routeClick,true);
+document.addEventListener('input',routeInput,true);
+document.addEventListener('change',routeInput,true);
+function repair(){const root=document.getElementById('sf23Cell');if(root){const active=$(root,'[data-cell-kind].active')?.dataset.cellKind||'animal';chooseCell(root,active);}const ph=document.getElementById('sf23Ph'),slider=$(ph,'#sf23PhSlider');if(ph&&slider)updatePh(ph,slider);}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',repair,{once:true});else repair();
+const lesson=document.getElementById('lessonContent');
+if(lesson&&window.MutationObserver){new MutationObserver(()=>{const c=document.getElementById('sf23Cell');if(c&&!c.dataset.sf26Ready){c.dataset.sf26Ready='1';chooseCell(c,'animal');}const p=document.getElementById('sf23Ph'),sl=$(p,'#sf23PhSlider');if(p&&sl&&!p.dataset.sf26Ready){p.dataset.sf26Ready='1';updatePh(p,sl);}}).observe(lesson,{childList:true,subtree:true});}
+})();
+</script>
+</body></html>
