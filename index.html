@@ -791,6 +791,20 @@ window.MathJax = {
 @media(max-width:620px){#sf23Cell .sf25-cell-stage{min-height:230px}#sf23Cell .sf25-cell-stage svg{transform:perspective(900px) rotateX(7deg) rotateY(-5deg) scale(.98)}}
 @media(prefers-reduced-motion:reduce){#sf23Cell .sf25-cell-stage svg{animation:none}}
 </style>
+
+<style id="sf-evolution-27-biology-css">
+.sf27-bio{overflow:hidden}
+.sf27-cell-stage{min-height:250px;padding:12px!important;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at 50% 45%,rgba(67,116,164,.24),rgba(8,16,35,.96) 72%)!important}
+.sf27-cell-art{display:block;width:100%;max-width:650px;height:auto;filter:drop-shadow(0 18px 25px rgba(0,0,0,.28));animation:sf27Float 6s ease-in-out infinite}
+.sf27-cell-art[hidden]{display:none!important}
+.sf27-bio .sf25-bio-tabs{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}
+.sf27-bio .sf25-bio-tabs button{flex:1;min-width:145px;border:1px solid rgba(155,190,255,.25);border-radius:13px;padding:12px;background:rgba(100,130,190,.12);color:inherit;font-weight:750}
+.sf27-bio .sf25-bio-tabs button.active{background:linear-gradient(135deg,rgba(77,151,214,.32),rgba(128,102,218,.28));border-color:#8ccfff;box-shadow:0 0 0 2px rgba(120,190,255,.12)}
+.sf27-bio .sf25-structure-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(125px,1fr));gap:8px;margin:14px 0}
+.sf27-bio .sf25-structure-grid button{min-height:42px}
+@keyframes sf27Float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@media(max-width:600px){.sf27-cell-stage{min-height:190px;padding:5px!important}.sf27-bio .sf25-structure-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.sf27-bio .sf25-bio-tabs button{min-width:0;padding:10px 6px;font-size:13px}}
+</style>
 </head>
 <body>
 <div class="app">
@@ -1643,97 +1657,55 @@ const descriptions={
 };
 function waveLab(){return '<section class="sf23-lab" id="sf23Wave"><div class="sf23-head"><div><div class="sf23-kicker">LABORATÓRIO DE FÍSICA · SIMULAÇÃO</div><h3>〰️ Estúdio de ondas</h3><p>Altere amplitude e frequência e observe como o formato da onda muda.</p></div><span class="sf23-live">● AO VIVO</span></div><div class="sf23-stage"><svg viewBox="0 0 520 160" role="img" aria-label="Onda senoidal animada"><defs><linearGradient id="sf23WaveGrad" x1="0" x2="1"><stop offset="0" stop-color="#8f82ff"/><stop offset="1" stop-color="#8fe8dd"/></linearGradient></defs><path d="M20 80H500" stroke="#ffffff33" stroke-dasharray="4 6"/><path d="M20 20V140M120 20V140M220 20V140M320 20V140M420 20V140" stroke="#ffffff12"/><path id="sf23WavePath" d="" fill="none" stroke="url(#sf23WaveGrad)" stroke-width="4" stroke-linecap="round"/><circle id="sf23WaveDot" cx="20" cy="80" r="6" fill="#ffd477"><animate attributeName="opacity" values=".4;1;.4" dur="1.4s" repeatCount="indefinite"/></circle></svg></div><div class="sf23-controls"><label class="sf23-control">Amplitude: <strong id="sf23AmpVal">30%</strong><input id="sf23Amp" type="range" min="5" max="60" value="30"></label><label class="sf23-control">Frequência: <strong id="sf23FreqVal">2 Hz</strong><input id="sf23Freq" type="range" min="1" max="6" value="2"></label></div><div class="sf23-readout"><b id="sf23WaveSummary">Onda moderada</b><span id="sf23WaveExplain">A amplitude indica o afastamento máximo em relação ao equilíbrio.</span></div><p class="sf23-note">Modelo didático: a animação representa uma onda transversal idealizada. A velocidade de propagação depende também do meio.</p></section>'}
 function phLab(){return '<section class="sf23-lab" id="sf23Ph"><div class="sf23-head"><div><div class="sf23-kicker">LABORATÓRIO DE QUÍMICA · SIMULAÇÃO</div><h3>🧪 Explorador de pH</h3><p>Deslize pela escala e veja o indicador mudar de cor em tempo real.</p></div><span class="sf23-live">● INTERATIVO</span></div><div class="sf23-stage sf25-ph-stage"><svg viewBox="0 0 300 150" role="img" aria-label="Frasco com líquido indicador de pH"><defs><linearGradient id="sf23Liquid" x1="0" x2="0" y1="0" y2="1"><stop id="sf23LiquidStop" offset="0" stop-color="#48b96b"/><stop id="sf23LiquidStop2" offset="1" stop-color="#238c60"/></linearGradient></defs><path d="M125 12h50v24l32 65q5 13-12 13H105q-17 0-12-13l32-65z" fill="#ffffff12" stroke="#dce4ff" stroke-width="3"/><path id="sf23LiquidShape" d="M112 78h76l15 31q3 7-9 7h-88q-12 0-9-7z" fill="url(#sf23Liquid)" opacity=".95"/><path d="M125 12h50" stroke="#dce4ff" stroke-width="5" stroke-linecap="round"/><circle cx="151" cy="91" r="5" fill="#ffffff80"><animate attributeName="cy" values="91;83;91" dur="2s" repeatCount="indefinite"/></circle></svg><div class="sf25-ph-bubble" id="sf25PhBubble">pH 7 · NEUTRO</div></div><label class="sf23-control sf25-ph-control">Valor de pH: <strong id="sf23PhValue">7</strong><input id="sf23PhSlider" type="range" min="0" max="14" step="1" value="7" aria-label="Ajustar valor de pH"></label><div class="sf23-ph-scale sf25-ph-scale" id="sf23PhScale">'+Array.from({length:15},(_,i)=>'<span style="--i:'+i+'" data-ph="'+i+'" title="pH '+i+'"></span>').join('')+'</div><div class="sf23-readout"><b id="sf23PhClass">Neutro</b><span id="sf23PhExplain">pH 7 é neutro a 25 °C.</span></div><p class="sf23-note">Modelo didático de indicador universal: a cor é ilustrativa. A classificação considera pH abaixo de 7 ácido, 7 neutro e acima de 7 básico (a 25 °C).</p></section>'}
-function cellLab(){return `<section class="sf23-lab sf25-bio-lab" id="sf23Cell"><div class="sf23-head"><div><div class="sf23-kicker">LABORATÓRIO DE BIOLOGIA · MICROUNIVERSO</div><h3>🔬 Explore o mundo celular</h3><p>Alterne entre uma célula animal e uma bactéria. Toque nas estruturas para descobrir como funcionam.</p></div><span class="sf23-live">● EXPLORAÇÃO 2D</span></div><div class="sf25-bio-tabs" role="tablist" aria-label="Tipo de célula"><button type="button" class="active" data-cell-kind="animal" role="tab" aria-selected="true">🧬 Célula animal</button><button type="button" data-cell-kind="bacteria" role="tab" aria-selected="false">🦠 Bactéria</button></div><div class="sf25-bio-intro" id="sf25BioIntro">Célula eucariótica: possui núcleo delimitado por membrana e várias organelas especializadas.</div><div class="sf23-stage sf25-cell-stage"><svg id="sf25AnimalArt" viewBox="0 0 680 470" role="img" aria-label="Modelo tridimensional didático de uma célula animal com núcleo, mitocôndrias, retículo endoplasmático, complexo de Golgi, lisossomos e ribossomos">
+function cellLab(){return \`<section class="sf23-lab sf25-bio-lab sf27-bio" id="sf23Cell">
+<div class="sf23-head"><div><div class="sf23-kicker">LABORATÓRIO DE BIOLOGIA · MICROUNIVERSO</div><h3>🔬 Explore o mundo celular</h3><p>Escolha um organismo e selecione suas estruturas para investigar como funciona.</p></div><span class="sf23-live">● INTERATIVO</span></div>
+<div class="sf25-bio-tabs" role="tablist" aria-label="Tipo de célula"><button type="button" class="active" data-cell-kind="animal" role="tab" aria-selected="true">🧬 Célula animal</button><button type="button" data-cell-kind="bacteria" role="tab" aria-selected="false">🦠 Bactéria</button></div>
+<div class="sf25-bio-intro" id="sf25BioIntro">Célula eucariótica: possui núcleo delimitado por membrana e organelas especializadas.</div>
+<div class="sf23-stage sf25-cell-stage sf27-cell-stage">
+<svg id="sf25AnimalArt" class="sf27-cell-art" viewBox="0 0 680 470" role="img" aria-label="Célula animal arredondada em corte, com núcleo, mitocôndrias, retículo e complexo de Golgi">
 <defs>
- <radialGradient id="sf27AnimalCyt" cx="42%" cy="36%" r="72%"><stop stop-color="#356b91"/><stop offset=".58" stop-color="#173b61"/><stop offset="1" stop-color="#0a1b36"/></radialGradient>
- <linearGradient id="sf27AnimalMem" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#b9fbff"/><stop offset=".3" stop-color="#49c8e4"/><stop offset=".7" stop-color="#2784bd"/><stop offset="1" stop-color="#a6efff"/></linearGradient>
- <radialGradient id="sf27Nucleus" cx="32%" cy="25%" r="78%"><stop stop-color="#ffdf9a"/><stop offset=".42" stop-color="#e98579"/><stop offset="1" stop-color="#783d91"/></radialGradient>
- <linearGradient id="sf27Mito" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffe4a2"/><stop offset=".5" stop-color="#e78c67"/><stop offset="1" stop-color="#a84f67"/></linearGradient>
- <linearGradient id="sf27Golgi" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#a9b9ff"/><stop offset=".5" stop-color="#6679d4"/><stop offset="1" stop-color="#34488d"/></linearGradient>
- <filter id="sf27Shadow" x="-30%" y="-30%" width="160%" height="170%"><feGaussianBlur in="SourceAlpha" stdDeviation="9"/><feOffset dy="10"/><feComponentTransfer><feFuncA type="linear" slope=".45"/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
- <filter id="sf27Glow"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+ <radialGradient id="sf27aBody" cx="35%" cy="28%" r="78%"><stop stop-color="#8cecff"/><stop offset=".28" stop-color="#397eae"/><stop offset=".72" stop-color="#17436e"/><stop offset="1" stop-color="#071b38"/></radialGradient>
+ <linearGradient id="sf27aRim" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e4ffff"/><stop offset=".35" stop-color="#42d5f0"/><stop offset=".72" stop-color="#246aaf"/><stop offset="1" stop-color="#b5f7ff"/></linearGradient>
+ <radialGradient id="sf27aNucleus" cx="28%" cy="22%" r="80%"><stop stop-color="#ffe8b2"/><stop offset=".4" stop-color="#e9a0ce"/><stop offset="1" stop-color="#6946a8"/></radialGradient>
+ <linearGradient id="sf27aMito" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffe4a4"/><stop offset=".5" stop-color="#e68c68"/><stop offset="1" stop-color="#9e4668"/></linearGradient>
+ <filter id="sf27aShadow" x="-30%" y="-30%" width="160%" height="170%"><feGaussianBlur stdDeviation="9"/><feOffset dy="12"/><feComponentTransfer><feFuncA type="linear" slope=".5"/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
 </defs>
-<ellipse cx="337" cy="408" rx="225" ry="25" fill="#020817" opacity=".55"/>
-<path d="M111 232C74 142 155 57 278 67c93-31 227 4 278 91 53 92 12 205-89 247-100 42-259 29-329-34-50-45-55-91-27-139Z" fill="url(#sf27AnimalMem)" stroke="#b5f8ff" stroke-width="9" filter="url(#sf27Shadow)"/>
-<path d="M124 230C91 151 164 75 282 82c91-25 211 9 257 87 46 80 8 182-86 220-92 37-237 25-302-31-45-39-51-82-27-128Z" fill="url(#sf27AnimalCyt)" stroke="#58cde6" stroke-width="4"/>
-<path d="M139 222C123 158 190 101 285 104c93-23 194 14 230 83" fill="none" stroke="#b8f7ff" stroke-width="5" opacity=".28"/>
-<!-- núcleo -->
-<ellipse cx="332" cy="216" rx="91" ry="79" fill="#532d76" opacity=".55" transform="translate(0 8)"/>
-<ellipse cx="329" cy="208" rx="86" ry="75" fill="url(#sf27Nucleus)" stroke="#ffd6a1" stroke-width="8" filter="url(#sf27Shadow)"/>
-<ellipse cx="337" cy="211" rx="29" ry="26" fill="#533079" stroke="#c99bdc" stroke-width="5"/>
-<path d="M278 174q34-30 62-4t49-2" fill="none" stroke="#ffe3b4" stroke-width="5" opacity=".55"/>
-<!-- retículo endoplasmático rugoso -->
-<g fill="none" stroke="#79d9d0" stroke-width="10" stroke-linecap="round" opacity=".95">
- <path d="M238 177q-43 9-48 42t38 28q42-2 46 25t-28 34"/>
- <path d="M246 195q-39 7-36 31t35 18q41-4 54 23"/>
- <path d="M252 220q-29 14-18 34t38 10q28-10 42 12"/>
-</g>
-<g fill="#e7faff"><circle cx="194" cy="215" r="3"/><circle cx="205" cy="238" r="3"/><circle cx="226" cy="253" r="3"/><circle cx="252" cy="265" r="3"/><circle cx="269" cy="290" r="3"/><circle cx="288" cy="306" r="3"/></g>
-<!-- mitocôndrias -->
-<g filter="url(#sf27Shadow)">
- <g transform="translate(164 146) rotate(-25)"><ellipse rx="48" ry="24" fill="url(#sf27Mito)" stroke="#ffd6a1" stroke-width="5"/><path d="M-34 0q13-22 26 0t25 0t18 0" fill="none" stroke="#8d405d" stroke-width="5"/></g>
- <g transform="translate(473 280) rotate(24)"><ellipse rx="49" ry="24" fill="url(#sf27Mito)" stroke="#ffd6a1" stroke-width="5"/><path d="M-34 0q13-22 26 0t25 0t18 0" fill="none" stroke="#8d405d" stroke-width="5"/></g>
-</g>
-<!-- Golgi -->
-<g transform="translate(390 305)" filter="url(#sf27Shadow)">
- <path d="M-43-28q45-25 83-2M-49-9q50-26 94-1M-43 10q46-23 84-1M-29 28q35-17 65-2" fill="none" stroke="url(#sf27Golgi)" stroke-width="13" stroke-linecap="round"/>
- <path d="M-43-28q45-25 83-2M-49-9q50-26 94-1M-43 10q46-23 84-1" fill="none" stroke="#c3d0ff" stroke-width="3" opacity=".8"/>
-</g>
-<!-- lisossomos e ribossomos -->
-<g filter="url(#sf27Glow)"><circle cx="211" cy="318" r="13" fill="#f18eae" stroke="#ffd2e2" stroke-width="4"/><circle cx="515" cy="185" r="11" fill="#f18eae" stroke="#ffd2e2" stroke-width="4"/><circle cx="451" cy="135" r="8" fill="#f7c66c"/><circle cx="182" cy="265" r="7" fill="#f7c66c"/><circle cx="286" cy="345" r="6" fill="#f7c66c"/><circle cx="430" cy="350" r="7" fill="#f7c66c"/><circle cx="535" cy="235" r="6" fill="#f7c66c"/></g>
-<!-- rótulos e linhas -->
-<g font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#f4f8ff" stroke="#071326" stroke-width="3" paint-order="stroke">
- <path d="M330 129V74H393" fill="none" stroke="#dceaff" stroke-width="2"/><text x="400" y="79">Núcleo</text>
- <path d="M164 146L83 105H28" fill="none" stroke="#dceaff" stroke-width="2"/><text x="26" y="97">Mitocôndria</text>
- <path d="M414 307L520 365H650" fill="none" stroke="#dceaff" stroke-width="2"/><text x="650" y="387" text-anchor="end">Complexo de Golgi</text>
- <path d="M211 318L114 372H26" fill="none" stroke="#dceaff" stroke-width="2"/><text x="26" y="395">Lisossomo</text>
- <path d="M500 205L572 146H650" fill="none" stroke="#dceaff" stroke-width="2"/><text x="650" y="137" text-anchor="end">Citoplasma</text>
- <text x="340" y="448" text-anchor="middle" font-size="13" fill="#bdeef8">CÉLULA EUCARIÓTICA ANIMAL</text>
-</g>
-</svg><svg id="sf25BacteriaArt" viewBox="0 0 680 470" role="img" aria-label="Modelo tridimensional didático de uma bactéria com cápsula, parede celular, membrana plasmática, citoplasma, nucleoide, plasmídeo, ribossomos, pili e flagelo" hidden>
+<ellipse cx="338" cy="250" rx="258" ry="172" fill="#020817" opacity=".5"/>
+<path d="M83 236C82 133 177 66 315 65c144-1 267 67 281 167 14 99-90 171-237 176C211 414 91 348 83 236Z" fill="url(#sf27aBody)" stroke="url(#sf27aRim)" stroke-width="15" filter="url(#sf27aShadow)"/>
+<path d="M105 210C128 115 220 82 328 83c112 1 207 46 238 117" fill="none" stroke="#e1fcff" stroke-width="8" opacity=".48" stroke-linecap="round"/>
+<ellipse cx="318" cy="237" rx="91" ry="78" fill="url(#sf27aNucleus)" stroke="#ffd8f5" stroke-width="5"/>
+<ellipse cx="345" cy="250" rx="29" ry="25" fill="#65408e" opacity=".85"/><circle cx="294" cy="210" r="13" fill="#fff0cf" opacity=".65"/>
+<g fill="url(#sf27aMito)" stroke="#ffe0a2" stroke-width="3"><ellipse cx="175" cy="193" rx="48" ry="22" transform="rotate(-25 175 193)"/><ellipse cx="442" cy="296" rx="49" ry="23" transform="rotate(22 442 296)"/><ellipse cx="225" cy="333" rx="39" ry="18" transform="rotate(14 225 333)"/></g>
+<g fill="none" stroke="#783d4c" stroke-width="5" stroke-linecap="round"><path d="M141 196q18-27 34 0t33 0"/><path d="M411 294q20-27 39 0t34 0"/><path d="M198 333q15-20 29 0t28 0"/></g>
+<g fill="none" stroke="#b7c6ff" stroke-width="9" stroke-linecap="round"><path d="M235 145q34-31 70-7t69-7"/><path d="M225 160q35-27 69-5t74-4"/><path d="M357 331q33-30 66-7"/></g>
+<g fill="none" stroke="#ffd17c" stroke-width="8" stroke-linecap="round"><path d="M390 170q32-18 57 2"/><path d="M385 185q35-18 61 2"/><path d="M380 200q37-17 64 2"/></g>
+<g fill="#f9c6ff"><circle cx="145" cy="274" r="8"/><circle cx="493" cy="205" r="7"/><circle cx="377" cy="116" r="6"/><circle cx="280" cy="365" r="7"/><circle cx="488" cy="335" r="6"/></g>
+<g fill="#d9f8ff" font-family="Arial" font-size="15" font-weight="700"><text x="318" y="238" text-anchor="middle">NÚCLEO</text><text x="338" y="448" text-anchor="middle" font-size="13" letter-spacing="2">CÉLULA ANIMAL · EUCARIONTE</text></g>
+</svg>
+<svg id="sf25BacteriaArt" class="sf27-cell-art" viewBox="0 0 680 470" role="img" aria-label="Bactéria em formato de bastonete com cápsula, parede celular, membrana, nucleoide, plasmídeos, ribossomos, pili e flagelo" hidden>
 <defs>
- <linearGradient id="sf27BacCapsule" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d9ff83"/><stop offset=".48" stop-color="#78cb5b"/><stop offset="1" stop-color="#287d4e"/></linearGradient>
- <linearGradient id="sf27BacWall" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffe68a"/><stop offset=".55" stop-color="#a6d84e"/><stop offset="1" stop-color="#4d9e53"/></linearGradient>
- <radialGradient id="sf27BacCore" cx="35%" cy="35%" r="80%"><stop stop-color="#fff0a1"/><stop offset=".7" stop-color="#e7b65a"/><stop offset="1" stop-color="#bd7844"/></radialGradient>
- <filter id="sf27BacShadow" x="-30%" y="-30%" width="160%" height="170%"><feGaussianBlur in="SourceAlpha" stdDeviation="9"/><feOffset dy="10"/><feComponentTransfer><feFuncA type="linear" slope=".45"/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+ <linearGradient id="sf27bCapsule" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#efffb1"/><stop offset=".45" stop-color="#a9dc67"/><stop offset="1" stop-color="#4f9855"/></linearGradient>
+ <linearGradient id="sf27bWall" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d7ff9b"/><stop offset=".5" stop-color="#72bd62"/><stop offset="1" stop-color="#397d55"/></linearGradient>
+ <radialGradient id="sf27bInside" cx="35%" cy="28%" r="80%"><stop stop-color="#efffb9"/><stop offset=".55" stop-color="#a6d96c"/><stop offset="1" stop-color="#4b9a65"/></radialGradient>
+ <filter id="sf27bShadow" x="-30%" y="-40%" width="170%" height="190%"><feGaussianBlur stdDeviation="8"/><feOffset dy="12"/><feComponentTransfer><feFuncA type="linear" slope=".45"/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
 </defs>
-<ellipse cx="330" cy="400" rx="210" ry="23" fill="#020817" opacity=".55"/>
-<!-- flagelo -->
-<path d="M132 285C56 293 53 352 91 374s-3 49-54 53 4 39 43 20" fill="none" stroke="#3e9fbd" stroke-width="17" stroke-linecap="round"/>
-<path d="M132 285C56 293 53 352 91 374" fill="none" stroke="#9be4ef" stroke-width="4" opacity=".7"/>
-<!-- pili e fímbrias -->
-<g fill="none" stroke="#48a85d" stroke-width="9" stroke-linecap="round">
- <path d="M166 115q-25-55-55-59m91 37q-13-55 8-77m48 74q4-53 39-66m49 72q27-51 59-48m42 83q43-35 69-17m-36 224q34 33 63 20m-121 16q13 50 43 52m-224-62q-35 33-63 18m-25-103q-49 2-62 34"/>
- <path d="M198 89q-7-28 5-40m130 12q-4-26 12-42m121 105q28-23 47-14" stroke="#8bd66a" stroke-width="5"/>
-</g>
-<!-- corpo em camadas -->
-<path d="M119 218C88 129 163 65 275 73c109-26 227 24 259 113 35 98-26 189-139 209-108 21-226-7-271-73-28-41-27-75-5-104Z" fill="url(#sf27BacCapsule)" stroke="#d6ff91" stroke-width="12" filter="url(#sf27BacShadow)"/>
-<path d="M137 218c-24-70 43-122 139-117 97-20 198 23 226 94 29 75-23 147-115 164-91 18-194-7-233-59-23-31-34-55-17-82Z" fill="url(#sf27BacWall)" stroke="#4a9d4d" stroke-width="13"/>
-<path d="M157 219c-19-55 39-94 119-91 81-15 164 20 187 77 24 60-19 117-96 131-77 15-163-6-197-48-20-25-28-46-13-69Z" fill="url(#sf27BacCore)" stroke="#64a9b6" stroke-width="8"/>
-<!-- nucleoide -->
-<path d="M235 184c-38-44-12-58 18-34s42 58 73 32 59-14 42 13-58 11-58 44 39 33 57 8-10-41-37-22-52 25-69 3-39-20-43 5 22 36 44 16" fill="none" stroke="#d54d9e" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M235 184c-38-44-12-58 18-34s42 58 73 32" fill="none" stroke="#ffadd8" stroke-width="4" stroke-linecap="round"/>
-<!-- plasmídeo -->
-<ellipse cx="399" cy="255" rx="28" ry="17" transform="rotate(-27 399 255)" fill="none" stroke="#a04fb8" stroke-width="7"/>
-<!-- ribossomos -->
-<g fill="#c94842" stroke="#ff9d80" stroke-width="2">
- <circle cx="191" cy="200" r="6"/><circle cx="212" cy="254" r="6"/><circle cx="250" cy="286" r="6"/><circle cx="286" cy="150" r="6"/><circle cx="325" cy="285" r="6"/><circle cx="365" cy="180" r="6"/><circle cx="431" cy="207" r="6"/><circle cx="455" cy="273" r="6"/><circle cx="173" cy="238" r="6"/><circle cx="347" cy="235" r="6"/><circle cx="291" cy="318" r="6"/><circle cx="398" cy="145" r="6"/><circle cx="470" cy="235" r="6"/><circle cx="235" cy="151" r="6"/>
-</g>
-<!-- detalhes de superfície -->
-<g fill="none" stroke="#eaffb5" stroke-width="4" opacity=".55"><path d="M145 170q25-55 95-62"/><path d="M405 105q55 15 75 57"/><path d="M177 330q63 47 142 43"/></g>
-<!-- rótulos -->
-<g font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#f5fff0" stroke="#183321" stroke-width="3" paint-order="stroke">
- <path d="M167 113L92 70H22" fill="none" stroke="#e8ffd2" stroke-width="2"/><text x="22" y="61">Pili / fímbrias</text>
- <path d="M135 190L75 164H18" fill="none" stroke="#e8ffd2" stroke-width="2"/><text x="18" y="155">Cápsula</text>
- <path d="M163 296L92 345H18" fill="none" stroke="#e8ffd2" stroke-width="2"/><text x="18" y="366">Parede celular</text>
- <path d="M225 329L206 402H120" fill="none" stroke="#e8ffd2" stroke-width="2"/><text x="120" y="424">Membrana plasmática</text>
- <path d="M316 206L530 110H657" fill="none" stroke="#e8ffd2" stroke-width="2"/><text x="657" y="101" text-anchor="end">Nucleoide (DNA)</text>
- <path d="M399 255L535 292H657" fill="none" stroke="#e8ffd2" stroke-width="2"/><text x="657" y="314" text-anchor="end">Plasmídeo</text>
- <path d="M365 180L535 190H657" fill="none" stroke="#e8ffd2" stroke-width="2"/><text x="657" y="181" text-anchor="end">Citoplasma e ribossomos</text>
- <path d="M80 383L65 438H18" fill="none" stroke="#e8ffd2" stroke-width="2"/><text x="18" y="459">Flagelo</text>
- <text x="365" y="458" text-anchor="middle" font-size="13" fill="#e1ffbd">CÉLULA PROCARIÓTICA BACTERIANA</text>
-</g>
-</svg></div><div class="sf25-structure-grid" id="sf25StructureGrid"><button type="button" class="sf23-organelle active" data-cell-structure="nucleus">Núcleo</button><button type="button" class="sf23-organelle" data-cell-structure="membrane">Membrana</button><button type="button" class="sf23-organelle" data-cell-structure="mitochondria">Mitocôndria</button><button type="button" class="sf23-organelle" data-cell-structure="golgi">Complexo de Golgi</button><button type="button" class="sf23-organelle" data-cell-structure="reticulum">Retículo endoplasmático</button><button type="button" class="sf23-organelle" data-cell-structure="lysosome">Lisossomo</button><button type="button" class="sf23-organelle" data-cell-structure="ribosome">Ribossomo</button></div><div class="sf23-description sf25-bio-description" id="sf23CellDescription"><b>Núcleo</b><br>Armazena a maior parte do DNA e coordena atividades da célula.</div><p class="sf23-note" id="sf25BioNote">Modelo didático simplificado de célula animal eucariótica. As estruturas e proporções não estão em escala.</p></section>`}
+<ellipse cx="318" cy="251" rx="220" ry="135" fill="#020817" opacity=".5"/>
+<path d="M128 162C150 100 218 76 326 77c116 1 193 38 213 107 19 67-5 134-70 169-66 36-213 39-285 6-73-33-87-125-56-197Z" fill="url(#sf27bCapsule)" stroke="#eaffbb" stroke-width="13" filter="url(#sf27bShadow)"/>
+<path d="M151 166C173 121 231 106 326 107c102 1 164 29 180 81 15 51-5 106-58 134-56 29-189 31-249 5-60-27-75-108-48-161Z" fill="url(#sf27bWall)" stroke="#f4ffd0" stroke-width="7"/>
+<path d="M174 171C197 139 244 130 326 131c87 1 139 23 151 63 12 42-6 85-48 108-46 24-164 26-214 4-50-22-65-90-41-135Z" fill="url(#sf27bInside)" stroke="#e0ffb2" stroke-width="5"/>
+<path d="M242 221c-35-38 20-63 48-30 28 33 47-19 75-1 27 18-17 39 8 54 24 14-21 36-43 15-23-21-45 22-69 5-24-17 14-28-19-43Z" fill="none" stroke="#6755a6" stroke-width="12" stroke-linecap="round"/>
+<path d="M351 187c-18-17-33 9-17 21 17 13 35-9 17-21Z" fill="none" stroke="#d45c91" stroke-width="8"/>
+<path d="M392 263c-15-14-29 8-15 19 15 11 30-8 15-19Z" fill="none" stroke="#d45c91" stroke-width="8"/>
+<g fill="#fff2a8" stroke="#719b45" stroke-width="2"><circle cx="211" cy="196" r="6"/><circle cx="229" cy="260" r="6"/><circle cx="286" cy="294" r="6"/><circle cx="327" cy="166" r="6"/><circle cx="433" cy="213" r="6"/><circle cx="405" cy="291" r="6"/><circle cx="466" cy="255" r="6"/><circle cx="265" cy="158" r="6"/></g>
+<g stroke="#d9f7a4" stroke-width="5" stroke-linecap="round"><path d="M179 151l-23-35M214 124l-9-43M259 111l2-45M307 106l8-42M357 109l19-42M409 122l29-36M461 150l39-29M495 191l50-12M502 244l52 8M477 294l42 35M426 329l22 45M364 342l4 49M297 341l-11 49M229 321l-25 40"/></g>
+<path d="M522 245c76 4 95 57 64 96-24 30-68 25-81 56" fill="none" stroke="#a8e9b1" stroke-width="9" stroke-linecap="round"/>
+<g fill="#f2ffd5" font-family="Arial" font-size="14" font-weight="700"><text x="328" y="420" text-anchor="middle" letter-spacing="2">BACTÉRIA · PROCARIÓTICA</text></g>
+</svg>
+</div>
+<div class="sf25-structure-grid" id="sf25StructureGrid"></div>
+<div class="sf23-description sf25-bio-description" id="sf23CellDescription"><b>Núcleo</b><br>Armazena a maior parte do DNA e coordena diversas atividades celulares.</div>
+<p class="sf23-note" id="sf25BioNote">Modelo didático simplificado. As estruturas e proporções não estão em escala.</p>
+</section>\`;}
 function timelineLab(){return '<section class="sf23-lab" id="sf23Timeline"><div class="sf23-head"><div><div class="sf23-kicker">APRENDIZAGEM VISUAL · LINHA DO TEMPO</div><h3>⏳ Organize os acontecimentos</h3><p>Explore uma sequência visual para compreender antes, durante e depois.</p></div><span class="sf23-live">● GUIADO</span></div><div class="sf23-stage" style="padding:16px"><div style="width:100%;max-width:480px"><div class="sf23-progress"><span id="sf23TimelineProgress"></span></div><div id="sf23TimelineStep" style="text-align:center;color:#fff;font-weight:800;font-size:15px">1 · Contexto</div><p id="sf23TimelineText" style="text-align:center;color:#c7d1ea;font-size:12px;line-height:1.6">Todo processo histórico ou geográfico precisa ser situado no tempo e no espaço.</p><div class="sf23-actions" style="justify-content:center"><button type="button" id="sf23TimelinePrev" disabled>← Anterior</button><button type="button" id="sf23TimelineNext">Próxima etapa →</button></div></div></div><p class="sf23-note">Use esta estrutura como organizador de estudo; os eventos específicos devem ser identificados no conteúdo da aula.</p></section>'}
 function chooseLab(){let k='';try{k=typeof topicKey==='function'?topicKey():''}catch(e){}if(/^fis-|^fisica$/.test(k))return waveLab();if(/^qui-|^quimica$/.test(k))return phLab();if(/^bio|^biologia$/.test(k))return cellLab();if(/^his-|^historia$|^geo-|^geografia$/.test(k))return timelineLab();return ''}
 function initWave(){const amp=byId('sf23Amp'),freq=byId('sf23Freq'),path=byId('sf23WavePath'),dot=byId('sf23WaveDot');if(!amp||!freq||!path)return;let phase=0;const draw=()=>{const a=Number(amp.value),f=Number(freq.value);byId('sf23AmpVal').textContent=a+'%';byId('sf23FreqVal').textContent=f+' Hz';let d='';for(let x=20;x<=500;x+=3){const y=80-Math.sin((x-20)/480*f*Math.PI*2+phase)*a;d+=(x===20?'M':'L')+x.toFixed(1)+' '+y.toFixed(1)+' '}path.setAttribute('d',d);dot.setAttribute('cy',80-Math.sin(phase)*a);byId('sf23WaveSummary').textContent=a<20?'Baixa amplitude':a<45?'Amplitude moderada':'Alta amplitude';byId('sf23WaveExplain').textContent='Frequência: '+f+' Hz no modelo. Amplitude: '+a+'% da altura de referência.'};amp.addEventListener('input',draw);freq.addEventListener('input',draw);draw();if(waveTimer)clearInterval(waveTimer);waveTimer=setInterval(()=>{phase+=.09;draw()},80)}
