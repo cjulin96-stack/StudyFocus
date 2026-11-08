@@ -1643,6 +1643,8 @@ function initLearningFlow(){
  const quiz=document.getElementById('quizPanel');
  const progress=page.querySelector('.learn-progress-panel');
  if(!layout||!assessment||!mistakes||!quiz||!progress)return;
+ // Remove o cabeçalho legado que ficava solto depois das etapas novas.
+ page.querySelectorAll('.learn-section-heading').forEach(h=>{const label=h.querySelector('b');if(label&&/estude e pratique/i.test(label.textContent))h.hidden=true;});
  const flow=document.createElement('section');flow.id='sf24LearningFlow';flow.className='sf24-flow';
  flow.innerHTML='<div class="sf24-flow-head"><div><b>Seu percurso de aprendizagem</b><small>Avance por etapas, no seu ritmo.</small></div><span class="tag">3 etapas</span></div><div class="sf24-steps" role="group" aria-label="Etapas da aprendizagem"><button type="button" class="sf24-step" data-sf24-step="learn" aria-pressed="true"><span class="sf24-num">01</span><span><b>Aprender</b><small>Entenda o conteúdo</small></span></button><button type="button" class="sf24-step" data-sf24-step="practice" aria-pressed="false"><span class="sf24-num">02</span><span><b>Praticar</b><small>Treine com questões</small></span></button><button type="button" class="sf24-step" data-sf24-step="assess" aria-pressed="false"><span class="sf24-num">03</span><span><b>Avaliar</b><small>Confira sua evolução</small></span></button></div>';
  const learn=document.createElement('div');learn.id='sf24LearnStage';learn.className='sf24-stage';
