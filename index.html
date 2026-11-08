@@ -979,6 +979,84 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 }
 @media(prefers-reduced-motion:reduce){.sf-home-shortcuts button{transition:none}}
 </style>
+
+<style id="sf-dashboard-42">
+/* Dashboard 4.2 — acabamento premium, profundidade e estados interativos */
+#page-inicio{--sf-cyan:#56e7ef;--sf-violet:#a18cff}
+#page-inicio .sf-dashboard-intro{
+ min-height:142px;padding:25px 29px;border-color:#4bdde855;
+ background:
+  radial-gradient(circle at 82% 48%,#47e5ef20 0 2px,transparent 3px),
+  radial-gradient(circle at 88% 20%,#9a83ff25,transparent 29%),
+  radial-gradient(ellipse at 100% 100%,#35dce51c,transparent 48%),
+  linear-gradient(112deg,#101c31 0%,#111b30 54%,#142b40 100%);
+}
+#page-inicio .sf-dashboard-intro:before{content:"";position:absolute;width:170px;height:170px;right:34px;top:-65px;border:1px solid #5be5ed20;border-radius:50%;box-shadow:0 0 0 15px #5be5ed08,0 0 0 31px #a18cff08;pointer-events:none}
+#page-inicio .sf-dashboard-intro:after{height:2px;opacity:.8}
+#page-inicio .sf-dashboard-intro h2{font-size:clamp(21px,2.7vw,29px);font-weight:850;letter-spacing:-.8px}
+#page-inicio .sf-dashboard-intro p{font-size:12.5px;max-width:590px}
+#page-inicio .sf-dashboard-orb{z-index:1;flex-basis:76px;width:76px;height:76px;border-radius:25px;box-shadow:0 0 38px #35dce733,inset 0 0 24px #35dce722}
+#page-inicio .stats{gap:12px}
+#page-inicio .stat{
+ min-height:112px;padding:16px 16px 14px;border:1px solid #35516b!important;
+ border-radius:16px!important;
+ background:linear-gradient(145deg,#15263b 0%,#101c2e 72%,#111b2c 100%)!important;
+ box-shadow:0 8px 22px #02081255,inset 0 1px #ffffff0a!important;
+ transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease;
+}
+#page-inicio .stat:nth-child(2n){background:linear-gradient(145deg,#1a2340,#111b30 76%)!important}
+#page-inicio .stat:hover{transform:translateY(-3px);border-color:#55dfe8!important;box-shadow:0 13px 28px #02081277,0 0 0 1px #55dfe81a!important}
+#page-inicio .stat-top{color:#a9bfd3;font-weight:750;letter-spacing:.15px}
+#page-inicio .stat-icon{display:grid;place-items:center;width:27px;height:27px;border:1px solid #4bdde833;border-radius:9px;background:#39dce716}
+#page-inicio .stat strong{display:block;margin:8px 0 3px;color:#f3fbff;font-variant-numeric:tabular-nums}
+#page-inicio .stat small{color:#8fa9c0}
+#page-inicio .sf-block-label{display:flex;align-items:center;gap:11px}
+#page-inicio .content-grid{gap:17px}
+#page-inicio .content-grid .panel{
+ border:1px solid #304963!important;border-radius:17px!important;
+ background:linear-gradient(145deg,#142238 0%,#101b2d 72%,#101a2a 100%)!important;
+ box-shadow:0 10px 28px #02081244,inset 0 1px #ffffff08!important;
+}
+#page-inicio .panel-head h3{color:#effaff;letter-spacing:-.2px}
+#page-inicio .panel-head small,#page-inicio .panel-head .muted{color:#91a9bf}
+#page-inicio .sf-quick-panel{border-color:#3c5c76!important}
+#page-inicio .sf-home-shortcuts{gap:10px}
+#page-inicio .sf-home-shortcuts button{
+ position:relative;min-height:92px;padding:13px;border-color:#34516a;
+ background:linear-gradient(145deg,#172b42,#101c2e);
+}
+#page-inicio .sf-home-shortcuts button:after{content:"↗";position:absolute;right:11px;top:10px;color:#6c8ba4;font-size:12px;opacity:.75}
+#page-inicio .sf-home-shortcuts button:hover{transform:translateY(-3px);border-color:#5ce5eb;background:linear-gradient(145deg,#1a354b,#142238);box-shadow:0 10px 22px #0004,0 0 18px #35dce51a}
+#page-inicio .sf-home-shortcuts button>span{width:34px;height:34px;border:1px solid #45dce82c;border-radius:11px;background:linear-gradient(145deg,#3bdce729,#8c7aff1d);font-size:18px}
+#page-inicio .sf-home-shortcuts b{font-size:11.5px}
+#page-inicio .sf-home-shortcuts small{font-size:9.5px}
+#page-inicio .sf-activity-panel{border-color:#3a536b!important}
+#page-inicio .sf-home-activity{gap:9px}
+#page-inicio .sf-activity-row{padding:11px 12px;border-color:#ffffff12;background:linear-gradient(100deg,#0d1a2b,#122238);transition:border-color .2s,transform .2s}
+#page-inicio .sf-activity-row:hover{transform:translateX(2px);border-color:#4bdde855}
+#page-inicio .sf-activity-icon{border:1px solid #4bdde82c;background:#35dce71b}
+#page-inicio .sf-activity-copy b{font-size:11.5px}
+#page-inicio .sf-activity-time{padding:5px 7px;border:1px solid #ffffff12;border-radius:7px;background:#ffffff06;font-size:9px}
+#page-inicio .sf-activity-empty{background:#0d192a}
+@media(max-width:650px){
+ #page-inicio .sf-dashboard-intro{min-height:124px;padding:17px 16px}
+ #page-inicio .sf-dashboard-intro p{font-size:11px;line-height:1.55}
+ #page-inicio .sf-dashboard-orb{flex-basis:50px;width:50px;height:50px;border-radius:16px}
+ #page-inicio .stats{gap:8px}
+ #page-inicio .stat{min-height:102px;padding:12px 10px}
+ #page-inicio .stat strong{font-size:22px}
+ #page-inicio .content-grid .panel{border-radius:15px!important}
+ #page-inicio .sf-home-shortcuts{gap:8px}
+ #page-inicio .sf-home-shortcuts button{min-height:91px;padding:11px}
+ #page-inicio .sf-activity-row{gap:8px;padding:9px}
+ #page-inicio .sf-activity-time{font-size:8px}
+}
+@media(prefers-reduced-motion:reduce){
+ #page-inicio .stat,#page-inicio .sf-home-shortcuts button,#page-inicio .sf-activity-row{transition:none!important}
+ #page-inicio .stat:hover,#page-inicio .sf-home-shortcuts button:hover,#page-inicio .sf-activity-row:hover{transform:none}
+}
+</style>
+
 </head>
 <body>
 <div class="app">
