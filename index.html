@@ -1977,8 +1977,9 @@ const plans={
  }
 };
 const $=(root,sel)=>root.querySelector(sel);
-function count(){try{return Number(localStorage.getItem(STORE)||0)}catch(e){return 0}}
-function save(){try{localStorage.setItem(STORE,String(count()+1))}catch(e){}}
+function completed(){try{const v=JSON.parse(localStorage.getItem(STORE)||'[]');return Array.isArray(v)?v:[]}catch(e){return []}}
+function count(){return completed().length}
+function save(kind){try{const v=completed();if(!v.includes(kind)){v.push(kind);localStorage.setItem(STORE,JSON.stringify(v));}}catch(e){}}
 function mount(root){
  if(root.dataset.sf30Ready)return;
  const note=$(root,'#sf25BioNote');if(!note)return;
@@ -2001,7 +2002,7 @@ function mount(root){
   if(answered)return;answered=true;const p=plans[kind],buttons=[...options.children],ok=index===p.correct;
   buttons.forEach((b,i)=>{b.disabled=true;if(i===p.correct)b.classList.add('correct');else if(i===index)b.classList.add('incorrect')});
   feedback.textContent=(ok?'Resposta correta! ':'Vamos revisar. ')+p.explain;feedback.classList.add(ok?'good':'review');retry.hidden=ok;
-  if(ok){save();$(panel,'.sf30-total').textContent=String(count());}
+  if(ok){save(kind);$(panel,'.sf30-total').textContent=String(count());}
  }
  function setKind(nextKind){kind=plans[nextKind]?nextKind:'animal';step=0;update();}
  prev.addEventListener('click',()=>{if(step>0){step--;update()}});
