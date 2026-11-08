@@ -1892,8 +1892,7 @@ function init(){
  const up=()=>drag=false;
  renderer.domElement.addEventListener('pointerdown',down);renderer.domElement.addEventListener('pointermove',move);renderer.domElement.addEventListener('pointerup',up);renderer.domElement.addEventListener('pointercancel',up);
  renderer.domElement.addEventListener('wheel',e=>{e.preventDefault();camera.position.z=Math.max(5,Math.min(13,camera.position.z+e.deltaY*.008));},{passive:false});
- root.querySelectorAll('[data-cell-kind]').forEach(btn=>btn.addEventListener('click',()=>build(btn.dataset.cellKind)));
- root.addEventListener('click',e=>{if(e.target.closest('[data-cell-structure]'))setTimeout(highlightSelected,0);});
+ let lastKind='';const syncSelection=()=>{const kind=root.querySelector('[data-cell-kind].active')?.dataset.cellKind||'animal';if(kind!==lastKind){lastKind=kind;build(kind);}else highlightSelected();};const selectionObserver=new MutationObserver(syncSelection);selectionObserver.observe(root,{subtree:true,childList:true,attributes:true,attributeFilter:['class','aria-selected']});syncSelection();
  const animate=()=>{raf=requestAnimationFrame(animate);if(!drag)world.rotation.y+=.0018;renderer.render(scene,camera);};animate();
  root.dataset.sf28Ready='1';
 }
