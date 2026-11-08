@@ -1825,6 +1825,9 @@ function chooseCell(root,kind){
  const bac=kind==='bacteria',animal=$(root,'#sf25AnimalArt'),bacteria=$(root,'#sf25BacteriaArt'),grid=$(root,'#sf25StructureGrid'),intro=$(root,'#sf25BioIntro'),note=$(root,'#sf25BioNote'),desc=$(root,'#sf23CellDescription');
  if(!animal||!bacteria||!grid)return;
  animal.hidden=bac;bacteria.hidden=!bac;
+ /* Exibição explícita: evita que regras globais de SVG anulem o atributo hidden. */
+ animal.style.setProperty('display',bac?'none':'block','important');
+ bacteria.style.setProperty('display',bac?'block':'none','important');
  animal.setAttribute('aria-hidden',String(bac));bacteria.setAttribute('aria-hidden',String(!bac));
  root.querySelectorAll('[data-cell-kind]').forEach(btn=>{const on=btn.dataset.cellKind===kind;btn.classList.toggle('active',on);btn.setAttribute('aria-selected',String(on));});
  intro.textContent=bac?'Célula procariótica: não possui núcleo delimitado por membrana nem organelas membranosas. O DNA fica no nucleoide.':'Célula eucariótica: possui núcleo delimitado por membrana e organelas especializadas.';
