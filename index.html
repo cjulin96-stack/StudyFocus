@@ -1839,4 +1839,75 @@ const lesson=document.getElementById('lessonContent');
 if(lesson&&window.MutationObserver){new MutationObserver(()=>{const c=document.getElementById('sf23Cell');if(c&&!c.dataset.sf26Ready){c.dataset.sf26Ready='1';chooseCell(c,'animal');}const p=document.getElementById('sf23Ph'),sl=$(p,'#sf23PhSlider');if(p&&sl&&!p.dataset.sf26Ready){p.dataset.sf26Ready='1';updatePh(p,sl);}}).observe(lesson,{childList:true,subtree:true});}
 })();
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+<script id="sf-evolution-28-webgl-js">
+(()=>{'use strict';
+const rootId='sf23Cell';
+let activeKind='animal',scene,camera,renderer,world,raf=0,drag=false,lastX=0,lastY=0,ready=false,resizeObserver;
+const meshes={};
+const mat=(color,roughness=.48,metalness=.04,transparent=false,opacity=1)=>new THREE.MeshStandardMaterial({color,roughness,metalness,transparent,opacity});
+function addMesh(name,geometry,material,pos,scale,rotation){const m=new THREE.Mesh(geometry,material);m.name=name;m.position.set(...pos);if(scale)m.scale.set(...scale);if(rotation)m.rotation.set(...rotation);m.castShadow=true;m.receiveShadow=true;world.add(m);(meshes[name]||(meshes[name]=[])).push(m);return m}
+function tube(name,points,radius,color){const curve=new THREE.CatmullRomCurve3(points.map(p=>new THREE.Vector3(...p)));return addMesh(name,new THREE.TubeGeometry(curve,64,radius,8,false),mat(color,.55,.08),[0,0,0])}
+function sphere(name,color,pos,scale,opacity=1){return addMesh(name,new THREE.SphereGeometry(1,48,32),mat(color,.42,.08,opacity<1,opacity),pos,scale)}
+function clearWorld(){while(world.children.length){const o=world.children.pop();if(o.geometry)o.geometry.dispose();if(o.material){if(Array.isArray(o.material))o.material.forEach(m=>m.dispose());else o.material.dispose();}}Object.keys(meshes).forEach(k=>delete meshes[k]);}
+function animal(){
+ sphere('membrane',0x55c9e9,[0,0,0],[2.7,1.8,1.75],.24);
+ sphere('cytoplasm',0x2676a6,[0,0,0],[2.55,1.67,1.62],.34);
+ sphere('nucleus',0xc17bdc,[-.25,.08,.12],[.94,.91,.88]);
+ sphere('nucleolus',0x6b328d,[-.05,.12,.78],[.28,.28,.25]);
+ for(let i=0;i<5;i++){const a=i*Math.PI*2/5;sphere('mitochondria',0xe78d55,[Math.cos(a)*1.48,Math.sin(a)*.75,Math.sin(a*1.7)*.7],[.48,.23,.24]);}
+ for(let i=0;i<5;i++){const y=-.7+i*.18;addMesh('golgi',new THREE.TorusGeometry(.42+i*.035,.055,12,64,Math.PI*1.45),mat(0xf5c36b),[1.15,y,.2],[1,.7,1],[0,0,-.35]);}
+ for(let i=0;i<4;i++){const a=i*1.55;tube('reticulum',[[-1.25,Math.sin(a)*.6,-.35],[-.8,Math.sin(a+.6)*.8,-.4],[.2,Math.sin(a+1)*.8,-.35],[.8,Math.sin(a+1.4)*.5,-.25]],.045,0x9dc7ff);}
+ for(let i=0;i<30;i++){const a=i*2.4,r=.8+(i%5)*.25;sphere('ribosome',0xf9d77e,[Math.cos(a)*r,Math.sin(a)*r*.6,Math.sin(i*1.9)*1.05],[.055,.055,.055]);}
+}
+function bacteria(){
+ sphere('capsule',0x8fce62,[0,0,0],[2.75,1.22,1.25],.22);
+ sphere('wall',0x61a84e,[0,0,0],[2.52,1.05,1.08],.48);
+ sphere('membrane',0xb4df70,[0,0,0],[2.36,.91,.94],.34);
+ sphere('cytoplasm',0xc8e58a,[0,0,0],[2.25,.82,.85],.86);
+ tube('nucleoid',[[-1.2,.05,.25],[-.8,.5,.25],[-.2,-.4,.3],[.3,.35,.25],[.8,-.2,.3],[1.15,.22,.2]],.075,0x6650a2);
+ for(let i=0;i<3;i++){const a=i*2.1;addMesh('plasmid',new THREE.TorusGeometry(.16,.035,10,36),mat(0xd34f9b),[Math.cos(a)*1.25,Math.sin(a)*.45,.5],[1,.8,1],[a,.4,a]);}
+ for(let i=0;i<55;i++){const x=-1.85+(i%11)*.36,y=-.55+Math.floor(i/11)*.27;sphere('ribosome',0x668b39,[x,y,.58],[.045,.045,.045]);}
+ for(let i=0;i<13;i++){const a=-1.2+i*.2;const x=Math.cos(a)*2.2,y=Math.sin(a)*.85;const dir=new THREE.Vector3(Math.cos(a),Math.sin(a),0);const rod=addMesh('pili',new THREE.CylinderGeometry(.025,.04,.48,8),mat(0xd7efa5),[x+dir.x*.2,y+dir.y*.2,0]);rod.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),dir);}
+ const pts=[];for(let i=0;i<80;i++){const t=i/79;pts.push([2.45+1.2*t, .2+Math.sin(t*8)*(.15+t*.45),Math.cos(t*8)*(.15+t*.4)]);}tube('flagellum',pts,.035,0x9ce0a0);
+}
+function build(kind){activeKind=kind;clearWorld();kind==='animal'?animal():bacteria();world.rotation.set(.15,-.4,0);document.getElementById(rootId)?.setAttribute('data-webgl-kind',kind);highlightSelected();}
+function highlightSelected(){const root=document.getElementById(rootId);if(!root)return;const key=root.querySelector('[data-cell-structure].active')?.dataset.cellStructure;const map={nucleus:['nucleus','nucleolus'],membrane:['membrane'],mitochondria:['mitochondria'],golgi:['golgi'],reticulum:['reticulum'],lysosome:[],ribosome:['ribosome'],capsule:['capsule'],wall:['wall'],cytoplasm:['cytoplasm'],nucleoid:['nucleoid'],plasmid:['plasmid'],pili:['pili'],flagellum:['flagellum']};Object.entries(meshes).forEach(([name,list])=>list.forEach(m=>{const selected=(map[key]||[]).includes(name);const base=m.material.userData.baseColor??m.material.color.getHex();if(m.material.emissive){m.material.emissive.setHex(selected?0x555522:0x000000);m.material.emissiveIntensity=selected?.9:0;}}));}
+function init(){
+ const root=document.getElementById(rootId),stage=root?.querySelector('.sf23-stage');if(!root||!stage||!window.THREE||ready)return;
+ ready=true;stage.querySelectorAll('svg').forEach(el=>el.style.display='none');
+ const host=document.createElement('div');host.id='sf28WebGL';host.setAttribute('role','img');host.setAttribute('aria-label','Modelo tridimensional interativo. Arraste para girar e use os controles para explorar.');stage.appendChild(host);
+ scene=new THREE.Scene();scene.background=new THREE.Color(0x0a172b);
+ camera=new THREE.PerspectiveCamera(38,1,.1,100);camera.position.set(0,0,8.8);
+ renderer=new THREE.WebGLRenderer({antialias:true,alpha:false});renderer.setPixelRatio(Math.min(devicePixelRatio||1,2));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.outputColorSpace=THREE.SRGBColorSpace;host.appendChild(renderer.domElement);
+ scene.add(new THREE.HemisphereLight(0xc8eaff,0x15233d,2));
+ const keyLight=new THREE.DirectionalLight(0xffffff,3);keyLight.position.set(4,6,8);keyLight.castShadow=true;scene.add(keyLight);
+ const rim=new THREE.PointLight(0x58b9ff,24,18);rim.position.set(-4,1,-3);scene.add(rim);
+ world=new THREE.Group();scene.add(world);build('animal');
+ const resize=()=>{const w=Math.max(280,host.clientWidth),h=Math.max(230,Math.min(440,w*.68));renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();};resize();
+ if(window.ResizeObserver){resizeObserver=new ResizeObserver(resize);resizeObserver.observe(host);}else window.addEventListener('resize',resize);
+ const down=e=>{drag=true;lastX=e.clientX;lastY=e.clientY;renderer.domElement.setPointerCapture?.(e.pointerId);};
+ const move=e=>{if(!drag)return;world.rotation.y+=(e.clientX-lastX)*.008;world.rotation.x+=(e.clientY-lastY)*.008;lastX=e.clientX;lastY=e.clientY;};
+ const up=()=>drag=false;
+ renderer.domElement.addEventListener('pointerdown',down);renderer.domElement.addEventListener('pointermove',move);renderer.domElement.addEventListener('pointerup',up);renderer.domElement.addEventListener('pointercancel',up);
+ renderer.domElement.addEventListener('wheel',e=>{e.preventDefault();camera.position.z=Math.max(5,Math.min(13,camera.position.z+e.deltaY*.008));},{passive:false});
+ root.querySelectorAll('[data-cell-kind]').forEach(btn=>btn.addEventListener('click',()=>build(btn.dataset.cellKind)));
+ root.addEventListener('click',e=>{if(e.target.closest('[data-cell-structure]'))setTimeout(highlightSelected,0);});
+ const animate=()=>{raf=requestAnimationFrame(animate);if(!drag)world.rotation.y+=.0018;renderer.render(scene,camera);};animate();
+ root.dataset.sf28Ready='1';
+}
+function boot(){if(window.THREE){init();return;}let tries=0;const wait=setInterval(()=>{tries++;if(window.THREE){clearInterval(wait);init();}else if(tries>40)clearInterval(wait);},250);}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
+const target=document.getElementById('lessonContent');if(target&&window.MutationObserver)new MutationObserver(()=>{const r=document.getElementById(rootId);if(r&&!r.dataset.sf28Ready){ready=false;boot();}}).observe(target,{childList:true,subtree:true});
+})();
+</script>
+<style id="sf-evolution-28-webgl-css">
+#sf28WebGL{width:100%;min-height:230px;border-radius:18px;overflow:hidden;background:radial-gradient(ellipse at 50% 45%,#1e4266,#091426 72%);touch-action:pan-y;box-shadow:inset 0 0 45px rgba(64,155,226,.14)}
+#sf28WebGL canvas{display:block;width:100%;height:auto;cursor:grab;touch-action:pan-y}
+#sf28WebGL canvas:active{cursor:grabbing}
+.sf27-cell-art{display:none!important}
+.sf27-cell-stage{min-height:230px!important}
+</style>
+
 </body></html>
