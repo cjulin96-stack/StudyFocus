@@ -2121,81 +2121,111 @@ function groupFor(id){const g=new THREE.Group();g.name=id;model.add(g);groups[id
 function build(){
  model=new THREE.Group();scene.add(model);
  const body=groupFor('body'),nerv=groupFor('nervous'),circ=groupFor('circulatory'),resp=groupFor('respiratory'),dig=groupFor('digestive'),urin=groupFor('urinary'),repro=groupFor('reproductive'),skel=groupFor('skeletal'),mus=groupFor('muscular');
- const bone=0xe8dfc9,skinColor=0x9bbdca;
- // Silhueta anatômica translúcida: tórax, cintura e pelve com proporções humanas.
- const torsoProfile=[
-  new THREE.Vector2(.17,.22),new THREE.Vector2(.27,.28),new THREE.Vector2(.31,.43),
-  new THREE.Vector2(.27,.66),new THREE.Vector2(.31,.86),new THREE.Vector2(.39,1.12),
-  new THREE.Vector2(.46,1.38),new THREE.Vector2(.43,1.55),new THREE.Vector2(.30,1.69),
-  new THREE.Vector2(.14,1.73)
+ const bone=0xe8dfc9,skin=0xb8cbd0,skinShade=0x91aeb9;
+ const ell=(g,n,c,p,s,o=1)=>mesh(g,n,new THREE.SphereGeometry(1,32,24),c,p,s,o);
+ // Silhueta externa redesenhada: contorno contínuo e volumes anatômicos mais naturais.
+ const profile=[
+  new THREE.Vector2(.12,.18),new THREE.Vector2(.20,.20),new THREE.Vector2(.27,.27),
+  new THREE.Vector2(.29,.40),new THREE.Vector2(.265,.55),new THREE.Vector2(.28,.72),
+  new THREE.Vector2(.32,.91),new THREE.Vector2(.39,1.13),new THREE.Vector2(.445,1.34),
+  new THREE.Vector2(.43,1.48),new THREE.Vector2(.36,1.59),new THREE.Vector2(.24,1.66),
+  new THREE.Vector2(.12,1.69)
  ];
- const torso=new THREE.LatheGeometry(torsoProfile,48);
- mesh(body,'body',torso,skinColor,[0,0,0],[1,1,.72],.16);
- mesh(body,'head',new THREE.SphereGeometry(.285,32,24),0xb5cbd1,[0,2.08,0],[.82,1.08,.78],.24);
- mesh(body,'head',new THREE.SphereGeometry(.17,24,18),0xb5cbd1,[0,1.94,.035],[.86,.65,.8],.18);
- capsule(body,'neck',0x9bbdca,[0,1.72,0],[0,1.91,0],.105);
+ mesh(body,'body',new THREE.LatheGeometry(profile,64),skin,[0,0,0],[1,1,.78],.20);
+ // Pelve, tórax, cintura escapular e pescoço.
+ ell(body,'pelvis',skinShade,[0,.22,-.005],[.34,.29,.235],.22);
+ ell(body,'chest',skin,[0,1.38,.012],[.425,.27,.285],.18);
+ ell(body,'abdomen',skin,[0,.91,.015],[.275,.40,.235],.17);
+ ell(body,'neck',skin,[0,1.76,0],[.125,.19,.125],.22);
  for(const side of [-1,1]){
-  mesh(body,'shoulder',new THREE.SphereGeometry(.19,24,18),0x9bbdca,[side*.43,1.48,0],[1,.92,.85],.2);
-  capsule(body,'upperArm',0x9bbdca,[side*.46,1.45,0],[side*.62,.99,.015],.125);
-  mesh(body,'elbow',new THREE.SphereGeometry(.105,18,14),0x9bbdca,[side*.62,.99,.015],[1,1,1],.2);
-  capsule(body,'forearm',0x9bbdca,[side*.62,.96,.015],[side*.77,.52,.035],.09);
-  mesh(body,'hand',new THREE.SphereGeometry(.105,18,14),0x9bbdca,[side*.79,.43,.05],[.72,1.18,.48],.22);
-  for(let f=0;f<4;f++)capsule(body,'finger',0x9bbdca,[side*(.73+f*.038),.39,.07],[side*(.72+f*.04),.27,.075],.018);
-  mesh(body,'pelvis',new THREE.SphereGeometry(.29,24,18),0x8caebc,[side*.105,.28,-.005],[.85,.72,.72],.18);
-  capsule(body,'thigh',0x91b2c0,[side*.19,.25,0],[side*.22,-.39,.015],.15);
-  mesh(body,'knee',new THREE.SphereGeometry(.115,18,14),0x9bbdca,[side*.22,-.42,.02],[1,1,.9],.2);
-  capsule(body,'calf',0x91b2c0,[side*.22,-.44,.015],[side*.25,-1.02,-.015],.115);
-  mesh(body,'ankle',new THREE.SphereGeometry(.075,16,12),0x9bbdca,[side*.25,-1.02,0],[1,1,1],.2);
-  mesh(body,'foot',new THREE.SphereGeometry(.14,18,14),0x91b2c0,[side*.25,-1.1,.13],[.8,.52,1.5],.2);
+  ell(body,'shoulder',skin,[side*.43,1.48,0],[.19,.19,.19],.22);
+  capsule(body,'upperArm',skin,[side*.46,1.43,0],[side*.62,1.00,.005],.118);
+  ell(body,'elbow',skin,[side*.62,.99,.005],[.105,.105,.105],.22);
+  capsule(body,'forearm',skin,[side*.62,.96,.005],[side*.76,.53,.025],.085);
+  ell(body,'wrist',skin,[side*.76,.51,.025],[.072,.075,.065],.22);
+  ell(body,'hand',skin,[side*.79,.405,.045],[.095,.14,.055],.22);
+  for(let f=0;f<4;f++){
+   const x=side*(.72+f*.045);
+   capsule(body,'finger',skin,[x,.36,.055],[x+side*.008,.235,.06],.017);
+   ell(body,'finger',skin,[x+side*.008,.235,.06],[.018,.022,.018],.22);
+  }
+  capsule(body,'finger',skin,[side*.72,.43,.07],[side*.665,.34,.075],.021);
+  ell(body,'hip',skinShade,[side*.17,.22,0],[.19,.23,.22],.20);
+  capsule(body,'thigh',skin,[side*.18,.18,0],[side*.205,-.42,.012],.145);
+  ell(body,'knee',skin,[side*.205,-.43,.012],[.112,.12,.12],.22);
+  capsule(body,'calf',skin,[side*.205,-.47,.012],[side*.235,-1.04,-.005],.105);
+  ell(body,'ankle',skin,[side*.235,-1.045,0],[.075,.09,.075],.22);
+  ell(body,'foot',skin,[side*.235,-1.13,.095],[.105,.105,.205],.22);
+  // Detalhes externos discretos para dar leitura de anatomia, sem excesso de linhas.
+  ell(body,'clavicle',skinShade,[side*.205,1.56,.205],[.20,.035,.025],.24);
  }
- // Sistema nervoso.
- mesh(nerv,'brain',new THREE.SphereGeometry(.22,32,24),0xe5a5c7,[0,2.09,.055],[1,.84,.9]);
- for(let k=0;k<3;k++)mesh(nerv,'brain',new THREE.SphereGeometry(.095,20,16),0xf0bfd4,[(k-1)*.105,2.17,.11],[1,.72,.8]);
- capsule(nerv,'spinal',0xe5a5c7,[0,1.86,.02],[0,.38,.02],.045);
- // Coração, vasos e pulmões com separação lateral.
- mesh(circ,'heart',new THREE.SphereGeometry(.17,32,24),0xd94f68,[-.105,1.13,.23],[.82,1.1,.78]);
- capsule(circ,'vessels',0xd85c68,[0,1.45,.19],[0,.45,.18],.018);
- capsule(circ,'vessels',0xc94c61,[0,1.38,.2],[-.2,1.55,.17],.018);
- capsule(circ,'vessels',0xc94c61,[0,1.38,.2],[.2,1.55,.17],.018);
- mesh(resp,'lungs',new THREE.SphereGeometry(.245,32,24),0x78bde1,[-.225,1.27,.12],[.78,1.15,.72]);
- mesh(resp,'lungs',new THREE.SphereGeometry(.245,32,24),0x78bde1,[.225,1.27,.12],[.78,1.15,.72]);
- capsule(resp,'trachea',0x8ed5d0,[0,1.82,.16],[0,1.48,.16],.047);
- // Sistema digestório: fígado, estômago e alças intestinais.
- mesh(dig,'liver',new THREE.SphereGeometry(.22,32,24),0x9b694e,[.19,.99,.2],[1.45,.68,.72]);
- mesh(dig,'stomach',new THREE.SphereGeometry(.17,28,20),0xe9a16c,[-.16,.91,.23],[.8,1.2,.78]);
- const gut=mesh(dig,'intestine',new THREE.TorusKnotGeometry(.115,.033,120,12,2,5),0xe7c28a,[0,.54,.23],[1.25,1.25,.72]);gut.rotation.x=.3;
- // Sistema urinário e reprodutor.
- mesh(urin,'kidneys',new THREE.SphereGeometry(.115,24,18),0x9b79c9,[-.27,.59,-.035],[.72,1.12,.72]);
- mesh(urin,'kidneys',new THREE.SphereGeometry(.115,24,18),0x9b79c9,[.27,.59,-.035],[.72,1.12,.72]);
- mesh(urin,'bladder',new THREE.SphereGeometry(.105,24,18),0x9b79c9,[0,.22,.2],[1,.82,.85]);
- mesh(repro,'uterus',new THREE.CapsuleGeometry(.085,.2,8,16),0xd987a8,[0,.48,.22],[1,.9,.8]);
- mesh(repro,'ovaries',new THREE.SphereGeometry(.065,20,16),0xe9a5bd,[-.16,.54,.23],[1,1,1]);
- mesh(repro,'ovaries',new THREE.SphereGeometry(.065,20,16),0xe9a5bd,[.16,.54,.23],[1,1,1]);
- mesh(repro,'testes',new THREE.SphereGeometry(.075,20,16),0x86b9d8,[-.1,.13,.24],[1,1,1]);
- mesh(repro,'testes',new THREE.SphereGeometry(.075,20,16),0x86b9d8,[.1,.13,.24],[1,1,1]);
- // Esqueleto com crânio, coluna, costelas, pelve e ossos dos membros.
- mesh(skel,'skeleton',new THREE.SphereGeometry(.19,24,18),bone,[0,2.08,-.07],[.85,1,.72]);
- capsule(skel,'skeleton',bone,[0,1.84,-.04],[0,.32,-.04],.045);
- for(let y=1.05;y<=1.58;y+=.105){
-  const rib=new THREE.TorusGeometry(.235,.014,8,32,Math.PI);
-  const left=mesh(skel,'skeleton',rib,bone,[-.015,y,-.055],[1,.78,.7]);left.rotation.z=Math.PI;
-  const right=mesh(skel,'skeleton',rib,bone,[.015,y,-.055],[1,.78,.7]);
- }
- mesh(skel,'skeleton',new THREE.SphereGeometry(.25,20,16),bone,[0,.28,-.05],[1.35,.5,.65]);
+ // Face com orelhas, nariz, olhos e boca em relevo sutil.
+ ell(body,'head',skin,[0,2.12,0],[.235,.30,.205],.22);
+ ell(body,'jaw',skin,[0,1.98,.035],[.175,.13,.17],.22);
  for(const side of [-1,1]){
-  capsule(skel,'skeleton',bone,[side*.12,1.57,-.04],[side*.44,1.47,-.04],.035);
-  capsule(skel,'skeleton',bone,[side*.44,1.44,-.04],[side*.63,.99,-.04],.035);
-  capsule(skel,'skeleton',bone,[side*.63,.96,-.04],[side*.77,.51,-.04],.027);
-  capsule(skel,'skeleton',bone,[side*.18,.25,-.04],[side*.22,-.42,-.04],.055);
-  capsule(skel,'skeleton',bone,[side*.22,-.42,-.04],[side*.25,-1.04,-.04],.043);
+  ell(body,'ear',skinShade,[side*.235,2.11,0],[.045,.075,.045],.24);
+  ell(body,'eye',0x34465a,[side*.085,2.16,.181],[.025,.018,.012],1);
+  ell(body,'brow',skinShade,[side*.085,2.195,.18],[.052,.012,.012],.5);
  }
- // Grupos musculares didáticos em camadas, com volumes suaves.
+ ell(body,'nose',skinShade,[0,2.105,.205],[.032,.065,.035],.65);
+ ell(body,'mouth',0x8d6670,[0,2.015,.194],[.055,.009,.009],.8);
+ // Sistema nervoso: cérebro com hemisférios e medula.
+ ell(nerv,'brain',0xe5a5c7,[0,2.16,.055],[.205,.17,.17]);
+ for(const side of [-1,1])for(let k=0;k<3;k++)ell(nerv,'brain',0xf0bfd4,[side*(.07+k*.025),2.18-k*.035,.17],[.065,.055,.025]);
+ capsule(nerv,'spinal',0xe5a5c7,[0,1.91,.015],[0,.36,.015],.035);
+ // Circulação: coração, aorta e ramificações principais.
+ ell(circ,'heart',0xd94f68,[-.09,1.18,.245],[.135,.18,.105]);
+ capsule(circ,'vessels',0xd85c68,[0,1.47,.19],[0,.48,.19],.022);
+ capsule(circ,'vessels',0xc94c61,[0,1.40,.20],[-.19,1.57,.17],.018);
+ capsule(circ,'vessels',0xc94c61,[0,1.40,.20],[.19,1.57,.17],.018);
+ capsule(circ,'vessels',0xd85c68,[0,.85,.19],[-.20,.48,.15],.014);
+ capsule(circ,'vessels',0xd85c68,[0,.85,.19],[.20,.48,.15],.014);
+ // Respiração: pulmões separados, brônquios e traqueia.
+ ell(resp,'lungs',0x78bde1,[-.205,1.27,.13],[.17,.29,.105]);
+ ell(resp,'lungs',0x78bde1,[.205,1.27,.13],[.17,.29,.105]);
+ capsule(resp,'trachea',0x8ed5d0,[0,1.83,.16],[0,1.48,.16],.035);
+ capsule(resp,'trachea',0x8ed5d0,[0,1.49,.16],[-.17,1.36,.16],.022);
+ capsule(resp,'trachea',0x8ed5d0,[0,1.49,.16],[.17,1.36,.16],.022);
+ // Digestório: fígado, estômago e alças intestinais.
+ ell(dig,'liver',0x9b694e,[.17,1.00,.19],[.25,.14,.10]);
+ ell(dig,'stomach',0xe9a16c,[-.15,.91,.20],[.13,.19,.105]);
+ const gut=mesh(dig,'intestine',new THREE.TorusKnotGeometry(.105,.026,144,12,2,5),0xe7c28a,[0,.58,.22],[1.3,1.35,.8]);gut.rotation.x=.3;
+ // Sistema urinário e reprodutor, em apresentação anatômica educativa.
+ ell(urin,'kidneys',0x9b79c9,[-.245,.62,-.02],[.085,.13,.07]);
+ ell(urin,'kidneys',0x9b79c9,[.245,.62,-.02],[.085,.13,.07]);
+ capsule(urin,'ureters',0xb28cdb,[-.245,.53,.015],[-.07,.27,.13],.012);
+ capsule(urin,'ureters',0xb28cdb,[.245,.53,.015],[.07,.27,.13],.012);
+ ell(urin,'bladder',0x9b79c9,[0,.22,.16],[.105,.095,.085]);
+ ell(repro,'uterus',0xd987a8,[0,.49,.18],[.105,.13,.075]);
+ for(const side of [-1,1])ell(repro,'ovaries',0xe9a5bd,[side*.16,.53,.18],[.052,.045,.045]);
+ for(const side of [-1,1])ell(repro,'testes',0x86b9d8,[side*.085,.12,.20],[.052,.065,.05]);
+ // Esqueleto: crânio, coluna, caixa torácica, pelve e ossos longos.
+ ell(skel,'skeleton',bone,[0,2.12,-.065],[.19,.23,.15]);
+ ell(skel,'skeleton',bone,[0,2.13,.075],[.13,.11,.09]);
+ capsule(skel,'skeleton',bone,[0,1.88,-.035],[0,.31,-.035],.035);
+ for(let y=1.08;y<=1.57;y+=.095){
+  const width=.20+((y-1.08)/.49)*.045;
+  const rib=new THREE.TorusGeometry(width,.012,8,40,Math.PI);
+  const l=mesh(skel,'skeleton',rib,bone,[-.012,y,-.045],[1,.82,.72]);l.rotation.z=Math.PI;
+  mesh(skel,'skeleton',rib,bone,[.012,y,-.045],[1,.82,.72]);
+ }
+ ell(skel,'skeleton',bone,[0,.28,-.055],[.29,.12,.10]);
  for(const side of [-1,1]){
-  mesh(mus,'muscles',new THREE.SphereGeometry(.22,24,18),0xb85e72,[side*.22,1.35,.11],[.92,.72,.55]);
-  capsule(mus,'muscles',0xb85e72,[side*.45,1.45,.08],[side*.62,.99,.08],.105);
-  capsule(mus,'muscles',0xb85e72,[side*.62,.96,.08],[side*.77,.52,.08],.07);
-  capsule(mus,'muscles',0xb85e72,[side*.19,.24,.08],[side*.22,-.42,.08],.12);
-  capsule(mus,'muscles',0xb85e72,[side*.22,-.44,.08],[side*.25,-1.01,.08],.09);
+  capsule(skel,'skeleton',bone,[side*.12,1.58,-.04],[side*.43,1.48,-.04],.027);
+  capsule(skel,'skeleton',bone,[side*.43,1.45,-.04],[side*.62,.99,-.04],.027);
+  capsule(skel,'skeleton',bone,[side*.62,.96,-.04],[side*.76,.52,-.04],.021);
+  capsule(skel,'skeleton',bone,[side*.18,.22,-.04],[side*.205,-.43,-.04],.047);
+  capsule(skel,'skeleton',bone,[side*.205,-.43,-.04],[side*.235,-1.04,-.04],.035);
+ }
+ // Musculatura por grupos principais: peitoral, deltoide, braços, abdômen e pernas.
+ for(const side of [-1,1]){
+  ell(mus,'muscles',0xc66d7d,[side*.19,1.39,.18],[.20,.15,.075]);
+  ell(mus,'muscles',0xb85e72,[side*.43,1.48,.05],[.15,.15,.13]);
+  capsule(mus,'muscles',0xb85e72,[side*.46,1.43,.09],[side*.62,.99,.09],.085);
+  capsule(mus,'muscles',0xb85e72,[side*.62,.96,.08],[side*.76,.53,.08],.058);
+  ell(mus,'muscles',0xc66d7d,[side*.13,.99,.15],[.11,.23,.07]);
+  capsule(mus,'muscles',0xb85e72,[side*.18,.20,.08],[side*.205,-.42,.08],.115);
+  capsule(mus,'muscles',0xb85e72,[side*.205,-.45,.08],[side*.235,-1.01,.08],.078);
  }
 }
 function info(id){const d=DATA[id]||DATA.heart;root.querySelector('#sf32-organ-name').textContent=d[0];root.querySelector('#sf32-organ-system').textContent=d[2];root.querySelector('#sf32-organ-desc').textContent=d[1];root.querySelectorAll('[data-sf32-organ]').forEach(b=>b.classList.toggle('active',b.dataset.sf32Organ===id));selected=id}
