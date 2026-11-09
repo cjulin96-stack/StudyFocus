@@ -1442,7 +1442,39 @@ button:disabled{opacity:.48;cursor:not-allowed;transform:none!important}
  .main{padding:18px 14px 35px!important}
 }
 @media(prefers-reduced-motion:reduce){.side,.sf-sidebar-backdrop{transition:none!important}}
-</style></head>
+</style><style id="sf-250-polish-css">
+:root{scroll-behavior:smooth}
+button,input,select,textarea{transition:border-color .16s ease,background-color .16s ease,box-shadow .16s ease,transform .16s ease}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid #72e6e0!important;outline-offset:3px!important}
+.sf250-strip{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:10px 0;padding:10px 12px;border:1px solid #52668a66;border-radius:13px;background:linear-gradient(100deg,#172b43,#202449);color:#dceaff;font-size:12px}
+.sf250-strip strong{color:#78e6df}
+.sf250-goal{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;margin:14px 0;padding:15px;border:1px solid #53688d;border-radius:16px;background:linear-gradient(120deg,#172b43,#202449)}
+.sf250-goal h3{margin:0 0 4px;font-size:15px}.sf250-goal p{margin:0;color:#aebed7;font-size:12px}
+.sf250-goal progress{width:100%;height:9px;margin-top:10px;accent-color:#67ddd5}
+.sf250-goal-controls{display:flex;align-items:center;gap:6px}.sf250-goal-controls input{width:64px;padding:7px;border:1px solid #596b90;border-radius:8px;background:#0d172b;color:#fff}
+.sf250-task-search{width:100%;margin:8px 0 12px;padding:12px 14px;border:1px solid #53668a;border-radius:12px;background:#101a30;color:#f4f7ff}
+.sf250-task-search:focus{border-color:#66dfd0;box-shadow:0 0 0 3px #66dfd022}
+.sf250-task-overdue{border-color:#d77d8d!important;background:linear-gradient(90deg,#7d34401c,transparent)!important}
+.sf250-task-today{border-color:#d6b45b!important}
+.sf250-task-due{display:inline-flex;margin:5px 0 0;padding:3px 7px;border-radius:99px;background:#d6b45b20;color:#ffdc8b;font-size:10px;font-weight:800}
+.sf250-task-overdue .sf250-task-due{background:#df728522;color:#ff9eae}
+.sf250-network{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));z-index:1500;transform:translate(-50%,20px);opacity:0;pointer-events:none;padding:9px 13px;border:1px solid #5b6e91;border-radius:99px;background:#111b30;color:#e9f3ff;font-size:12px;box-shadow:0 10px 35px #0008;transition:opacity .2s,transform .2s}
+.sf250-network.show{opacity:1;transform:translate(-50%,0)}
+.sf250-top{position:fixed;right:16px;bottom:calc(18px + env(safe-area-inset-bottom));z-index:80;width:44px;height:44px;border:1px solid #61749a;border-radius:50%;background:#1a2944;color:#fff;font-size:20px;box-shadow:0 8px 24px #0007;opacity:0;pointer-events:none;transform:translateY(8px)}
+.sf250-top.visible{opacity:1;pointer-events:auto;transform:translateY(0)}
+.sf250-shortcuts{margin-top:12px;color:#9fb1cc;font-size:11px;line-height:1.7}
+.sf250-shortcuts kbd{padding:2px 5px;border:1px solid #627391;border-radius:5px;background:#0d1729;color:#e7f0ff}
+.sf250-empty{padding:18px;border:1px dashed #586d91;border-radius:13px;color:#aebed7;text-align:center}
+@media(max-width:650px){
+ .sf250-goal{grid-template-columns:1fr}
+ .sf250-goal-controls{justify-content:space-between}
+ .sf250-goal-controls input{width:76px}
+ .sf250-top{bottom:calc(92px + env(safe-area-inset-bottom))}
+ .sf250-network{bottom:calc(78px + env(safe-area-inset-bottom))}
+}
+@media(prefers-reduced-motion:reduce){:root{scroll-behavior:auto}button,input,select,textarea,.sf250-network{transition:none!important}}
+</style>
+</head>
 <body>
 <div class="app">
 <div class="sf-sidebar-backdrop" id="sfSidebarBackdrop"></div><aside class="side">
@@ -2910,7 +2942,8 @@ document.addEventListener('keydown',e=>{if(!$('page-revisao')?.classList.contain
 document.addEventListener('DOMContentLoaded',()=>{init();$('sf100CourseSearch')?.addEventListener('input',filterCourses)},{once:true});
 if(document.readyState!=='loading')init();
 })();
-<\/script><style id="sf-navigation-mobile-final">
+</script>
+<style id="sf-navigation-mobile-final">
 @media(max-width:900px){
   .side{height:auto!important;min-height:0!important;padding:7px 6px calc(7px + env(safe-area-inset-bottom))!important}
   .nav{display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;grid-auto-flow:row!important;align-items:stretch!important;justify-content:stretch!important;gap:3px!important;width:100%!important}
@@ -2967,6 +3000,110 @@ document.addEventListener('click',function(e){
  backdrop.addEventListener('click',close);
  document.querySelectorAll('.side .nav button[data-page]').forEach(button=>button.addEventListener('click',close));
  document.addEventListener('keydown',event=>{if(event.key==='Escape')close();});
+})();
+</script>
+<script id="sf-250-evolution">
+(()=>{'use strict';
+if(window.__sf250Installed)return;window.__sf250Installed=true;
+const $=id=>document.getElementById(id);
+const safe=(v)=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const readGoal=()=>{try{return Math.max(15,Math.min(600,Number(localStorage.getItem('sf250-daily-goal'))||60))}catch(e){return 60}};
+const getSessions=()=>{try{return typeof data!=='undefined'&&Array.isArray(data.sessions)?data.sessions:[]}catch(e){return []}};
+const todayKey=()=>{try{return typeof localDayKey==='function'?localDayKey():new Date().toISOString().slice(0,10)}catch(e){return new Date().toISOString().slice(0,10)}};
+function ensureGoal(){
+ const home=$('page-inicio');if(!home||$('sf250Goal'))return;
+ const box=document.createElement('section');box.id='sf250Goal';box.className='sf250-goal';
+ box.innerHTML='<div><h3>🎯 Meta diária de foco</h3><p id="sf250GoalText">Acompanhe seu tempo de concentração de hoje.</p><progress id="sf250GoalBar" max="60" value="0"></progress></div><div class="sf250-goal-controls"><label for="sf250GoalInput">Meta (min)</label><input id="sf250GoalInput" type="number" min="15" max="600" step="5"><strong id="sf250GoalPct">0%</strong></div>';
+ const anchor=$('sf100Home')||home.querySelector('.stats')||home.firstElementChild;if(anchor)anchor.insertAdjacentElement('afterend',box);
+ $('sf250GoalInput').value=readGoal();$('sf250GoalInput').addEventListener('change',()=>{const v=Math.max(15,Math.min(600,Number($('sf250GoalInput').value)||60));$('sf250GoalInput').value=v;try{localStorage.setItem('sf250-daily-goal',String(v))}catch(e){}renderGoal()});
+ renderGoal();
+}
+function renderGoal(){
+ const bar=$('sf250GoalBar');if(!bar)return;
+ const today=todayKey(),minutes=getSessions().filter(x=>x.date===today).reduce((n,x)=>n+(Number(x.minutes)||0),0),goal=readGoal(),pct=Math.min(100,Math.round(minutes/goal*100));
+ bar.max=goal;bar.value=Math.min(goal,minutes);
+ $('sf250GoalText').textContent=minutes+' de '+goal+' minutos registrados hoje'+(pct>=100?' — meta alcançada!':'');
+ $('sf250GoalPct').textContent=pct+'%';
+}
+function ensureTaskSearch(){
+ const list=$('allTasks');if(!list||$('sf250TaskSearch'))return;
+ const input=document.createElement('input');input.id='sf250TaskSearch';input.type='search';input.className='sf250-task-search';input.placeholder='Buscar tarefa por nome, matéria ou prazo…';input.setAttribute('aria-label','Buscar tarefas');
+ const toolbar=$('sf100TaskToolbar');(toolbar||list).insertAdjacentElement('beforebegin',input);
+ input.addEventListener('input',filterTasks);
+}
+function filterTasks(){
+ const q=($('sf250TaskSearch')?.value||'').trim().toLocaleLowerCase('pt-BR'),rows=[...($('allTasks')?.querySelectorAll('.task')||[])];let count=0;
+ rows.forEach(row=>{const match=!q||row.innerText.toLocaleLowerCase('pt-BR').includes(q);row.dataset.sf250SearchMatch=match?'1':'0';row.style.display=match?'':'none';if(match)count++});
+ let status=$('sf250TaskSearchCount');if(!status&&$('sf250TaskSearch')){status=document.createElement('div');status.id='sf250TaskSearchCount';status.className='sf250-strip';$('sf250TaskSearch').insertAdjacentElement('afterend',status)}
+ if(status)status.textContent=q?count+' tarefa(s) encontradas':'Mostrando todas as tarefas';
+}
+function decorateTasks(){
+ const rows=[...($('allTasks')?.querySelectorAll('.task')||[])],today=todayKey();
+ rows.forEach(row=>{
+  row.classList.remove('sf250-task-overdue','sf250-task-today');
+  row.querySelector('.sf250-task-due')?.remove();
+  const text=row.innerText||'',date=(text.match(/\b(\d{4}-\d{2}-\d{2})\b/)||[])[1];
+  if(!date)return;
+  const done=!!row.querySelector('.task-check:checked')||/conclu[ií]d[ao]/i.test(text);
+  const tag=document.createElement('span');tag.className='sf250-task-due';
+  if(date<today&&!done){row.classList.add('sf250-task-overdue');tag.textContent='Atrasada'}
+  else if(date===today&&!done){row.classList.add('sf250-task-today');tag.textContent='Vence hoje'}
+  else tag.textContent='Prazo: '+date.split('-').reverse().join('/');
+  const target=row.querySelector('.task-info')||row.querySelector('.task-content')||row;
+  target.appendChild(tag);
+ });
+}
+function ensureNetwork(){
+ if($('sf250Network'))return;
+ const el=document.createElement('div');el.id='sf250Network';el.className='sf250-network';el.setAttribute('role','status');el.setAttribute('aria-live','polite');document.body.appendChild(el);
+ const update=()=>{el.textContent=navigator.onLine?'Conexão restaurada':'Você está offline — seus dados locais continuam disponíveis';el.classList.toggle('show',!navigator.onLine)};
+ window.addEventListener('offline',update);window.addEventListener('online',update);if(!navigator.onLine)update();
+}
+function ensureTop(){
+ if($('sf250Top'))return;const b=document.createElement('button');b.id='sf250Top';b.className='sf250-top';b.type='button';b.textContent='↑';b.setAttribute('aria-label','Voltar ao topo');document.body.appendChild(b);b.onclick=()=>window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+ const update=()=>b.classList.toggle('visible',window.scrollY>500);window.addEventListener('scroll',update,{passive:true});update();
+}
+function enhanceFocus(){
+ const context=$('sf60FocusIntent');if(context&&!context.dataset.sf250Enhanced){context.dataset.sf250Enhanced='1';context.setAttribute('list','sf250IntentOptions');const dl=document.createElement('datalist');dl.id='sf250IntentOptions';dl.innerHTML='<option value="Concluir uma tarefa"><option value="Estudar um conteúdo novo"><option value="Resolver exercícios"><option value="Revisar meus erros"><option value="Preparar uma avaliação">';document.body.appendChild(dl);context.setAttribute('aria-label','Objetivo desta sessão de foco')}
+ const preset=document.querySelector('.sf51-presets');if(preset&&!$('sf250FocusTip')){const p=document.createElement('p');p.id='sf250FocusTip';p.className='sf250-strip';p.innerHTML='<strong>Dica:</strong> escolha um ciclo compatível com sua energia. Você pode pausar ou reiniciar quando precisar.';preset.insertAdjacentElement('afterend',p)}
+}
+function enhanceForms(){
+ const task=$('taskForm');if(task&&!task.dataset.sf250Guard){task.dataset.sf250Guard='1';$('taskName')?.setAttribute('maxlength','100');$('taskName')?.setAttribute('required','required');$('taskSubject')?.setAttribute('maxlength','60');task.addEventListener('submit',e=>{const name=$('taskName')?.value.trim();if(!name){e.preventDefault();$('taskName')?.focus();return}const submit=task.querySelector('[type="submit"]');if(submit){submit.disabled=true;setTimeout(()=>submit.disabled=false,700)}})}
+ const card=$('cardForm');if(card&&!card.dataset.sf250Guard){card.dataset.sf250Guard='1';['cardQuestion','cardAnswer'].forEach(id=>$(id)?.setAttribute('maxlength','500'));card.querySelectorAll('input,textarea').forEach(x=>x.setAttribute('required','required'))}
+}
+function enhanceNav(){
+ const nav=document.querySelector('.side .nav');if(!nav)return;
+ nav.querySelectorAll('button[data-page]').forEach(b=>{const active=$('page-'+b.dataset.page)?.classList.contains('active');if(active)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});
+}
+function keyboard(){
+ if(window.__sf250Keys)return;window.__sf250Keys=true;
+ document.addEventListener('keydown',e=>{
+  const tag=document.activeElement?.tagName,typing=['INPUT','TEXTAREA','SELECT'].includes(tag)||document.activeElement?.isContentEditable;
+  if(e.key==='Escape'){document.body.classList.remove('sf-sidebar-open');const d=document.querySelector('.nav-more');if(d)d.open=false;return}
+  if(typing||e.ctrlKey||e.metaKey||e.altKey)return;
+  if(e.key==='/'){const active=$('page-tarefas')?.classList.contains('active');if(active&&$('sf250TaskSearch')){e.preventDefault();$('sf250TaskSearch').focus()}}
+  if(e.key.toLowerCase()==='g'){window.__sf250GPressed=Date.now();setTimeout(()=>{window.__sf250GPressed=0},900)}
+  if(/^[1-8]$/.test(e.key)&&window.__sf250GPressed&&Date.now()-window.__sf250GPressed<900){const pages=['inicio','aprender','tarefas','foco','revisao','materias','ferramentas','progresso'];if(typeof navigate==='function')navigate(pages[Number(e.key)-1]);window.__sf250GPressed=0}
+ });
+}
+function announceNavigation(){
+ const nav=document.querySelector('.side .nav');if(!nav||nav.dataset.sf250Observer)return;nav.dataset.sf250Observer='1';
+ const observer=new MutationObserver(enhanceNav);document.querySelectorAll('.page').forEach(p=>observer.observe(p,{attributes:true,attributeFilter:['class']}));
+}
+function addShortcutsHint(){
+ const focus=$('page-foco');if(focus&&!$('sf250Shortcuts')){const p=document.createElement('p');p.id='sf250Shortcuts';p.className='sf250-shortcuts';p.innerHTML='Atalhos: <kbd>g</kbd> + <kbd>1–8</kbd> navega entre áreas · <kbd>/</kbd> busca tarefas · <kbd>Esc</kbd> fecha menus.';const anchor=focus.querySelector('.sf-block-label');if(anchor)anchor.insertAdjacentElement('afterend',p)}
+}
+function wrapRender(name,fn){
+ const base=window[name];if(typeof base!=='function'||base.__sf250)return;
+ const wrapped=function(){const result=base.apply(this,arguments);try{fn()}catch(e){}return result};wrapped.__sf250=true;window[name]=wrapped;
+}
+function init(){
+ ensureGoal();ensureTaskSearch();filterTasks();decorateTasks();ensureNetwork();ensureTop();enhanceFocus();enhanceForms();enhanceNav();announceNavigation();addShortcutsHint();keyboard();
+}
+wrapRender('renderTasks',()=>{filterTasks();decorateTasks()});
+wrapRender('render',()=>{renderGoal();filterTasks();decorateTasks();enhanceNav()});
+document.addEventListener('DOMContentLoaded',init,{once:true});
+if(document.readyState!=='loading')init();
 })();
 </script>
 </body></html>
