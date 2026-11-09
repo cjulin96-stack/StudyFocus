@@ -1416,10 +1416,36 @@ button:disabled{opacity:.48;cursor:not-allowed;transform:none!important}
  .nav-more-menu button .ico{width:21px}
 }
 @media(max-width:390px){.nav button{font-size:9px}.nav button .ico{font-size:17px}}
+</style><style id="sf-sidebar-mobile-drawer">
+.sf-menu-trigger{display:none}
+.sf-sidebar-backdrop{display:none}
+@media(max-width:900px){
+ .sf-menu-trigger{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:40px;padding:8px 12px;border:1px solid var(--line);border-radius:11px;background:#1b2540;color:var(--text);font-weight:750}
+ .app{display:block!important;min-height:100vh}
+ .side{position:fixed!important;z-index:1002!important;top:0!important;bottom:0!important;left:0!important;right:auto!important;width:min(300px,84vw)!important;height:100dvh!important;min-height:100dvh!important;overflow-y:auto!important;padding:24px 17px!important;border-right:1px solid var(--line)!important;border-top:0!important;background:#10182cf7!important;transform:translateX(-105%);transition:transform .25s ease!important;box-shadow:18px 0 45px #0008}
+ body.sf-sidebar-open .side{transform:translateX(0)!important}
+ .brand{display:flex!important;padding:0 9px 26px!important}
+ .side-note{display:block!important;position:static!important;margin-top:25px}
+ .nav{display:grid!important;grid-template-columns:1fr!important;gap:6px!important}
+ .nav-primary{display:grid!important;gap:6px!important}
+ .nav-group-label{display:block!important}
+ .nav button{display:flex!important;flex-direction:row!important;justify-content:flex-start!important;align-items:center!important;gap:12px!important;width:100%!important;min-width:0!important;min-height:45px!important;padding:11px 13px!important;font-size:13px!important;text-align:left!important}
+ .nav .ico{width:21px!important;font-size:17px!important}
+ .nav-more{display:block!important;position:static!important;width:auto!important;margin-top:7px!important;padding-top:9px!important;border-top:1px solid #ffffff18!important}
+ .nav-more>summary{height:auto!important;min-height:44px!important;display:flex!important;flex-direction:row!important;justify-content:flex-start!important;gap:12px!important;padding:11px 13px!important;font-size:13px!important}
+ .nav-more>summary .ico{width:21px!important;font-size:17px!important}
+ .nav-more-menu{position:static!important;width:auto!important;max-width:none!important;padding:4px 0 0 12px!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
+ .nav-more-menu .nav-group-label{padding:8px 12px 3px!important}
+ .nav-more-menu button{min-height:43px!important;padding:10px 13px!important;font-size:13px!important}
+ .sf-sidebar-backdrop{display:block!important;position:fixed;inset:0;background:#030712a8;z-index:1001;opacity:0;pointer-events:none;transition:opacity .25s}
+ body.sf-sidebar-open .sf-sidebar-backdrop{opacity:1;pointer-events:auto}
+ .main{padding:18px 14px 35px!important}
+}
+@media(prefers-reduced-motion:reduce){.side,.sf-sidebar-backdrop{transition:none!important}}
 </style></head>
 <body>
 <div class="app">
-<aside class="side">
+<div class="sf-sidebar-backdrop" id="sfSidebarBackdrop"></div><aside class="side">
 <div class="brand"><div class="logo">✦</div><div><strong>StudyFocus</strong><small>Seu tempo. Seu foco.</small></div></div>
 <nav class="nav sf-organized-nav" aria-label="Navegação principal">
 <div class="nav-group-label sf-primary-label">PRINCIPAL</div>
@@ -1444,7 +1470,7 @@ button:disabled{opacity:.48;cursor:not-allowed;transform:none!important}
 <div class="side-note"><b>✦ Uma sessão de cada vez</b>Pequenos passos todos os dias constroem grandes resultados.</div>
 </aside>
 <main class="main">
-<header class="top"><div><div class="eyebrow">PAINEL DE ESTUDOS</div><h1 id="pageTitle">Bom estudo! 👋</h1><div class="date" id="today"></div></div><div class="top-actions"><button class="sound-toggle" id="soundToggle" onclick="toggleStudySound()" aria-label="Ativar ou desativar efeitos sonoros">🔊 Sons ligados</button><div class="avatar" aria-label="Perfil local">SF</div></div></header>
+<header class="top"><div><div class="eyebrow">PAINEL DE ESTUDOS</div><h1 id="pageTitle">Bom estudo! 👋</h1><div class="date" id="today"></div></div><button class="sf-menu-trigger" id="sfMenuTrigger" type="button" aria-label="Abrir menu lateral" aria-expanded="false">☰ <span>Menu</span></button><div class="top-actions"><button class="sound-toggle" id="soundToggle" onclick="toggleStudySound()" aria-label="Ativar ou desativar efeitos sonoros">🔊 Sons ligados</button><div class="avatar" aria-label="Perfil local">SF</div></div></header>
 <section class="page active" id="page-inicio">
 <div class="sf-page-hero sf-home-hero"><div class="sf-page-hero-copy"><span class="sf-page-kicker">✦ STUDYFOCUS · CENTRAL DO ALUNO</span><span class="sf-page-pill">SEU PAINEL</span><h2>Seu progresso começa com um passo.</h2><p>Um espaço para organizar sua rotina, acompanhar suas conquistas e manter o ritmo dos estudos.</p><div class="sf-hero-chips"><span>◷ Rotina inteligente</span><span>✧ Metas pessoais</span><span>↗ Evolução contínua</span></div></div><div class="sf-hero-art" aria-hidden="true"><span>✦</span><i>✧</i><b>STUDY<br>FOCUS</b></div></div><div class="sf-block-label"><span>01</span><div><b>Visão geral</b><small>Seus indicadores e próximos passos.</small></div></div>
 
@@ -2911,7 +2937,18 @@ document.addEventListener('click',function(e){
  if(menu&&menu.open&&!menu.contains(e.target))menu.open=false;
 });
 </script>
-</body></html>";
+<script id="sf-sidebar-mobile-controller">
+(function(){
+ const trigger=document.getElementById('sfMenuTrigger');
+ const backdrop=document.getElementById('sfSidebarBackdrop');
+ const close=()=>{document.body.classList.remove('sf-sidebar-open');if(trigger)trigger.setAttribute('aria-expanded','false');};
+ if(!trigger||!backdrop)return;
+ trigger.addEventListener('click',()=>{const open=document.body.classList.toggle('sf-sidebar-open');trigger.setAttribute('aria-expanded',String(open));});
+ backdrop.addEventListener('click',close);
+ document.querySelectorAll('.side .nav button[data-page]').forEach(button=>button.addEventListener('click',close));
+ document.addEventListener('keydown',event=>{if(event.key==='Escape')close();});
+})();
+</script></body></html>";
   iframe.addEventListener('load',()=>{load.textContent='Laboratório iniciado';},{once:true});
   frame.appendChild(iframe);frame.hidden=false;panel.querySelector('#sf32-atlas-placeholder').hidden=true;
  });
