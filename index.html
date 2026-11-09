@@ -1388,24 +1388,58 @@ button:disabled{opacity:.48;cursor:not-allowed;transform:none!important}
 @media(max-width:760px){.sf100-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.sf100-grid .sf100-metric:last-child:nth-child(odd){grid-column:span 2}.sf100-focus-state{grid-template-columns:1fr}.sf100-toolbar{align-items:stretch}.sf100-toolbar>*{flex:1 1 auto}}
 @media(max-width:390px){.sf100-panel{padding:12px}.sf100-metric b{font-size:16px}.sf100-metric small{font-size:8px}}
 @media(prefers-reduced-motion:reduce){.sf100-panel *{scroll-behavior:auto!important;transition:none!important}}
+</style><style id="sf-navigation-organization">
+.nav-primary{display:grid;gap:7px}
+.nav-group-label{padding:8px 12px 3px;color:#8493b5;font-size:9px;font-weight:900;letter-spacing:1.35px}
+.nav-more{margin-top:7px;border-top:1px solid #ffffff12;padding-top:9px}
+.nav-more>summary{list-style:none;display:flex;align-items:center;gap:12px;padding:11px 13px;border-radius:12px;color:#aebbd4;font-size:13px;font-weight:750;cursor:pointer;user-select:none}
+.nav-more>summary::-webkit-details-marker{display:none}
+.nav-more>summary:hover,.nav-more[open]>summary{background:#8e80ff18;color:#f2f4ff}
+.nav-more>summary .ico{width:21px;text-align:center;font-size:17px}
+.nav-chevron{margin-left:auto;transition:transform .2s}
+.nav-more:not([open]) .nav-chevron{transform:rotate(-90deg)}
+.nav-more-menu{display:grid;gap:5px;padding-top:5px}
+.nav-more-menu button{width:100%}
+.nav-more-menu .nav-group-label{padding-top:10px}
+@media(max-width:900px){
+ .nav{align-items:stretch;gap:3px}
+ .nav-primary{display:contents}
+ .sf-primary-label,.nav-more-menu .nav-group-label{display:none}
+ .nav button{min-width:0;min-height:52px;flex:1}
+ .nav button .ico{font-size:18px}
+ .nav-more{position:relative;flex:1;margin:0;padding:0;border:0;min-width:0}
+ .nav-more>summary{height:52px;min-width:0;justify-content:center;flex-direction:column;gap:1px;padding:5px 2px;font-size:10px}
+ .nav-more>summary .ico{width:auto;font-size:18px}
+ .nav-chevron{display:none}
+ .nav-more-menu{position:absolute;right:0;bottom:calc(100% + 10px);width:min(220px,75vw);padding:9px;background:#141d35;border:1px solid #53648a;border-radius:15px;box-shadow:0 16px 40px #020617aa;z-index:20;gap:4px}
+ .nav-more-menu button{display:flex;flex-direction:row;justify-content:flex-start;text-align:left;padding:11px 13px;min-height:43px;font-size:12px}
+ .nav-more-menu button .ico{width:21px}
+}
+@media(max-width:390px){.nav button{font-size:9px}.nav button .ico{font-size:17px}}
 </style></head>
 <body>
 <div class="app">
 <aside class="side">
 <div class="brand"><div class="logo">✦</div><div><strong>StudyFocus</strong><small>Seu tempo. Seu foco.</small></div></div>
-<nav class="nav" aria-label="Navegação principal">
-<div class="nav-group-label">VISÃO GERAL</div>
+<nav class="nav sf-organized-nav" aria-label="Navegação principal">
+<div class="nav-group-label sf-primary-label">PRINCIPAL</div>
+<div class="nav-primary">
 <button class="active" data-page="inicio"><span class="ico">⌂</span>Início</button>
-<div class="nav-group-label">ORGANIZAR</div>
-<button data-page="tarefas"><span class="ico">▤</span>Tarefas</button>
-<button data-page="materias"><span class="ico">▦</span>Matérias</button>
-<div class="nav-group-label">APRENDER</div>
 <button data-page="aprender"><span class="ico">✎</span>Aprender</button>
-<button data-page="revisao"><span class="ico">✧</span>Revisão</button>
-<button data-page="ferramentas"><span class="ico">🧰</span>Ferramentas</button>
-<div class="nav-group-label">ACOMPANHAR</div>
+<button data-page="tarefas"><span class="ico">▤</span>Tarefas</button>
 <button data-page="foco"><span class="ico">◷</span>Foco</button>
+<button data-page="revisao"><span class="ico">✧</span>Revisão</button>
+</div>
+<details class="nav-more" open>
+<summary><span class="ico">＋</span><span>Mais opções</span><span class="nav-chevron">⌄</span></summary>
+<div class="nav-more-menu">
+<div class="nav-group-label">ORGANIZAÇÃO</div>
+<button data-page="materias"><span class="ico">▦</span>Matérias</button>
+<div class="nav-group-label">RECURSOS</div>
+<button data-page="ferramentas"><span class="ico">🧰</span>Ferramentas</button>
 <button data-page="progresso"><span class="ico">↗</span>Progresso</button>
+</div>
+</details>
 </nav>
 <div class="side-note"><b>✦ Uma sessão de cada vez</b>Pequenos passos todos os dias constroem grandes resultados.</div>
 </aside>
@@ -1626,7 +1660,7 @@ function showCelebration(title,subtitle,reward){
  clearTimeout(showCelebration.timer);showCelebration.timer=setTimeout(()=>{layer.classList.remove('sf-celebration-show');setTimeout(()=>layer.remove(),350)},2600);
 }
 function navigate(page){const target='page-'+page;document.querySelectorAll('main .page').forEach(x=>{const active=x.id===target;x.classList.toggle('active',active);x.style.display=active?'block':'none'});document.querySelectorAll('.nav button').forEach(x=>x.classList.toggle('active',x.dataset.page===page));const titles={inicio:'Bom estudo! 👋',tarefas:'Minhas tarefas',materias:'Minhas matérias',aprender:'Sala de aprendizagem',foco:'Hora de focar',revisao:'Central de revisão',ferramentas:'Ferramentas de estudo',progresso:'Minha evolução'};document.getElementById('pageTitle').textContent=titles[page]||'StudyFocus';if(page==='foco')renderTimer();window.scrollTo({top:0,behavior:'smooth'})}
-document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>navigate(b.dataset.page)));
+document.querySelectorAll('.nav button[data-page]').forEach(b=>b.addEventListener('click',()=>{navigate(b.dataset.page);const more=document.querySelector('.nav-more');if(more)more.open=false;}));
 document.getElementById('today').textContent=new Intl.DateTimeFormat('pt-BR',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(new Date());
 document.getElementById('subjectForm').addEventListener('submit',e=>{e.preventDefault();const name=document.getElementById('subjectName').value.trim();if(!name)return;if(data.subjects.some(x=>x.toLowerCase()===name.toLowerCase())){toast('Essa matéria já existe.');return}data.subjects.push(name);data.subjects.sort((a,b)=>a.localeCompare(b,'pt-BR'));e.target.reset();save();toast('Matéria adicionada!')});function subjectIcon(name){const n=name.toLowerCase();if(/matem|álgebra|geometr/.test(n))return '∑';if(/portugu|literat|redação|língua/.test(n))return 'Aa';if(/biolog|ciênc|anatom/.test(n))return '⌬';if(/quím/.test(n))return '⚗';if(/físic/.test(n))return '⚛';if(/histór/.test(n))return '◷';if(/geograf/.test(n))return '◎';if(/inglês|idioma|espanhol/.test(n))return '文';return '✦'}function renderSubjects(){const list=document.getElementById('subjectList');if(!list)return;document.getElementById('subjectCount').textContent=data.subjects.length+' '+(data.subjects.length===1?'matéria':'matérias');document.getElementById('subjectOptions').innerHTML=data.subjects.map(x=>'<option value="'+esc(x)+'"></option>').join('');list.className='sf-subject-grid';const search=(document.getElementById('sf60SubjectSearch')?.value||'').trim().toLowerCase(),visible=data.subjects.map((x,i)=>({x,i})).filter(o=>o.x.toLowerCase().includes(search)),summary=document.getElementById('sf60SubjectSummary');if(summary)summary.innerHTML='<span><b>'+data.subjects.length+'</b> disciplinas</span><span><b>'+data.tasks.length+'</b> atividades</span><span><b>'+data.tasks.filter(t=>t.done).length+'</b> concluídas</span>';list.innerHTML=visible.map(({x,i})=>{const tasks=data.tasks.filter(t=>(t.subject||'').trim().toLowerCase()===x.trim().toLowerCase()),done=tasks.filter(t=>t.done).length,pct=tasks.length?Math.round(done/tasks.length*100):0;return '<article class="sf-subject-card"><div class="sf-subject-card-top"><span class="sf-subject-symbol">'+subjectIcon(x)+'</span><span class="sf-subject-index">DISCIPLINA '+String(i+1).padStart(2,'0')+'</span></div><h3>'+esc(x)+'</h3><p>'+(tasks.length?tasks.length+' '+(tasks.length===1?'atividade registrada':'atividades registradas'):'Sua jornada nesta matéria começa aqui.')+'</p><div class="sf-subject-progress"><div><span>Atividades concluídas</span><b>'+done+'/'+tasks.length+'</b></div><div class="sf-subject-track"><i style="width:'+pct+'%"></i></div></div><div class="sf-subject-card-actions"><button class="btn" type="button" onclick="openSubject('+i+')">Explorar matéria <span>→</span></button><button class="btn ghost sf-subject-remove" type="button" aria-label="Remover '+esc(x)+'" onclick="removeSubject('+i+')">×</button></div></article>'}).join('')||'<div class="sf-subject-empty"><span>✧</span><b>Sua biblioteca está pronta para começar</b><small>Adicione uma disciplina acima para criar seu espaço de estudos.</small></div>'}function openSubject(i){const name=data.subjects[i];if(!name)return;const tasks=data.tasks.filter(t=>(t.subject||'').trim().toLowerCase()===name.trim().toLowerCase()),done=tasks.filter(t=>t.done).length,pending=tasks.filter(t=>!t.done),pct=tasks.length?Math.round(done/tasks.length*100):0;const modal=document.getElementById('subjectDetail');document.getElementById('subjectDetailContent').innerHTML='<div class="sf-subject-detail-head"><span class="sf-subject-symbol">'+subjectIcon(name)+'</span><div><span class="sf-page-kicker">VISÃO DA DISCIPLINA</span><h2 id="subjectDetailTitle">'+esc(name)+'</h2><p>Um panorama das suas atividades nesta matéria.</p></div></div><div class="sf-subject-detail-stats"><div><b>'+tasks.length+'</b><span>Atividades</span></div><div><b>'+done+'</b><span>Concluídas</span></div><div><b>'+pending.length+'</b><span>Pendentes</span></div></div><div class="sf-subject-detail-progress"><div><b>Progresso das atividades</b><strong>'+pct+'%</strong></div><div class="sf-subject-track"><i style="width:'+pct+'%"></i></div></div><h3>Atividades da matéria</h3>'+(tasks.length?'<div class="sf-subject-detail-list">'+tasks.map(t=>'<div class="sf-subject-detail-task '+(t.done?'is-done':'')+'"><span>'+(t.done?'✓':'○')+'</span><div><b>'+esc(t.name)+'</b><small>'+(t.done?'Concluída':'Pendente')+(t.date?' · Prazo: '+new Date(t.date+'T12:00:00').toLocaleDateString('pt-BR'):'')+'</small></div></div>').join('')+'</div>':'<div class="sf-subject-empty compact"><b>Nenhuma atividade vinculada ainda</b><small>Ao criar uma tarefa, selecione exatamente esta matéria no campo Matéria.</small></div>');modal.hidden=false;document.body.classList.add('sf-modal-open')}function closeSubject(){const modal=document.getElementById('subjectDetail');if(modal)modal.hidden=true;document.body.classList.remove('sf-modal-open')}function removeSubject(i){if(confirm('Remover esta matéria da lista? As tarefas já cadastradas serão mantidas.')){data.subjects.splice(i,1);save()}}
 document.getElementById('taskForm').addEventListener('submit',e=>{e.preventDefault();data.tasks.push({id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),name:taskName.value.trim(),subject:taskSubject.value.trim(),date:taskDate.value,priority:taskPriority.value,done:false});e.target.reset();save();toast('Tarefa adicionada!')});
