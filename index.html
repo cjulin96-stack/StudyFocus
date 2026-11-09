@@ -1057,6 +1057,77 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 }
 </style>
 
+
+<style id="sf-subjects-43">
+#page-materias .sf-subjects-layout{display:grid;gap:18px}
+#page-materias .sf-subject-create{display:grid;grid-template-columns:64px minmax(0,1fr) minmax(230px,.9fr);align-items:center;gap:17px;padding:22px;border:1px solid #3b5278;background:linear-gradient(120deg,#1c2b49,#17243b 65%,#202044)}
+#page-materias .sf-subject-create-icon{width:58px;height:58px;display:grid;place-items:center;border-radius:18px;background:linear-gradient(145deg,#1c8294,#514b9b);font-size:30px;color:#fff;box-shadow:0 8px 24px #1aa9bd30}
+#page-materias .sf-subject-create h3,#page-materias .sf-subject-library-head h3{margin:5px 0;font-size:20px}
+#page-materias .sf-subject-create p,#page-materias .sf-subject-library-head p{margin:5px 0;line-height:1.5}
+#page-materias .sf-subject-create form{display:flex;align-items:end;gap:10px}
+#page-materias .sf-subject-create form .field{flex:1;min-width:0}
+#page-materias .sf-subject-create .form-actions{margin:0;flex:none}
+#page-materias .sf-subject-create .form-actions .btn{white-space:nowrap}
+#page-materias .sf-subject-library-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:8px 0 0}
+#page-materias .sf-subject-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+#page-materias .sf-subject-card{min-width:0;padding:19px;border:1px solid #3a4f73;border-radius:19px;background:linear-gradient(145deg,#1c2b49,#141f35);box-shadow:0 12px 30px #050b1b35;transition:transform .2s,border-color .2s,box-shadow .2s}
+#page-materias .sf-subject-card:hover{transform:translateY(-3px);border-color:#5b9db6;box-shadow:0 16px 34px #050b1b55}
+#page-materias .sf-subject-card-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+#page-materias .sf-subject-symbol{width:48px;height:48px;flex:none;display:grid;place-items:center;border:1px solid #5d83a566;border-radius:15px;background:linear-gradient(145deg,#1a7387,#55478e);color:#fff;font-size:25px;font-weight:800;box-shadow:0 7px 20px #111a3540}
+#page-materias .sf-subject-index{font-size:9px;letter-spacing:1.2px;color:#91a7c8;font-weight:800}
+#page-materias .sf-subject-card h3{font-size:19px;margin:15px 0 5px;overflow-wrap:anywhere}
+#page-materias .sf-subject-card>p{font-size:12px;color:#9eafc9;min-height:19px;margin:0 0 17px}
+#page-materias .sf-subject-progress>div:first-child,#page-materias .sf-subject-detail-progress>div:first-child{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:11px;color:#aebed5;margin-bottom:8px}
+#page-materias .sf-subject-progress b{color:#e4efff;font-variant-numeric:tabular-nums}
+#page-materias .sf-subject-track{height:7px;overflow:hidden;border-radius:20px;background:#0b1428;border:1px solid #344867}
+#page-materias .sf-subject-track i{display:block;height:100%;border-radius:20px;background:linear-gradient(90deg,#28c4cf,#9a83ff);box-shadow:0 0 12px #40c8dc66;transition:width .3s}
+#page-materias .sf-subject-card-actions{display:flex;align-items:center;gap:8px;margin-top:17px}
+#page-materias .sf-subject-card-actions .btn:first-child{flex:1;display:flex;justify-content:space-between;gap:8px}
+#page-materias .sf-subject-remove{min-width:42px;padding:8px!important;font-size:18px}
+#page-materias .sf-subject-empty{grid-column:1/-1;display:grid;justify-items:center;gap:8px;text-align:center;padding:30px 18px;border:1px dashed #465d80;border-radius:18px;background:#101a2c;color:#dce8fb}
+#page-materias .sf-subject-empty>span{font-size:27px;color:#9d91ff}
+#page-materias .sf-subject-empty small{color:#9eafc9;line-height:1.6}
+#page-materias .sf-subject-modal[hidden]{display:none}
+#page-materias .sf-subject-modal{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;padding:16px;background:#050a16cc;backdrop-filter:blur(9px)}
+#page-materias .sf-subject-modal-panel{position:relative;width:min(100%,650px);max-height:min(86vh,780px);overflow:auto;padding:25px;border:1px solid #536b91;border-radius:22px;background:linear-gradient(145deg,#1b2947,#101a2e);box-shadow:0 25px 80px #0009}
+#page-materias .sf-subject-modal-close{position:absolute;right:14px;top:12px;width:38px;height:38px;border:1px solid #506486;border-radius:12px;background:#ffffff0a;color:#fff;font-size:25px;cursor:pointer}
+#page-materias .sf-subject-detail-head{display:flex;align-items:center;gap:15px;padding-right:40px}
+#page-materias .sf-subject-detail-head h2{margin:4px 0;font-size:25px;overflow-wrap:anywhere}
+#page-materias .sf-subject-detail-head p{margin:3px 0;color:#aabbd4;font-size:12px}
+#page-materias .sf-subject-detail-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:22px 0}
+#page-materias .sf-subject-detail-stats>div{display:grid;gap:4px;padding:14px;border:1px solid #3c5277;border-radius:14px;background:#ffffff07}
+#page-materias .sf-subject-detail-stats b{font-size:24px;font-variant-numeric:tabular-nums}
+#page-materias .sf-subject-detail-stats span{font-size:11px;color:#aabbd4}
+#page-materias .sf-subject-detail-progress{padding:15px;border:1px solid #3c5277;border-radius:14px;background:#ffffff06;margin-bottom:22px}
+#page-materias .sf-subject-detail-progress strong{font-size:16px;color:#8fe5ed}
+#page-materias .sf-subject-modal-panel h3{font-size:16px;margin:0 0 10px}
+#page-materias .sf-subject-detail-list{display:grid;gap:8px}
+#page-materias .sf-subject-detail-task{display:flex;gap:11px;align-items:center;padding:12px;border:1px solid #354968;border-radius:12px;background:#ffffff05}
+#page-materias .sf-subject-detail-task>span{font-size:18px;color:#8fdde5}
+#page-materias .sf-subject-detail-task>div{display:grid;gap:4px;min-width:0}
+#page-materias .sf-subject-detail-task b{font-size:13px;overflow-wrap:anywhere}
+#page-materias .sf-subject-detail-task small{font-size:11px;color:#9eafc9}
+#page-materias .sf-subject-detail-task.is-done b{text-decoration:line-through;color:#9eafc9}
+#page-materias .sf-subject-empty.compact{padding:18px;margin-top:8px}
+body.sf-modal-open{overflow:hidden}
+@media(max-width:760px){
+ #page-materias .sf-subject-create{grid-template-columns:48px minmax(0,1fr);gap:12px;padding:16px}
+ #page-materias .sf-subject-create-icon{width:46px;height:46px;border-radius:14px;font-size:24px}
+ #page-materias .sf-subject-create form{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr);gap:8px}
+ #page-materias .sf-subject-create .form-actions .btn{width:100%}
+ #page-materias .sf-subject-library-head{align-items:flex-start}
+ #page-materias .sf-subject-grid{grid-template-columns:minmax(0,1fr);gap:11px}
+ #page-materias .sf-subject-card{padding:16px}
+ #page-materias .sf-subject-modal{padding:10px}
+ #page-materias .sf-subject-modal-panel{padding:19px 15px;border-radius:18px;max-height:90vh}
+ #page-materias .sf-subject-detail-head h2{font-size:21px}
+ #page-materias .sf-subject-detail-stats{gap:7px}
+ #page-materias .sf-subject-detail-stats>div{padding:11px 8px}
+ #page-materias .sf-subject-detail-stats b{font-size:21px}
+}
+@media(prefers-reduced-motion:reduce){#page-materias .sf-subject-card,#page-materias .sf-subject-track i{transition:none}}
+</style>
+
 </head>
 <body>
 <div class="app">
@@ -1112,7 +1183,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 </section>
 <datalist id="subjectOptions"></datalist><section class="page" id="page-materias">
 <div class="sf-page-hero sf-subjects-hero"><div class="sf-page-hero-copy"><span class="sf-page-kicker">✦ SUA BIBLIOTECA PESSOAL</span><span class="sf-page-pill">DISCIPLINAS</span><h2>Conhecimento organizado por matéria.</h2><p>Monte seu espaço de estudos e mantenha tarefas e revisões conectadas às disciplinas.</p><div class="sf-hero-chips"><span>📚 Suas matérias</span><span>＋ Personalização</span><span>⌁ Organização</span></div></div><div class="sf-hero-art" aria-hidden="true"><span>▤</span><i>✧</i><b>LEARN<br>MORE</b></div></div><div class="sf-block-label"><span>01</span><div><b>Monte sua biblioteca</b><small>Adicione as disciplinas que fazem parte da sua rotina.</small></div></div>
-<div class="panel"><h3>📚 Minhas matérias</h3><p class="muted">Cadastre disciplinas para organizar tarefas e cartões.</p><form id="subjectForm"><div class="field"><label for="subjectName">Nome da matéria</label><input id="subjectName" maxlength="40" placeholder="Ex.: Geografia" required></div><div class="form-actions"><button class="btn" type="submit">＋ Adicionar matéria</button></div></form></div><div class="panel"><div class="panel-head"><h3>Disciplinas cadastradas</h3><span class="tag" id="subjectCount">0 matérias</span></div><div id="subjectList" class="task-list"></div></div></section>
+<div class="sf-subjects-layout"><div class="panel sf-subject-create"><div class="sf-subject-create-icon">＋</div><div><span class="sf-page-kicker">EXPANDA SUA BIBLIOTECA</span><h3>Adicionar disciplina</h3><p class="muted">Crie uma área para organizar as atividades de cada matéria.</p></div><form id="subjectForm"><div class="field"><label for="subjectName">Nome da matéria</label><input id="subjectName" maxlength="40" placeholder="Ex.: Geografia" required></div><div class="form-actions"><button class="btn" type="submit">＋ Adicionar matéria</button></div></form></div><div class="sf-subject-library-head"><div><span class="sf-page-kicker">SEU ACERVO DE CONHECIMENTO</span><h3>Suas disciplinas</h3><p class="muted">Acompanhe atividades e abra o espaço individual de cada matéria.</p></div><span class="tag" id="subjectCount">0 matérias</span></div><div id="subjectList" class="task-list sf-subject-grid"></div></div><div class="sf-subject-modal" id="subjectDetail" hidden onclick="if(event.target===this)closeSubject()"><div class="sf-subject-modal-panel" role="dialog" aria-modal="true" aria-labelledby="subjectDetailTitle"><button class="sf-subject-modal-close" type="button" onclick="closeSubject()" aria-label="Fechar">×</button><div id="subjectDetailContent"></div></div></div></section>
 <section class="page" id="page-aprender">
 <div class="learn-hero"><div class="learn-hero-top"><span class="learn-kicker">✦ STUDYFOCUS ACADEMY</span><span class="learn-hero-pill">APRENDIZAGEM GUIADA</span></div><h2>Seu próximo nível começa aqui.</h2><p>Uma jornada de aprendizagem organizada: escolha sua etapa, explore uma trilha e avance aula por aula.</p><div class="learn-hero-foot"><span>🎓 Conteúdo por etapa escolar</span><span>🧠 Aulas + prática + revisão</span><span>📈 Evolução acompanhada</span></div></div>
 <div class="learn-section-heading"><span>01</span><div><b>Personalize seu percurso</b><small>Escolha em qual etapa você está estudando.</small></div></div>
@@ -1286,7 +1357,7 @@ function showCelebration(title,subtitle,reward){
 function navigate(page){const target='page-'+page;document.querySelectorAll('main .page').forEach(x=>{const active=x.id===target;x.classList.toggle('active',active);x.style.display=active?'block':'none'});document.querySelectorAll('.nav button').forEach(x=>x.classList.toggle('active',x.dataset.page===page));const titles={inicio:'Bom estudo! 👋',tarefas:'Minhas tarefas',materias:'Minhas matérias',aprender:'Sala de aprendizagem',foco:'Hora de focar',revisao:'Central de revisão',ferramentas:'Ferramentas de estudo',progresso:'Minha evolução'};document.getElementById('pageTitle').textContent=titles[page]||'StudyFocus';if(page==='foco')renderTimer();window.scrollTo({top:0,behavior:'smooth'})}
 document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>navigate(b.dataset.page)));
 document.getElementById('today').textContent=new Intl.DateTimeFormat('pt-BR',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(new Date());
-document.getElementById('subjectForm').addEventListener('submit',e=>{e.preventDefault();const name=document.getElementById('subjectName').value.trim();if(!name)return;if(data.subjects.some(x=>x.toLowerCase()===name.toLowerCase())){toast('Essa matéria já existe.');return}data.subjects.push(name);data.subjects.sort((a,b)=>a.localeCompare(b,'pt-BR'));e.target.reset();save();toast('Matéria adicionada!')});function renderSubjects(){const list=document.getElementById('subjectList');if(!list)return;document.getElementById('subjectCount').textContent=data.subjects.length+' matérias';document.getElementById('subjectOptions').innerHTML=data.subjects.map(x=>'<option value="'+esc(x)+'"></option>').join('');list.innerHTML=data.subjects.map((x,i)=>'<div class="task"><div class="task-info"><div class="task-name">'+esc(x)+'</div></div><button class="btn ghost" onclick="removeSubject('+i+')">×</button></div>').join('')||'<div class="empty">Adicione sua primeira matéria.</div>'}function removeSubject(i){if(confirm('Remover esta matéria da lista?')){data.subjects.splice(i,1);save()}}
+document.getElementById('subjectForm').addEventListener('submit',e=>{e.preventDefault();const name=document.getElementById('subjectName').value.trim();if(!name)return;if(data.subjects.some(x=>x.toLowerCase()===name.toLowerCase())){toast('Essa matéria já existe.');return}data.subjects.push(name);data.subjects.sort((a,b)=>a.localeCompare(b,'pt-BR'));e.target.reset();save();toast('Matéria adicionada!')});function subjectIcon(name){const n=name.toLowerCase();if(/matem|álgebra|geometr/.test(n))return '∑';if(/portugu|literat|redação|língua/.test(n))return 'Aa';if(/biolog|ciênc|anatom/.test(n))return '⌬';if(/quím/.test(n))return '⚗';if(/físic/.test(n))return '⚛';if(/histór/.test(n))return '◷';if(/geograf/.test(n))return '◎';if(/inglês|idioma|espanhol/.test(n))return '文';return '✦'}function renderSubjects(){const list=document.getElementById('subjectList');if(!list)return;document.getElementById('subjectCount').textContent=data.subjects.length+' '+(data.subjects.length===1?'matéria':'matérias');document.getElementById('subjectOptions').innerHTML=data.subjects.map(x=>'<option value="'+esc(x)+'"></option>').join('');list.className='sf-subject-grid';list.innerHTML=data.subjects.map((x,i)=>{const tasks=data.tasks.filter(t=>(t.subject||'').trim().toLowerCase()===x.trim().toLowerCase()),done=tasks.filter(t=>t.done).length,pct=tasks.length?Math.round(done/tasks.length*100):0;return '<article class="sf-subject-card"><div class="sf-subject-card-top"><span class="sf-subject-symbol">'+subjectIcon(x)+'</span><span class="sf-subject-index">DISCIPLINA '+String(i+1).padStart(2,'0')+'</span></div><h3>'+esc(x)+'</h3><p>'+(tasks.length?tasks.length+' '+(tasks.length===1?'atividade registrada':'atividades registradas'):'Sua jornada nesta matéria começa aqui.')+'</p><div class="sf-subject-progress"><div><span>Atividades concluídas</span><b>'+done+'/'+tasks.length+'</b></div><div class="sf-subject-track"><i style="width:'+pct+'%"></i></div></div><div class="sf-subject-card-actions"><button class="btn" type="button" onclick="openSubject('+i+')">Explorar matéria <span>→</span></button><button class="btn ghost sf-subject-remove" type="button" aria-label="Remover '+esc(x)+'" onclick="removeSubject('+i+')">×</button></div></article>'}).join('')||'<div class="sf-subject-empty"><span>✧</span><b>Sua biblioteca está pronta para começar</b><small>Adicione uma disciplina acima para criar seu espaço de estudos.</small></div>'}function openSubject(i){const name=data.subjects[i];if(!name)return;const tasks=data.tasks.filter(t=>(t.subject||'').trim().toLowerCase()===name.trim().toLowerCase()),done=tasks.filter(t=>t.done).length,pending=tasks.filter(t=>!t.done),pct=tasks.length?Math.round(done/tasks.length*100):0;const modal=document.getElementById('subjectDetail');document.getElementById('subjectDetailContent').innerHTML='<div class="sf-subject-detail-head"><span class="sf-subject-symbol">'+subjectIcon(name)+'</span><div><span class="sf-page-kicker">VISÃO DA DISCIPLINA</span><h2>'+esc(name)+'</h2><p>Um panorama das suas atividades nesta matéria.</p></div></div><div class="sf-subject-detail-stats"><div><b>'+tasks.length+'</b><span>Atividades</span></div><div><b>'+done+'</b><span>Concluídas</span></div><div><b>'+pending.length+'</b><span>Pendentes</span></div></div><div class="sf-subject-detail-progress"><div><b>Progresso das atividades</b><strong>'+pct+'%</strong></div><div class="sf-subject-track"><i style="width:'+pct+'%"></i></div></div><h3>Atividades da matéria</h3>'+(tasks.length?'<div class="sf-subject-detail-list">'+tasks.map(t=>'<div class="sf-subject-detail-task '+(t.done?'is-done':'')+'"><span>'+(t.done?'✓':'○')+'</span><div><b>'+esc(t.name)+'</b><small>'+(t.done?'Concluída':'Pendente')+(t.date?' · Prazo: '+new Date(t.date+'T12:00:00').toLocaleDateString('pt-BR'):'')+'</small></div></div>').join('')+'</div>':'<div class="sf-subject-empty compact"><b>Nenhuma atividade vinculada ainda</b><small>Ao criar uma tarefa, selecione exatamente esta matéria no campo Matéria.</small></div>');modal.hidden=false;document.body.classList.add('sf-modal-open')}function closeSubject(){const modal=document.getElementById('subjectDetail');if(modal)modal.hidden=true;document.body.classList.remove('sf-modal-open')}function removeSubject(i){if(confirm('Remover esta matéria da lista? As tarefas já cadastradas serão mantidas.')){data.subjects.splice(i,1);save()}}
 document.getElementById('taskForm').addEventListener('submit',e=>{e.preventDefault();data.tasks.push({id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),name:taskName.value.trim(),subject:taskSubject.value.trim(),date:taskDate.value,priority:taskPriority.value,done:false});e.target.reset();save();toast('Tarefa adicionada!')});
 document.getElementById('taskFilter').addEventListener('change',renderTasks);
 function taskHTML(t){return '<div class="task '+(t.done?'done':'')+'"><input class="task-check" type="checkbox" '+(t.done?'checked':'')+' aria-label="Concluir tarefa" onchange="toggleTask(\''+t.id+'\')"><div class="task-info"><div class="task-name">'+esc(t.name)+'</div><div class="task-meta">'+esc(t.subject)+(t.date?' · '+new Date(t.date+'T12:00:00').toLocaleDateString('pt-BR'):'')+'</div></div><span class="tag '+(t.priority==='high'?'high':t.priority==='low'?'low':'')+'">'+(t.priority==='high'?'Alta':t.priority==='low'?'Baixa':'Normal')+'</span><button class="btn ghost" style="padding:6px 9px" aria-label="Excluir tarefa" onclick="deleteTask(\''+t.id+'\')">×</button></div>'}
