@@ -2931,24 +2931,7 @@ if(document.readyState!=='loading')init();
  .nav .ico,.nav-more>summary .ico{font-size:16px!important}
 }
 </style>
-<script id="sf-navigation-dismiss">
-document.addEventListener('click',function(e){
- const menu=document.querySelector('.nav-more');
- if(menu&&menu.open&&!menu.contains(e.target))menu.open=false;
-});
-</script>
-<script id="sf-sidebar-mobile-controller">
-(function(){
- const trigger=document.getElementById('sfMenuTrigger');
- const backdrop=document.getElementById('sfSidebarBackdrop');
- const close=()=>{document.body.classList.remove('sf-sidebar-open');if(trigger)trigger.setAttribute('aria-expanded','false');};
- if(!trigger||!backdrop)return;
- trigger.addEventListener('click',()=>{const open=document.body.classList.toggle('sf-sidebar-open');trigger.setAttribute('aria-expanded',String(open));});
- backdrop.addEventListener('click',close);
- document.querySelectorAll('.side .nav button[data-page]').forEach(button=>button.addEventListener('click',close));
- document.addEventListener('keydown',event=>{if(event.key==='Escape')close();});
-})();
-<\/script></body></html>";
+</body></html>";
   iframe.addEventListener('load',()=>{load.textContent='Laboratório iniciado';},{once:true});
   frame.appendChild(iframe);frame.hidden=false;panel.querySelector('#sf32-atlas-placeholder').hidden=true;
  });
@@ -2968,4 +2951,22 @@ const retry=setInterval(()=>{if(!root&&document.querySelector('#sf23Cell'))mount
 @media(prefers-reduced-motion:reduce){.sf32-panel *{scroll-behavior:auto!important}}
 </style>
 
+<script id="sf-navigation-dismiss">
+document.addEventListener('click',function(e){
+ const menu=document.querySelector('.nav-more');
+ if(menu&&menu.open&&!menu.contains(e.target))menu.open=false;
+});
+</script>
+<script id="sf-sidebar-mobile-controller">
+(function(){
+ const trigger=document.getElementById('sfMenuTrigger');
+ const backdrop=document.getElementById('sfSidebarBackdrop');
+ const close=()=>{document.body.classList.remove('sf-sidebar-open');if(trigger)trigger.setAttribute('aria-expanded','false');};
+ if(!trigger||!backdrop)return;
+ trigger.addEventListener('click',()=>{const open=document.body.classList.toggle('sf-sidebar-open');trigger.setAttribute('aria-expanded',String(open));});
+ backdrop.addEventListener('click',close);
+ document.querySelectorAll('.side .nav button[data-page]').forEach(button=>button.addEventListener('click',close));
+ document.addEventListener('keydown',event=>{if(event.key==='Escape')close();});
+})();
+</script>
 </body></html>
